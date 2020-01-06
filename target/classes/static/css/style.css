@@ -1,0 +1,189 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0;
+    height: 100%;
+    background-color: #fff7dd;
+}
+#center{
+    position: absolute;
+    left: 27%;
+    right: 27%;
+    width: auto;
+    height: 100%;
+    border: 1px #451c17 solid;
+}
+
+#completedBids{
+    position: absolute;
+    bottom: 17%;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #494036;
+}
+
+#schedule{
+    position: relative;
+    width: inherit;
+    height: 400px;
+}
+
+#pairChoice{
+    position: relative;
+    left: 0;
+}
+
+#forms{
+    position: relative;
+    top: 10px;
+    right: 0;
+    width: 100%;
+    display: flex;
+}
+
+#limitOrder{
+    margin-left: 5%;
+}
+
+#totalBuy, #totalLim, #rateBuy, #rateSell, #totalSell, .input{
+    width: 165px;
+    height: 25px;
+    border-radius: 4px;
+    border: 1px solid #ff7d5d;
+    background-color: bisque;
+    resize: none;
+}
+
+#rateBuy, #rateSell, #totalBuy{
+
+    height: 23px;
+}
+
+#pairs{
+    width: auto;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid black;
+    outline: none;
+    background-color: #f6f6f6;
+}
+
+#quantitySell, #quantityBuy{
+    width: 168px;
+}
+
+#quantityBuy:focus{
+    color: #474747;
+    background-color: #dfc4a6;
+    border-color: #635a4f;
+    outline: none;
+}
+
+#quantitySell:focus{
+    color: #474747;
+    background-color: #dfc4a6;
+    border-color: #635a4f;
+    outline: none;
+}
+
+.disc{
+    color: gray;
+}
+
+.rowSale{
+    border: 1px darkslategray dashed;
+}
+
+#butBuy, #butSell{
+    position: absolute;
+    top: 145px;
+    height: 25px;
+    width: 100px;
+    border-radius: 4px;
+    background-color: #3e678f;
+    color: #dda458;
+}
+
+#butSell{
+    top: 147px;
+    right: 10px;
+}
+
+#sellsOrders{
+    width: 180px;
+    height: 190px;
+    overflow: auto;
+    color: bisque;
+}
+
+#bidsSell, #bidsBuy{
+    width: 250px;
+    height: 250px;
+    overflow: auto;
+}
+
+
+#bidsSell::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#bidsSell::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+#bidsSell::-webkit-scrollbar-thumb
+{
+    background-color: #b9afbd;
+}
+
+#bidsBuy::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#bidsBuy::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+#bidsBuy::-webkit-scrollbar-thumb
+{
+    background-color: #b9afbd;
+}
+
+#bidsSells{
+    position: absolute;
+    top: 500px;
+    left: 25px;
+    width: 250px;
+    height: 500px;
+    color: bisque;
+}
+
+#bidsBuys{
+    position: absolute;
+    top: 500px;
+    right: 25px;
+    width: 250px;
+    height: 500px;
+    color: bisque;
+}
+
+.pr{
+    display: flex;
+}
+
+.prr{
+    text-align: center;
+    color: gray;
+    width: 80px;
+    height: 20px;
+    border: 1px darkgrey solid;
+}

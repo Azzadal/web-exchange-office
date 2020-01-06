@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - db@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - db@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - db@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="db: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Tvx86OJyjSpkleOWDYZgxtJYQp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.javasampleapproach.jqueryajax.Repos" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Andrey\IdeaProjects\SpringBootJQueryAjaxClient\src\main\resources\static\pic" />
+      <recent name="C:\Users\Andrey\IdeaProjects\SpringBootJQueryAjaxClient\src\main\resources\static\css" />
+      <recent name="C:\Users\Andrey\IdeaProjects\SpringBootJQueryAjaxClient\src\main\resources\static\" />
+      <recent name="C:\Users\Andrey\IdeaProjects\SpringBootJQueryAjaxClient\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="SpringBootJQueryAjaxClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="SpringBootJQueryAjaxClient" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.javasampleapproach.jqueryajax.SpringBootJQueryAjaxClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@2e532db2" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="" />
+      <created>1574354208504</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574354208504</updated>
+      <workItem from="1574354217313" duration="247000" />
+      <workItem from="1574355487774" duration="1177000" />
+      <workItem from="1574526456065" duration="1263000" />
+      <workItem from="1574565001139" duration="1677000" />
+      <workItem from="1574587639428" duration="15061000" />
+      <workItem from="1574692138743" duration="7020000" />
+      <workItem from="1574779188025" duration="7346000" />
+      <workItem from="1574835970065" duration="349000" />
+      <workItem from="1574865178762" duration="7418000" />
+      <workItem from="1575085233119" duration="12344000" />
+      <workItem from="1575207487021" duration="9905000" />
+      <workItem from="1575300518019" duration="4662000" />
+      <workItem from="1575383985752" duration="7741000" />
+      <workItem from="1575553651497" duration="9956000" />
+      <workItem from="1575730725331" duration="6817000" />
+      <workItem from="1575781209601" duration="12285000" />
+      <workItem from="1575820044031" duration="5900000" />
+      <workItem from="1575892748014" duration="15233000" />
+      <workItem from="1575991030626" duration="7258000" />
+      <workItem from="1576071915590" duration="7335000" />
+      <workItem from="1576157967981" duration="9208000" />
+      <workItem from="1576247724258" duration="9310000" />
+      <workItem from="1576341218583" duration="4033000" />
+      <workItem from="1576403454417" duration="8049000" />
+      <workItem from="1576508800535" duration="5949000" />
+      <workItem from="1576578907937" duration="5551000" />
+      <workItem from="1576587182844" duration="10124000" />
+      <workItem from="1576666672533" duration="9540000" />
+      <workItem from="1576762283265" duration="6238000" />
+      <workItem from="1576923739459" duration="5742000" />
+      <workItem from="1576947429279" duration="2852000" />
+      <workItem from="1576986603579" duration="9921000" />
+      <workItem from="1577101206812" duration="10092000" />
+      <workItem from="1577196301294" duration="6005000" />
+      <workItem from="1577289254428" duration="4595000" />
+      <workItem from="1577602745538" duration="13539000" />
+      <workItem from="1577699307230" duration="1590000" />
+      <workItem from="1577718035268" duration="6341000" />
+      <workItem from="1577941815258" duration="3810000" />
+      <workItem from="1578034632321" duration="1660000" />
+      <workItem from="1578041615742" duration="7095000" />
+      <workItem from="1578107233182" duration="1421000" />
+      <workItem from="1578143622013" duration="2425000" />
+      <workItem from="1578288095191" duration="5626000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
