@@ -1,0 +1,8 @@
+com\javasampleapproach\jqueryajax\Repos\BidRepository.class
+com\javasampleapproach\jqueryajax\Repos\RateRepository.class
+com\javasampleapproach\jqueryajax\controller\BidController.class
+com\javasampleapproach\jqueryajax\model\Bid.class
+com\javasampleapproach\jqueryajax\controller\WebController.class
+com\javasampleapproach\jqueryajax\SpringBootJQueryAjaxClientApplication.class
+com\javasampleapproach\jqueryajax\model\Rate.class
+com\javasampleapproach\jqueryajax\controller\RateController.class

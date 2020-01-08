@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.javasampleapproach.jqueryajax.SpringBootJQueryAjaxClientApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.781 sec - in com.javasampleapproach.jqueryajax.SpringBootJQueryAjaxClientApplicationTests

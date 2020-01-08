@@ -1,0 +1,1 @@
+web: java -jar target/SpringBootJQueryAjaxClient-0.0.1.jar

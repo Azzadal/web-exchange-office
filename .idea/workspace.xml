@@ -5,7 +5,18 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="" />
+    <list default="true" id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="change test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/Repos/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/BidController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/BidController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/RateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/RateController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/WebController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/WebController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/pic/wallpaper.jpg" beforeDir="false" />
+    </list>
+    <list id="3e2019e7-2c9c-4251-acf4-f3fba90f55ff" name="change test" comment="1" />
+    <list id="290685be-46ac-40b4-b2b4-be8e188bf677" name="Revert &quot;change test&quot;" comment="Revert &quot;change test&quot;&#10;&#10;This reverts commit 8bbd59e1" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +53,9 @@
     </expand>
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="SpringBootJQueryAjaxClient" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -52,8 +66,14 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Azzadal &lt;andr280389@yandex.ru&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -78,6 +98,9 @@
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
@@ -133,6 +156,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="" />
+      <changelist id="3e2019e7-2c9c-4251-acf4-f3fba90f55ff" name="change test" comment="1" />
       <created>1574354208504</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -180,8 +204,24 @@
       <workItem from="1578041615742" duration="7095000" />
       <workItem from="1578107233182" duration="1421000" />
       <workItem from="1578143622013" duration="2425000" />
-      <workItem from="1578288095191" duration="6398000" />
+      <workItem from="1578288095191" duration="10471000" />
+      <workItem from="1578465438686" duration="5383000" />
     </task>
+    <task id="LOCAL-00001" summary="change test">
+      <created>1578473690899</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578473690899</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change test">
+      <created>1578475019785</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1578475019785</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,9 +255,36 @@
             </State>
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -225,7 +292,13 @@
     <option name="OPEN_TABS">
       <set>
         <option value="1" />
+        <option value="2" />
       </set>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Revert &quot;change test&quot;&#10;&#10;This reverts commit 8bbd59e1" />
+    <MESSAGE value="change test" />
+    <option name="LAST_COMMIT_MESSAGE" value="change test" />
   </component>
 </project>
