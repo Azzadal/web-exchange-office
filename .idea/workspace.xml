@@ -6,14 +6,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0229b0f-88e9-406e-b066-99bd6ad1a5d1" name="Default Changelist" comment="change test">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/Repos/Response.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/BidController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/BidController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/RateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/RateController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/WebController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javasampleapproach/jqueryajax/controller/WebController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/getrequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/getrequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/postrequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/postrequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringBootJQueryAjaxClient-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringBootJQueryAjaxClient-0.0.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/SpringBootJQueryAjaxClient-0.0.1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/SpringBootJQueryAjaxClient-0.0.1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/pic/wallpaper.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/getrequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/getrequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/postrequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/postrequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/javasampleapproach/jqueryajax/SpringBootJQueryAjaxClientApplicationTests.class" beforeDir="false" />
     </list>
     <list id="3e2019e7-2c9c-4251-acf4-f3fba90f55ff" name="change test" comment="1" />
     <list id="290685be-46ac-40b4-b2b4-be8e188bf677" name="Revert &quot;change test&quot;" comment="Revert &quot;change test&quot;&#10;&#10;This reverts commit 8bbd59e1" />
@@ -85,6 +91,7 @@
   <component name="ProjectId" id="1Tvx86OJyjSpkleOWDYZgxtJYQp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -206,6 +213,9 @@
       <workItem from="1578143622013" duration="2425000" />
       <workItem from="1578288095191" duration="10471000" />
       <workItem from="1578465438686" duration="5383000" />
+      <workItem from="1578573840484" duration="3504000" />
+      <workItem from="1578719414112" duration="6944000" />
+      <workItem from="1578808174633" duration="19256000" />
     </task>
     <task id="LOCAL-00001" summary="change test">
       <created>1578473690899</created>

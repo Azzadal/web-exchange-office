@@ -17,6 +17,13 @@ document.getElementById('butBuy').onclick = function (select) {
      if (n === 4) ajaxPostSell("EUSell");
  }
 
+const rowBuy = document.getElementsByClassName('rowBuy');
+const rowSell = document.getElementsByClassName('rowSell');
+const rateBuy = document.getElementById('rateBuy');
+const rateSell = document.getElementById('rateSell');
+const bidsSell = document.getElementById('bidsSell');
+const bidsBuy = document.getElementById('bidsBuy');
+const rowPrice = document.getElementsByClassName('rowPrice');
  //отправка заявки
 function ajaxPostBuy(pair){
     const formData = JSON.stringify({
@@ -39,13 +46,12 @@ function ajaxPostBuy(pair){
         }
     }
     request.send(formData);
-    const bidsSell = document.getElementById('bidsSell');
 
     function myJson(arr){
         let i;
-        bidsSell.innerHTML = '';
+        bidsBuy.innerHTML = '';
         for(i = 0; i < arr.length; i++) {
-            bidsSell.innerHTML += '<div class="pr"><div class="prr">' + arr[i].rate + '</div><div class="prr">' + arr[i].quantity + '</div><div class="prr">' +
+            bidsBuy.innerHTML += '<div class="rowSell"><div class="rowBuy">' + arr[i].rate + '</div><div class="rowBuy">' + arr[i].quantity + '</div><div class="rowBuy">' +
                 arr[i].total + '</div></div>';
         }
     }
@@ -74,16 +80,23 @@ function ajaxPostBuy(pair){
          }
      }
      request.send(formData);
-     const bidsBuy = document.getElementById('bidsBuy');
 
      function myJson(arr){
+         let row = document.getElementsByClassName('row');
          let i;
-         bidsBuy.innerHTML = '';
+         bidsSell.innerHTML = '';
          for(i = 0; i < arr.length; i++) {
-             bidsBuy.innerHTML += '<div class="pr"><div class="prr">' + arr[i].rate + '</div><div class="prr">' + arr[i].quantity + '</div><div class="prr">' +
+             bidsSell.innerHTML += '<div class="row"><div class="rowPrice">' + arr[i].rate + '</div><div class="rowQuan">' + arr[i].quantity + '</div><div class="rowTotal">' +
                  arr[i].total + '</div></div>';
+             row[i].style.display = "flex";
+             console.log(rowPrice[i])
+            row[i].onclick = function () {
+                //rateBuy.innerHTML = rowPrice[i];
+                console.log("gut")
+            }
          }
      }
+
      $("#quantitySell").val("0");
      $("#totalSell").val("0");
  }

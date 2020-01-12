@@ -10,14 +10,14 @@ body{
     position: absolute;
     left: 30%;
     right: 30%;
-    width: auto;
+    width: 45%;
     height: 100%;
     border: 1px #451c17 solid;
 }
 
 #completedBids{
     position: absolute;
-    bottom: 7%;
+    bottom: 5%;
     width: 100%;
     height: 20%;
 }
@@ -41,22 +41,17 @@ body{
     display: flex;
 }
 
-#limitOrder{
-    position: absolute;
-    left: 40%;
-}
-
-#totalBuy, #totalLim, #rateBuy, #rateSell, #totalSell, .input{
-    width: 100%;
-    height: 25px;
+.input{
+    width: 90%;
+    height: 23px;
     border-radius: 4px;
-    border: 1px solid #ff7d5d;
+    border: 1px solid #050956;
     background-color: bisque;
     resize: none;
 }
 
-#rateBuy, #rateSell, #totalBuy{
-    height: 23px;
+#rateBuy, #rateSell, #totalBuy, #totalSell{
+
 }
 
 #pairs{
@@ -99,13 +94,14 @@ body{
     left: 5%;
 }
 
-#sell{
+#limitOrder{
     position: absolute;
-    left: 73%;
+    left: 38%;
 }
 
-.rowSale{
-    border: 1px darkslategray dashed;
+#sell{
+    position: absolute;
+    left: 71%;
 }
 
 #butBuy, #butSell{
@@ -115,15 +111,14 @@ body{
     width: 100px;
     border-radius: 5px;
     background-color: #3e678f;
-    color: #dda458;
+    color: #e7e7d2;
 }
 
 #butBuy{
     left: 5%;
 }
 #butSell{
-    top: 152px;
-    right: 14%;
+    right: 12%;
 }
 
 #sellsOrders{
@@ -183,22 +178,22 @@ body{
 }
 
 #bidsSells{
-    left: 5%;
+    right: 3%;
 }
 #bidsBuys{
-    right: 5%;
+    left: 5%;
 }
 
-.pr{
+.rowSell{
     display: flex;
 }
 
-.prr, .prr1{
+.prr, .prr1, .rowBuy, .rowPrice, .rowQuan, .rowTotal{
     text-align: center;
-    color: gray;
+    color: #5b5b5b;
     width: 33%;
     height: 20px;
-    border: 1px darkgrey solid;
+    border: 1px #767676 solid;
 }
 
 .prr1{

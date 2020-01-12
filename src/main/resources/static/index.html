@@ -26,25 +26,25 @@
     </div>
     <div id="forms">
         <div class="form">
-        <form id="buy" name="buy">
+        <form id="buy">
             <label class="disc" for="rateBuy">Цена</label><br>
             <textarea id="rateBuy" type="text" class="input" name="rateBuy" disabled></textarea><br>
             <label class="disc" for="quantityBuy">Количество</label><br>
             <input id="quantityBuy" class="input" type="text" value="0" name="quantityBuy"><br>
             <label class="disc" for="totalBuy">Итого</label><br>
-            <textarea id="totalBuy" name="totalBuy" disabled></textarea>
+            <textarea id="totalBuy" name="totalBuy" class="input" disabled></textarea>
         </form>
         </div>
         <div class="form">
         <form id="limitOrder">
             <label class="disc" for="priceLim">Цена</label><br>
-            <input id="priceLim" class="input" type="text"><br>
+            <textarea id="priceLim" class="input" type="text"></textarea><br>
             <label class="disc" for="limit">Лимит</label><br>
-            <input id="limit" class="input" type="text"><br>
+            <input id="limit" class="input" type="text" value="0"><br>
             <label class="disc" for="quantityLim">Количество</label><br>
             <input id="quantityLim" class="input" type="text"><br>
             <label class="disc" for="totalLim">Итого</label><br>
-            <output id="totalLim" type="text"></output><br>
+            <textarea id="totalLim" class="input" type="text"></textarea><br>
             <button>Покупка</button>
             <button>Продажа</button>
         </form>
@@ -52,11 +52,11 @@
         <div class="form">
         <form id="sell">
             <label class="disc" for="rateSell">Цена</label><br>
-            <textarea id="rateSell" type="text" name="rateSell" disabled></textarea><br>
+            <textarea id="rateSell" type="text" name="rateSell" class="input" disabled></textarea><br>
             <label class="disc" for="quantitySell">Количество</label><br>
             <input id="quantitySell" class="input" type="text" value="0" name="quantitySell"><br>
             <label class="disc" for="totalSell">Итого</label><br>
-            <textarea id="totalSell" name="totalSell" disabled></textarea>
+            <textarea id="totalSell" class="input" name="totalSell" disabled></textarea>
         </form>
         </div>
         <button type="submit" id="butBuy">Покупка</button>
@@ -64,7 +64,7 @@
     </div>
 
     <div id="completedBids">
-        <div class="pr">
+        <div class="rowSell">
             <div class="prr1">Дата</div>
             <div class="prr1">Тип</div>
             <div class="prr1">Цена</div>
@@ -75,7 +75,7 @@
 </div>
 <div id="bidsSells">
 
-    <div class="pr">
+    <div class="rowSell">
         <div class="prr">Цена</div>
         <div class="prr">Кол-во</div>
         <div class="prr">Итого</div>
@@ -85,7 +85,7 @@
 </div>
 <div id="bidsBuys">
 
-    <div class="pr">
+    <div class="rowSell">
         <div class="prr">Цена</div>
         <div class="prr">Кол-во</div>
         <div class="prr">Итого</div>

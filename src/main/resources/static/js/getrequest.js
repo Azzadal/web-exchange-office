@@ -1,5 +1,5 @@
 window.onload = function () {
-    let changePair = document.getElementById('pairs');
+    const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
     const data = {
@@ -70,7 +70,7 @@ window.onload = function () {
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
-        }, 3000);
+        }, 10000);
     }
 
 
