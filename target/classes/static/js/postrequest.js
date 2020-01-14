@@ -17,6 +17,15 @@ document.getElementById('butBuy').onclick = function (select) {
      if (n === 4) ajaxPostSell("EUSell");
  }
 
+const quantityBuy = document.getElementById('quantityBuy');
+const rateBuy = document.getElementById('rateBuy');
+const totalBuy = document.getElementById('totalBuy');
+const bidsSell = document.getElementById('bidsSell');
+const bidsBuy = document.getElementById('bidsBuy');
+const rowPrice = document.getElementsByClassName('rowPrice');
+const rowQuan = document.getElementsByClassName('rowQuan');
+const rowTotal = document.getElementsByClassName('rowTotal');
+const row = document.getElementsByClassName('row');
  //отправка заявки
 function ajaxPostBuy(pair){
     const formData = JSON.stringify({
@@ -33,19 +42,17 @@ function ajaxPostBuy(pair){
         if (request.readyState === request.DONE) {
             if (request.status === 200) {
                 const json = request.response;
-                console.log(json)
                 myJson(json);
             }
         }
     }
     request.send(formData);
-    const bidsSell = document.getElementById('bidsSell');
 
     function myJson(arr){
         let i;
-        bidsSell.innerHTML = '';
+        bidsBuy.innerHTML = '';
         for(i = 0; i < arr.length; i++) {
-            bidsSell.innerHTML += '<div class="pr"><div class="prr">' + arr[i].rate + '</div><div class="prr">' + arr[i].quantity + '</div><div class="prr">' +
+            bidsBuy.innerHTML += '<div class="rowSell"><div class="rowBuy">' + arr[i].rate + '</div><div class="rowBuy">' + arr[i].quantity + '</div><div class="rowBuy">' +
                 arr[i].total + '</div></div>';
         }
     }
@@ -68,22 +75,33 @@ function ajaxPostBuy(pair){
          if (request.readyState === request.DONE) {
              if (request.status === 200) {
                  const json = request.response;
-                 console.log(json)
                  myJson(json);
+                 temp();
              }
          }
      }
      request.send(formData);
-     const bidsBuy = document.getElementById('bidsBuy');
 
      function myJson(arr){
-         let i;
-         bidsBuy.innerHTML = '';
+         let i, n = 0;
+         bidsSell.innerHTML = '';
          for(i = 0; i < arr.length; i++) {
-             bidsBuy.innerHTML += '<div class="pr"><div class="prr">' + arr[i].rate + '</div><div class="prr">' + arr[i].quantity + '</div><div class="prr">' +
+             bidsSell.innerHTML += '<div class="row"><div class="rowPrice">' + arr[i].rate + '</div><div class="rowQuan">' + arr[i].quantity + '</div><div class="rowTotal">' +
                  arr[i].total + '</div></div>';
+             row[i].style.display = "flex";
+         }
+
+     }
+     function temp(){
+         for (let i = 0; i < row.length; i++) {
+             row[i].addEventListener('click',function () {
+                 rateBuy.innerHTML = rowPrice[i].innerHTML;
+                 quantityBuy.value = rowQuan[i].innerHTML;
+                 totalBuy.innerHTML = rowTotal[i].innerHTML;
+             })
          }
      }
+
      $("#quantitySell").val("0");
      $("#totalSell").val("0");
  }

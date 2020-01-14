@@ -3,9 +3,6 @@ window.onload = function () {
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
     const data = {
-
-        //labels: ["1"],
-
         series: [
             [],
             []
@@ -31,19 +28,16 @@ window.onload = function () {
     }
 
     function getRateLib(pair) {
-
         const req = new XMLHttpRequest();
         req.responseType = "json";
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
                 const json = req.response;
-                console.log(json)
                 myJson2(json);//обработка ответа
             }
         }
         req.send();
-        //new Chartist.Line('.ct-chart', data);
     }
 
     function myJson2(response){
@@ -56,7 +50,6 @@ window.onload = function () {
             }
         }
         new Chartist.Line('.ct-chart', data);
-        console.log(data)
     }
 
     let timerId = null;
