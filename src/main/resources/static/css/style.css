@@ -184,11 +184,11 @@ body{
     left: 5%;
 }
 
-.rowSell{
+.rowSell, .rowBuy, .rowsSell, .rowsBuy, .rowHistory{
     display: flex;
 }
 
-.prr, .prr1, .rowBuy, .rowPrice, .rowQuan, .rowTotal{
+.prr, .prr1, .rowsPriceSell, .rowsQuanSell, .rowsTotalSell{
     text-align: center;
     color: #5b5b5b;
     width: 33%;
