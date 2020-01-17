@@ -18,15 +18,19 @@ document.getElementById('butSell').onclick = function (select) {
 }
 
 const quantityBuy = document.getElementById('quantityBuy');
+const quantitySell = document.getElementById('quantitySell');
 const rateBuy = document.getElementById('rateBuy');
+const rateSell = document.getElementById('rateSell');
 const totalBuy = document.getElementById('totalBuy');
 const bidsSell = document.getElementById('bidsSell');
 const bidsBuy = document.getElementById('bidsBuy');
 const rowsPriceSell = document.getElementsByClassName('rowsPriceSell');
+const rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy');
+const rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy');
 const rowsQuanSell = document.getElementsByClassName('rowsQuanSell');
 const rowsTotalSell = document.getElementsByClassName('rowsTotalSell');
-const rowSell = document.getElementsByClassName('rowSell');
 const rowsSell = document.getElementsByClassName('rowsSell');
+const rowsBuy = document.getElementsByClassName('rowsBuy');
 //отправка заявки
 function ajaxPostBuy(pair){
     const formData = JSON.stringify({
@@ -44,6 +48,7 @@ function ajaxPostBuy(pair){
             if (request.status === 200) {
                 const json = request.response;
                 myJson(json);
+                autofillSell();
             }
         }
     }
@@ -53,8 +58,20 @@ function ajaxPostBuy(pair){
         let i;
         bidsBuy.innerHTML = '';
         for(i = 0; i < arr.length; i++) {
-            bidsBuy.innerHTML += '<div class="rowSell"><div class="rowBuy">' + arr[i].rate + '</div><div class="rowBuy">' + arr[i].quantity + '</div><div class="rowBuy">' +
+            bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + arr[i].rate + '</div><div class="rowsQuanBuy">' + arr[i].quantity + '</div><div class="rowsTotalBuy">' +
                 arr[i].total + '</div></div>';
+            rowsBuy[i].style.display = "flex";
+        }
+    }
+
+    function autofillSell(){
+        for (let i = 0; i < rowsSell.length; i++) {
+            rowsBuy[i].addEventListener('click',function () {
+                console.log(rowsBuy[i])
+                rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
+                quantitySell.value = rowsQuanBuy[i].innerHTML;
+                outTotal();
+            })
         }
     }
     $("#quantityBuy").val("0");

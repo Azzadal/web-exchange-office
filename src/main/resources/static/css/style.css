@@ -188,7 +188,7 @@ body{
     display: flex;
 }
 
-.prr, .prr1, .rowsPriceSell, .rowsQuanSell, .rowsTotalSell{
+.prr, .prr1, .rowsPriceSell, .rowsQuanSell, .rowsTotalSell, .rowsPriceBuy, .rowsQuanBuy, .rowsTotalBuy{
     text-align: center;
     color: #5b5b5b;
     width: 33%;
