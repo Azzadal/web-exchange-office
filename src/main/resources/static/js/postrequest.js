@@ -65,9 +65,8 @@ function ajaxPostBuy(pair){
     }
 
     function autofillSell(){
-        for (let i = 0; i < rowsSell.length; i++) {
+        for (let i = 0; i < rowsBuy.length; i++) {
             rowsBuy[i].addEventListener('click',function () {
-                console.log(rowsBuy[i])
                 rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
                 quantitySell.value = rowsQuanBuy[i].innerHTML;
                 outTotal();
