@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <script src="js/jquery-3.4.1.js"></script>
+
+    <script defer src="js/getrequest.js"></script>
     <script defer src="js/postrequest.js"></script>
-    <script src="js/getrequest.js"></script>
-    <link rel="shortcut icon" href="drums.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/chartist.css">
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
@@ -13,8 +14,7 @@
 </head>
 <body>
 <div id="center">
-    <div id="schedule" class="ct-chart ct-perfect-fourth">
-    </div>
+    <div id="schedule" class="ct-chart ct-perfect-fourth"></div>
     <div id="pairChoice">
         <select id="pairs">
             <option>Выберите пару</option>
@@ -26,45 +26,45 @@
     </div>
     <div id="forms">
         <div class="form">
-        <form id="buy">
-            <label class="disc" for="rateBuy">Цена</label><br>
-            <textarea id="rateBuy" type="text" class="input" name="rateBuy" disabled></textarea><br>
-            <label class="disc" for="quantityBuy">Количество</label><br>
-            <input id="quantityBuy" class="input" type="text" value="0" name="quantityBuy"><br>
-            <label class="disc" for="totalBuy">Итого</label><br>
-            <textarea id="totalBuy" name="totalBuy" class="input" disabled></textarea>
-        </form>
+            <form id="buy">
+                <label class="disc" for="rateBuy">Цена</label><br>
+                <textarea id="rateBuy" type="text" class="input" name="rateBuy" disabled></textarea><br>
+                <label class="disc" for="quantityBuy">Количество</label><br>
+                <input id="quantityBuy" class="input" type="text" value="0" name="quantityBuy"><br>
+                <label class="disc" for="totalBuy">Итого</label><br>
+                <textarea id="totalBuy" name="totalBuy" class="input" disabled></textarea>
+            </form>
         </div>
         <div class="form">
-        <form id="limitOrder">
-            <label class="disc" for="priceLim">Цена</label><br>
-            <textarea id="priceLim" class="input" type="text"></textarea><br>
-            <label class="disc" for="limit">Лимит</label><br>
-            <input id="limit" class="input" type="text" value="0"><br>
-            <label class="disc" for="quantityLim">Количество</label><br>
-            <input id="quantityLim" class="input" type="text"><br>
-            <label class="disc" for="totalLim">Итого</label><br>
-            <textarea id="totalLim" class="input" type="text"></textarea><br>
-            <button>Покупка</button>
-            <button>Продажа</button>
-        </form>
+            <form id="limitOrder">
+                <label class="disc" for="priceLim">Цена</label><br>
+                <textarea id="priceLim" class="input" type="text"></textarea><br>
+                <label class="disc" for="limit">Лимит</label><br>
+                <input id="limit" class="input" type="text" value="0"><br>
+                <label class="disc" for="quantityLim">Количество</label><br>
+                <input id="quantityLim" class="input" type="text"><br>
+                <label class="disc" for="totalLim">Итого</label><br>
+                <textarea id="totalLim" class="input" type="text"></textarea><br>
+                <button>Покупка</button>
+                <button>Продажа</button>
+            </form>
         </div>
         <div class="form">
-        <form id="sell">
-            <label class="disc" for="rateSell">Цена</label><br>
-            <textarea id="rateSell" type="text" name="rateSell" class="input" disabled></textarea><br>
-            <label class="disc" for="quantitySell">Количество</label><br>
-            <input id="quantitySell" class="input" type="text" value="0" name="quantitySell"><br>
-            <label class="disc" for="totalSell">Итого</label><br>
-            <textarea id="totalSell" class="input" name="totalSell" disabled></textarea>
-        </form>
+            <form id="sell">
+                <label class="disc" for="rateSell">Цена</label><br>
+                <textarea id="rateSell" type="text" name="rateSell" class="input" disabled></textarea><br>
+                <label class="disc" for="quantitySell">Количество</label><br>
+                <input id="quantitySell" class="input" type="text" value="0" name="quantitySell"><br>
+                <label class="disc" for="totalSell">Итого</label><br>
+                <textarea id="totalSell" class="input" name="totalSell" disabled></textarea>
+            </form>
         </div>
         <button type="submit" id="butBuy">Покупка</button>
         <button type="submit" id="butSell">Продажа</button>
     </div>
 
     <div id="completedBids">
-        <div class="rowSell">
+        <div class="rowHistory">
             <div class="prr1">Дата</div>
             <div class="prr1">Тип</div>
             <div class="prr1">Цена</div>
@@ -81,11 +81,11 @@
         <div class="prr">Итого</div>
     </div>
 
-<div id="bidsSell"></div>
+    <div id="bidsSell" class="bidsSell"></div>
 </div>
 <div id="bidsBuys">
 
-    <div class="rowSell">
+    <div class="rowBuy">
         <div class="prr">Цена</div>
         <div class="prr">Кол-во</div>
         <div class="prr">Итого</div>

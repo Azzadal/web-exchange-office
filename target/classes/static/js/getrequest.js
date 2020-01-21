@@ -1,3 +1,7 @@
+function outTotal() {
+    totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
+    totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
+}
 window.onload = function () {
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -76,9 +80,5 @@ window.onload = function () {
     }
     quantityBuy.oninput = function () {
         outTotal();
-    }
-    function outTotal() {
-        totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
-        totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
     }
 }
