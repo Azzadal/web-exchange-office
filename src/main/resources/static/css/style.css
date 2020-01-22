@@ -213,4 +213,10 @@ body{
     #butSell{
         right: 6%;
     }
+
+    #schedule{
+        position: absolute;
+        width: 100%;
+        height: 25%;
+    }
 }

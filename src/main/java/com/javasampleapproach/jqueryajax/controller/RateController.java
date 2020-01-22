@@ -15,6 +15,7 @@ import java.util.Map;
 public class RateController {
     @Autowired
     private RateRepository rateRepository;
+    private Rate rate = new Rate();
 
     @PostMapping(value = "rate")
     public void addRateBuy(@RequestBody Rate rate){
@@ -40,75 +41,21 @@ public class RateController {
     public Iterable<Rate> getRateEULib(){
         return rateRepository.findByType("rateEU");
     }
-    private Rate rate = new Rate();
 
     @GetMapping(value = "rateUR")
-    public Map<String, BigDecimal> generateRateUR(){
-        HashMap<String, BigDecimal> map = new HashMap<>();
-        int minBuy = 50;
-        int maxBuy = 60;
-        int minSell = 45;
-        int maxSell = 50;
-        double randomBuy = (Math.random() * (maxBuy - minBuy)) + minBuy;
-        double randomSell = (Math.random() * (maxSell - minSell)) + minSell;
-
-        BigDecimal rateURBuy = new BigDecimal(randomBuy);
-        BigDecimal rateURSell = new BigDecimal(randomSell);
-
-        rate.setRateBuy(rateURBuy.setScale(2, BigDecimal.ROUND_CEILING));
-        rate.setRateSell(rateURSell.setScale(2, BigDecimal.ROUND_CEILING));
-
-        BigDecimal govno = rate.getRateBuy();
-        BigDecimal parasha = rate.getRateSell();
-        map.put("rateBuy", govno);
-        map.put("rateSell", parasha);
-        return map;
+    public Map<String, BigDecimal> genUR(){
+        return rate.generateRate(150,20,90,125);
     }
 
     @GetMapping(value = "rateER")
-    public Map<String, BigDecimal> generateRateER(){
+    public Map<String, BigDecimal> genER(){
         HashMap<String, BigDecimal> map = new HashMap<>();
-        int minBuy = 10;
-        int maxBuy = 20;
-        int minSell = 5;
-        int maxSell = 10;
-        double randomBuy = (Math.random() * (maxBuy - minBuy)) + minBuy;
-        double randomSell = (Math.random() * (maxSell - minSell)) + minSell;
-
-        BigDecimal rateURBuy = new BigDecimal(randomBuy);
-        BigDecimal rateURSell = new BigDecimal(randomSell);
-
-        rate.setRateBuy(rateURBuy.setScale(2, BigDecimal.ROUND_CEILING));
-        rate.setRateSell(rateURSell.setScale(2, BigDecimal.ROUND_CEILING));
-
-        BigDecimal govno = rate.getRateBuy();
-        BigDecimal parasha = rate.getRateSell();
-        map.put("rateBuy", govno);
-        map.put("rateSell", parasha);
-        return map;
+        return rate.generateRate(10,20,5,10);
     }
 
     @GetMapping(value = "rateUE")
-    public Map<String, BigDecimal> generateRateUE(){
-        HashMap<String, BigDecimal> map = new HashMap<>();
-        int minBuy = 15;
-        int maxBuy = 22;
-        int minSell = 10;
-        int maxSell = 13;
-        double randomBuy = (Math.random() * (maxBuy - minBuy)) + minBuy;
-        double randomSell = (Math.random() * (maxSell - minSell)) + minSell;
-
-        BigDecimal rateUEBuy = new BigDecimal(randomBuy);
-        BigDecimal rateUESell = new BigDecimal(randomSell);
-
-        rate.setRateBuy(rateUEBuy.setScale(2, BigDecimal.ROUND_CEILING));
-        rate.setRateSell(rateUESell.setScale(2, BigDecimal.ROUND_CEILING));
-
-        BigDecimal govno = rate.getRateBuy();
-        BigDecimal parasha = rate.getRateSell();
-        map.put("rateBuy", govno);
-        map.put("rateSell", parasha);
-        return map;
+    public Map<String, BigDecimal> genUE(){
+        return rate.generateRate(15,22,10,13);
     }
 
 }
