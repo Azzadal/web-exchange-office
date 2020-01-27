@@ -25,6 +25,7 @@ window.onload = function () {
                 rateSell.innerHTML = xhr.response.rateSell;
                 ajaxRate(pair);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
+                tables();
                 outTotal();
             }
         }
@@ -54,6 +55,27 @@ window.onload = function () {
             }
         }
         new Chartist.Line('.ct-chart', data);
+    }
+
+    const bidsBuy = document.getElementById('bidsBuy');
+    const rowsBuy = document.getElementsByClassName('rowsBuy');
+    function tables() {
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
+        req.open('GET', window.location + "URBuy");
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                let json = req.response;
+                let i;
+                bidsBuy.innerHTML = '';
+                for(i = 0; i < json.length; i++) {
+                    bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + json[i].rate + '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
+                        json[i].total + '</div></div>';
+                    rowsBuy[i].style.display = "flex";
+                }
+            }
+        }
+        req.send();
     }
 
     let timerId = null;

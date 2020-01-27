@@ -17,6 +17,11 @@ public class BidController {
         return bidRepository.findByType("URBuy");
     }
 
+    @GetMapping(value = "URBuy")
+    public Iterable<Bid> getRateLib(){
+        return bidRepository.findByType("URBuy");
+    }
+
     @PostMapping(value = "ERBuy")
     public Iterable<Bid> addNewBidERBuy(@RequestBody Bid bid){
         bidRepository.save(bid);

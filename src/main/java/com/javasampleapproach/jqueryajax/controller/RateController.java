@@ -49,7 +49,6 @@ public class RateController {
 
     @GetMapping(value = "rateER")
     public Map<String, BigDecimal> genER(){
-        HashMap<String, BigDecimal> map = new HashMap<>();
         return rate.generateRate(10,20,5,10);
     }
 
