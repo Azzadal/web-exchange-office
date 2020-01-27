@@ -18,7 +18,7 @@ public class BidController {
     }
 
     @GetMapping(value = "URBuy")
-    public Iterable<Bid> getRateLib(){
+    public Iterable<Bid> getURBuyTab(){
         return bidRepository.findByType("URBuy");
     }
 
@@ -44,6 +44,11 @@ public class BidController {
     @PostMapping(value = "URSell")
     public Iterable<Bid> addNewBidURSell(@RequestBody Bid bid){
         bidRepository.save(bid);
+        return bidRepository.findByType("URSell");
+    }
+
+    @GetMapping(value = "URSell")
+    public Iterable<Bid> getURSellTab(){
         return bidRepository.findByType("URSell");
     }
 

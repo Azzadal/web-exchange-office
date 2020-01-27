@@ -48,7 +48,6 @@ function ajaxPostBuy(pair){
             if (request.status === 200) {
                 const json = request.response;
                 myJson(json);
-                checkRec(json)
                 autofillSell();
             }
         }
@@ -62,13 +61,6 @@ function ajaxPostBuy(pair){
             bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + arr[i].rate + '</div><div class="rowsQuanBuy">' + arr[i].quantity + '</div><div class="rowsTotalBuy">' +
                 arr[i].total + '</div></div>';
             rowsBuy[i].style.display = "flex";
-        }
-    }
-
-    function checkRec(arr) {
-        for (let i = 0; i < rowsSell.length; i++) {
-            if (rowsPriceSell === arr[i].rate) alert("говно");
-            else alert(arr[i].rate);
         }
     }
 
@@ -116,6 +108,7 @@ function ajaxPostSell(pair){
         }
     }
     function autofillBuy(){
+        alert("говно");
         for (let i = 0; i < rowsSell.length; i++) {
             rowsSell[i].addEventListener('click',function () {
                 rateBuy.innerHTML = rowsPriceSell[i].innerHTML;

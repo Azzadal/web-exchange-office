@@ -25,7 +25,7 @@ window.onload = function () {
                 rateSell.innerHTML = xhr.response.rateSell;
                 ajaxRate(pair);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
-                tables();
+
                 outTotal();
             }
         }
@@ -59,10 +59,10 @@ window.onload = function () {
 
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
-    function tables() {
+    function tableBuy(arg) {
         const req = new XMLHttpRequest();
         req.responseType = "json";
-        req.open('GET', window.location + "URBuy");
+        req.open('GET', window.location + arg);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
                 let json = req.response;
@@ -78,14 +78,39 @@ window.onload = function () {
         req.send();
     }
 
+    function tableSell(arg) {
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
+        req.open('GET', window.location + arg);
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                let json = req.response;
+                let i;
+                bidsSell.innerHTML = '';
+                for(i = 0; i < json.length; i++) {
+                    bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + json[i].rate + '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
+                        json[i].total + '</div></div>';
+                    rowsSell[i].style.display = "flex";
+                }
+            }
+        }
+        req.send();
+    }
+
     let timerId = null;
 
     changePair.onchange = function () {
         n = this.selectedIndex;
-        if (n === 1) choice = "rateUR";
+        if (n === 1) {
+            choice = "rateUR";
+            arg1 = "URBuy";
+            arg2 = "URSell";
+        }
         if (n === 2) choice = "rateER";
         if (n === 3) choice = "rateUE";
         if (n === 4) choice = "rateEU";
+        tableBuy(arg1);
+        tableSell(arg2);
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
