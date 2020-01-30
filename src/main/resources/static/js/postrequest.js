@@ -108,7 +108,6 @@ function ajaxPostSell(pair){
         }
     }
     function autofillBuy(){
-        alert("говно");
         for (let i = 0; i < rowsSell.length; i++) {
             rowsSell[i].addEventListener('click',function () {
                 rateBuy.innerHTML = rowsPriceSell[i].innerHTML;

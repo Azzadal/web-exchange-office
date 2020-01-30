@@ -2,6 +2,69 @@ function outTotal() {
     totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
 }
+/////////////////////////////////////////////////////
+let stompClient = null;
+
+function setConnected(connected) {
+    $("#connect").prop("disabled", connected);
+    $("#disconnect").prop("disabled", !connected);
+    if (connected) {
+        $("#conversation").show();
+    }
+    else {
+        $("#conversation").hide();
+    }
+    $("#greetings").html("");
+}
+
+function connect() {
+    const socket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, frame => {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/greetings',function (greeting) {
+            let gvn = JSON.parse(greeting.body);
+            for (let i = 0; i < gvn.length; i++) {
+                $("#greetings").append("<tr><td>" + gvn[i].rate + "</td></tr>");
+                console.log(gvn[i].quantity)
+            }
+           console.log(gvn)
+        });
+    });
+}
+
+function disconnect() {
+    if (stompClient !== null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+function sendName() {
+    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+}
+
+function showGreeting(message) {
+    for (let i = 0; i < message.length; i++) {
+    //    $("#greetings").append("<tr><td>" + message.body[i] + "</td></tr>");
+        console.log(message.body.rate[i])
+    }
+
+}
+
+$(function () {
+    $("form").on('submit', function (e) {
+        e.preventDefault();
+    });
+    $( "#connect" ).click(function() { connect(); });
+    $( "#disconnect" ).click(function() { disconnect(); });
+    $( "#send" ).click(function() { sendName(); });
+});
+
+/////////////////////////////////////////////////////////////////
+
 window.onload = function () {
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -25,7 +88,6 @@ window.onload = function () {
                 rateSell.innerHTML = xhr.response.rateSell;
                 ajaxRate(pair);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
-
                 outTotal();
             }
         }
