@@ -1,3 +1,24 @@
+let stompClient = null;
+function connect() {
+    const socket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, frame => {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/greetings',function (greeting) {
+            let gvn = JSON.parse(greeting.body);
+            for (let i = 0; i < gvn.length; i++) {
+                $("#greetings").append("<tr><td>" + gvn[i].rate + "</td></tr>");
+            }
+        });
+    });
+}
+function sendName() {
+    stompClient.send("/app/hello", {}, JSON.stringify({
+        'rate':$("#rateBuy").val(),
+        'quantity': $("#quantityBuy").val(),
+        'total':$("#totalBuy").val(),
+        'type':"URBuy"}));
+}
 let changePair = document.getElementById('pairs');
 document.getElementById('butBuy').onclick = function (select) {
     select = changePair;

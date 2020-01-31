@@ -2,7 +2,7 @@ function outTotal() {
     totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
 }
-/////////////////////////////////////////////////////
+/*
 let stompClient = null;
 
 function setConnected(connected) {
@@ -27,9 +27,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             for (let i = 0; i < gvn.length; i++) {
                 $("#greetings").append("<tr><td>" + gvn[i].rate + "</td></tr>");
-                console.log(gvn[i].quantity)
             }
-           console.log(gvn)
         });
     });
 }
@@ -43,7 +41,11 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/hello", {}, JSON.stringify({
+        'rate':$("#rateBuy").val(),
+        'quantity': $("#quantityBuy").val(),
+        'total':$("#totalBuy").val(),
+        'type':"URBuy"}));
 }
 
 function showGreeting(message) {
@@ -63,7 +65,7 @@ $(function () {
     $( "#send" ).click(function() { sendName(); });
 });
 
-/////////////////////////////////////////////////////////////////
+*/
 
 window.onload = function () {
     const changePair = document.getElementById('pairs');
