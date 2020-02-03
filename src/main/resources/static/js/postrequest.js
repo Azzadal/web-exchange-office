@@ -9,13 +9,13 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             hhh.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                hhh.innerHTML += gvn[i].type + '<br/>';
+                hhh.innerHTML += gvn[i].rate + gvn[i].quantity + '<br/>';
             }
         });
     });
 }
 function sendName(pair) {
-    stompClient.send("/app/hello", {}, JSON.stringify({
+    stompClient.send("/app/" + pair, {}, JSON.stringify({
         'rate':$("#rateBuy").val(),
         'quantity':$("#quantityBuy").val(),
         'total':$("#totalBuy").val(),
@@ -28,7 +28,7 @@ document.getElementById('send').onclick = function (e) {
     e.preventDefault();
     n = changePair.selectedIndex;
     if (n === 1) sendName("URBuy");
-    if (n === 2) ajaxPostBuy("ERBuy");
+    if (n === 2) sendName("ERBuy");
     if (n === 3) ajaxPostBuy("UEBuy");
     if (n === 4) ajaxPostBuy("EUBuy");
     /*

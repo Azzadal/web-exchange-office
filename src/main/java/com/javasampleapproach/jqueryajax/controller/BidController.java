@@ -13,12 +13,20 @@ public class BidController {
     @Autowired
     private BidRepository bidRepository;
 
-    @MessageMapping("/hello")
+    @MessageMapping("/URBuy")
     @SendTo("/topic/greetings")
-    @PostMapping(value = "URBuy")
+   // @PostMapping(value = "URBuy")
     public Iterable<Bid> addNewBidURBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("URBuy");
+    }
+
+    @MessageMapping("/ERBuy")
+    @SendTo("/topic/greetings")
+    // @PostMapping(value = "URBuy")
+    public Iterable<Bid> addNewBidERBuy1(@RequestBody Bid bid){
+        bidRepository.save(bid);
+        return bidRepository.findByType("ERBuy");
     }
 
     @GetMapping(value = "URBuy")
