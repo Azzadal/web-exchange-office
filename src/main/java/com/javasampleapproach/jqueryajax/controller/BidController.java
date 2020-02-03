@@ -13,12 +13,6 @@ public class BidController {
     @Autowired
     private BidRepository bidRepository;
 
-
-    public Iterable<Bid> govno() throws Exception {
-        Thread.sleep(1000); // simulated delay
-        return bidRepository.findByType("URBuy");
-    }
-
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     @PostMapping(value = "URBuy")

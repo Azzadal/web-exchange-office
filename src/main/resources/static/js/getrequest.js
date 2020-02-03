@@ -48,13 +48,6 @@ function sendName() {
         'type':"URBuy"}));
 }
 
-function showGreeting(message) {
-    for (let i = 0; i < message.length; i++) {
-    //    $("#greetings").append("<tr><td>" + message.body[i] + "</td></tr>");
-        console.log(message.body.rate[i])
-    }
-
-}
 
 $(function () {
     $("form").on('submit', function (e) {
@@ -68,6 +61,7 @@ $(function () {
 */
 
 window.onload = function () {
+    connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');

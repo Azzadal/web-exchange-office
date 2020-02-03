@@ -4,29 +4,39 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
+        let hhh = document.getElementById('greetings');
         stompClient.subscribe('/topic/greetings',function (greeting) {
             let gvn = JSON.parse(greeting.body);
+            hhh.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                $("#greetings").append("<tr><td>" + gvn[i].rate + "</td></tr>");
+                hhh.innerHTML += gvn[i].type + '<br/>';
             }
         });
     });
 }
-function sendName() {
+function sendName(pair) {
     stompClient.send("/app/hello", {}, JSON.stringify({
         'rate':$("#rateBuy").val(),
-        'quantity': $("#quantityBuy").val(),
+        'quantity':$("#quantityBuy").val(),
         'total':$("#totalBuy").val(),
-        'type':"URBuy"}));
+        'type':pair}));
 }
+
+
 let changePair = document.getElementById('pairs');
-document.getElementById('butBuy').onclick = function (select) {
-    select = changePair;
-    n = select.selectedIndex;
+document.getElementById('send').onclick = function (e) {
+    e.preventDefault();
+    n = changePair.selectedIndex;
+    if (n === 1) sendName("URBuy");
+    if (n === 2) ajaxPostBuy("ERBuy");
+    if (n === 3) ajaxPostBuy("UEBuy");
+    if (n === 4) ajaxPostBuy("EUBuy");
+    /*
     if (n === 1) ajaxPostBuy("URBuy");
     if (n === 2) ajaxPostBuy("ERBuy");
     if (n === 3) ajaxPostBuy("UEBuy");
     if (n === 4) ajaxPostBuy("EUBuy");
+     */
 }
 
 document.getElementById('butSell').onclick = function (select) {
