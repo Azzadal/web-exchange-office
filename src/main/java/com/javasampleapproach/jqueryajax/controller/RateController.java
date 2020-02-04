@@ -17,7 +17,6 @@ public class RateController {
     @Autowired
     private RateRepository rateRepository;
     private Rate rate = new Rate();
-    private testip ip = new testip();
     //test user ip
     @GetMapping(value = "ip")
     private static String getClientIp(HttpServletRequest request) {
