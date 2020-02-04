@@ -7,10 +7,14 @@ function connect() {
         let hhh = document.getElementById('greetings');
         stompClient.subscribe('/topic/greetings',function (greeting) {
             let gvn = JSON.parse(greeting.body);
-            hhh.innerHTML = '';
+            bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                hhh.innerHTML += gvn[i].rate + gvn[i].quantity + '<br/>';
+                //hhh.innerHTML += gvn[i].rate + ' : ' + gvn[i].quantity + ' : ' + gvn[i].type + '<br/>';
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + gvn[i].rate + '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
+                    gvn[i].total + '</div></div>';
+                rowsBuy[i].style.display = "flex";
             }
+            autofillSell();
         });
     });
 }
@@ -94,20 +98,18 @@ function ajaxPostBuy(pair){
             rowsBuy[i].style.display = "flex";
         }
     }
-
-    function autofillSell(){
-        for (let i = 0; i < rowsBuy.length; i++) {
-            rowsBuy[i].addEventListener('click',function () {
-                rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
-                quantitySell.value = rowsQuanBuy[i].innerHTML;
-                outTotal();
-            })
-        }
-    }
     $("#quantityBuy").val("0");
     $("#totalBuy").val("0");
 }
-
+function autofillSell(){
+    for (let i = 0; i < rowsBuy.length; i++) {
+        rowsBuy[i].addEventListener('click',function () {
+            rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
+            quantitySell.value = rowsQuanBuy[i].innerHTML;
+            outTotal();
+        })
+    }
+}
 function ajaxPostSell(pair){
     const formData = JSON.stringify({
         rate: $("#rateSell").val(),

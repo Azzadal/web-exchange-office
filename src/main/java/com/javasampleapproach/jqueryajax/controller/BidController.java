@@ -21,6 +21,11 @@ public class BidController {
         return bidRepository.findByType("URBuy");
     }
 
+    @GetMapping(value = "URBuy")
+    public Iterable<Bid> getURBuyTab(){
+        return bidRepository.findByType("URBuy");
+    }
+
     @MessageMapping("/ERBuy")
     @SendTo("/topic/greetings")
     // @PostMapping(value = "URBuy")
@@ -29,9 +34,9 @@ public class BidController {
         return bidRepository.findByType("ERBuy");
     }
 
-    @GetMapping(value = "URBuy")
-    public Iterable<Bid> getURBuyTab(){
-        return bidRepository.findByType("URBuy");
+    @GetMapping(value = "ERBuy")
+    public Iterable<Bid> getERBuyTab(){
+        return bidRepository.findByType("ERBuy");
     }
 
     @PostMapping(value = "ERBuy")

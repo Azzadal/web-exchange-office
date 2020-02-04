@@ -4,6 +4,7 @@ function outTotal() {
 }
 
 window.onload = function () {
+    testIpReq();
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -14,6 +15,32 @@ window.onload = function () {
             []
         ]
     };
+
+
+
+
+
+    function testIpReq() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "ip");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                document.getElementById('greetings').innerHTML = xhr.response;
+            }
+        }
+        xhr.send();
+    }
+
+
+
+
+
+
+
+
+
 
     function getAjax(pair) {
         const xhr = new XMLHttpRequest();
@@ -58,6 +85,7 @@ window.onload = function () {
 
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
+
     function tableBuy(arg) {
         const req = new XMLHttpRequest();
         req.responseType = "json";
@@ -100,6 +128,7 @@ window.onload = function () {
 
     changePair.onchange = function () {
         n = this.selectedIndex;
+        let arg1, arg2, choice;
         if (n === 1) {
             choice = "rateUR";
             arg1 = "URBuy";
@@ -117,7 +146,7 @@ window.onload = function () {
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
-        }, 10000);
+        }, 5000);
     }
 
 
