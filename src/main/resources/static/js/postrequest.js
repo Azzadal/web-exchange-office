@@ -9,7 +9,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             hhh.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                hhh.innerHTML += gvn[i].rate + gvn[i].quantity + '<br/>';
+                hhh.innerHTML += gvn[i].rate + ' : ' + gvn[i].quantity + ' : ' + gvn[i].type + '<br/>';
             }
         });
     });
