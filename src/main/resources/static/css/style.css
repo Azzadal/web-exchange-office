@@ -8,9 +8,9 @@ body{
 }
 #center{
     position: absolute;
-    left: 30%;
-    right: 30%;
-    width: 45%;
+    left: 32%;
+    right: 32%;
+    width: 35%;
     height: 100%;
     border: 1px #451c17 solid;
 }
