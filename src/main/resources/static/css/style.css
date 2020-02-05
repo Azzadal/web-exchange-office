@@ -8,9 +8,9 @@ body{
 }
 #center{
     position: absolute;
-    left: 32%;
-    right: 32%;
-    width: 35%;
+    left: 27%;
+    right: 27%;
+    width: 45%;
     height: 100%;
     border: 1px #451c17 solid;
 }
@@ -240,4 +240,15 @@ body{
         height: 20%;
     }
 
+}
+
+@media screen and (min-width: 1800px){
+    #center{
+        position: absolute;
+        left: 33%;
+        right: 33%;
+        width: 33%;
+        height: 100%;
+        border: 1px #451c17 solid;
+    }
 }

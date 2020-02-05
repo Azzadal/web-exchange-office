@@ -14,8 +14,7 @@ public class BidController {
     private BidRepository bidRepository;
 
     @MessageMapping("/URBuy")
-    @SendTo("/topic/greetings")
-   // @PostMapping(value = "URBuy")
+    @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidURBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("URBuy");
@@ -27,9 +26,8 @@ public class BidController {
     }
 
     @MessageMapping("/ERBuy")
-    @SendTo("/topic/greetings")
-    // @PostMapping(value = "URBuy")
-    public Iterable<Bid> addNewBidERBuy1(@RequestBody Bid bid){
+    @SendTo("/topic/buys")
+    public Iterable<Bid> addNewBidERBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("ERBuy");
     }
@@ -39,26 +37,33 @@ public class BidController {
         return bidRepository.findByType("ERBuy");
     }
 
-    @PostMapping(value = "ERBuy")
-    public Iterable<Bid> addNewBidERBuy(@RequestBody Bid bid){
-        bidRepository.save(bid);
-        return bidRepository.findByType("ERBuy");
-    }
 
-    @PostMapping(value = "UEBuy")
+    @MessageMapping("/UEBuy")
+    @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidUEBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("UEBuy");
     }
 
-    @PostMapping(value = "EUBuy")
+    @GetMapping(value = "UEBuy")
+    public Iterable<Bid> getUEBuyTab(){
+        return bidRepository.findByType("UEBuy");
+    }
+
+    @MessageMapping("/EUBuy")
+    @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidEUBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("EUBuy");
     }
 
+    @GetMapping(value = "EUBuy")
+    public Iterable<Bid> getEUBuyTab(){
+        return bidRepository.findByType("EUBuy");
+    }
 
-    @PostMapping(value = "URSell")
+    @MessageMapping("/URSell")
+    @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidURSell(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("URSell");
@@ -69,25 +74,39 @@ public class BidController {
         return bidRepository.findByType("URSell");
     }
 
-    @PostMapping(value = "ERSell")
+    @MessageMapping("/ERSell")
+    @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidERSell(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("ERSell");
     }
 
-    @PostMapping(value = "UESell")
+    @GetMapping(value = "ERSell")
+    public Iterable<Bid> getERSellTab(){
+        return bidRepository.findByType("ERSell");
+    }
+
+    @MessageMapping("/UESell")
+    @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidUESell(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("UESell");
     }
 
-    @PostMapping(value = "EUSell")
+    @GetMapping(value = "UESell")
+    public Iterable<Bid> getUESellTab(){
+        return bidRepository.findByType("UESell");
+    }
+
+    @MessageMapping("/EUSell")
+    @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidEUSell(@RequestBody Bid bid){
         bidRepository.save(bid);
         return bidRepository.findByType("EUSell");
     }
 
-
-
-
+    @GetMapping(value = "EUSell")
+    public Iterable<Bid> getEUSellTab(){
+        return bidRepository.findByType("EUSell");
+    }
 }

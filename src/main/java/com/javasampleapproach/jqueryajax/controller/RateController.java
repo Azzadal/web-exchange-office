@@ -60,7 +60,7 @@ public class RateController {
 
     @GetMapping(value = "rateUR")
     public Map<String, BigDecimal> genUR(){
-        return rate.generateRate(150,20,90,125);
+        return rate.generateRate(20,150,90,125);
     }
 
     @GetMapping(value = "rateER")
@@ -71,6 +71,11 @@ public class RateController {
     @GetMapping(value = "rateUE")
     public Map<String, BigDecimal> genUE(){
         return rate.generateRate(15,22,10,13);
+    }
+
+    @GetMapping(value = "rateEU")
+    public Map<String, BigDecimal> genEU(){
+        return rate.generateRate(27,50,30,150);
     }
 
 }
