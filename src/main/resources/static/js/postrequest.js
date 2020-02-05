@@ -1,16 +1,16 @@
 const quantityBuy = document.getElementById('quantityBuy'),
-quantitySell = document.getElementById('quantitySell'),
-rateBuy = document.getElementById('rateBuy'),
-rateSell = document.getElementById('rateSell'),
-totalBuy = document.getElementById('totalBuy'),
-bidsSell = document.getElementById('bidsSell'),
-bidsBuy = document.getElementById('bidsBuy'),
-rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
-rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
-rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
-rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
-rowsSell = document.getElementsByClassName('rowsSell'),
-rowsBuy = document.getElementsByClassName('rowsBuy');
+    quantitySell = document.getElementById('quantitySell'),
+    rateBuy = document.getElementById('rateBuy'),
+    rateSell = document.getElementById('rateSell'),
+    totalBuy = document.getElementById('totalBuy'),
+    bidsSell = document.getElementById('bidsSell'),
+    bidsBuy = document.getElementById('bidsBuy'),
+    rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
+    rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
+    rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
+    rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
+    rowsSell = document.getElementsByClassName('rowsSell'),
+    rowsBuy = document.getElementsByClassName('rowsBuy');
 let stompClient = null;
 let changePair = document.getElementById('pairs');
 
@@ -44,9 +44,9 @@ function connect() {
 
 function addBidsBuy(pair) {
     stompClient.send("/app/" + pair, {}, JSON.stringify({
-        'rate':$("#rateBuy").val(),
-        'quantity':$("#quantityBuy").val(),
-        'total':$("#totalBuy").val(),
+        'rate':rateBuy.value,
+        'quantity':quantityBuy.value,
+        'total':totalBuy.value,
         'type':pair}));
 
     $("#quantityBuy").val("0");
@@ -55,9 +55,9 @@ function addBidsBuy(pair) {
 
 function addBidsSell(pair) {
     stompClient.send("/app/" + pair, {}, JSON.stringify({
-        'rate':$("#rateSell").val(),
-        'quantity':$("#quantitySell").val(),
-        'total':$("#totalSell").val(),
+        'rate':rateSell.value,
+        'quantity':quantitySell.value,
+        'total':totalSell.value,
         'type':pair}));
 
     $("#quantitySell").val("0");

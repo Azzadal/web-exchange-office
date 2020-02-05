@@ -1,7 +1,5 @@
-const quantityBuy = document.getElementById('quantityBuy'),
-quantitySell = document.getElementById('quantitySell'),
-totalBuy = document.getElementById('totalBuy'),
-totalSell = document.getElementById('totalSell');
+
+
 function outTotal() {
     totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
@@ -147,7 +145,10 @@ window.onload = function () {
             getAjax(choice);
         }, 5000);
     }
-
+    const quantityBuy = document.getElementById('quantityBuy'),
+    quantitySell = document.getElementById('quantitySell'),
+    totalBuy = document.getElementById('totalBuy'),
+    totalSell = document.getElementById('totalSell');
     quantitySell.oninput = function () {
         outTotal();
     }
