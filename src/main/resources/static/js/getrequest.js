@@ -1,5 +1,3 @@
-
-
 function outTotal() {
     totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
@@ -143,7 +141,7 @@ window.onload = function () {
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
-        }, 5000);
+        }, 10000);
     }
     const quantityBuy = document.getElementById('quantityBuy'),
     quantitySell = document.getElementById('quantitySell'),

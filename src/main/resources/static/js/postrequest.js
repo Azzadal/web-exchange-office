@@ -3,6 +3,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rateBuy = document.getElementById('rateBuy'),
     rateSell = document.getElementById('rateSell'),
     totalBuy = document.getElementById('totalBuy'),
+    totalSell = document.getElementById('totalSell'),
     bidsSell = document.getElementById('bidsSell'),
     bidsBuy = document.getElementById('bidsBuy'),
     rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
@@ -42,6 +43,24 @@ function connect() {
     });
 }
 
+function check(pair) {
+    let flag;
+    let q;
+    for (let i = 0; i < rowsSell.length; i++) {
+        if (rateBuy.value === rowsPriceSell[i].innerHTML) {
+            flag = 0;
+            q = i;
+        } else {
+            flag = 1;
+        }
+    }
+    if (flag === 1) {
+        addBidsBuy(pair);
+    } else {
+        rowsSell[q].style.backgroundColor = "green";
+    }
+}
+
 function addBidsBuy(pair) {
     stompClient.send("/app/" + pair, {}, JSON.stringify({
         'rate':rateBuy.value,
@@ -67,7 +86,8 @@ function addBidsSell(pair) {
 document.getElementById('butBuy').onclick = function (e) {
     e.preventDefault();
     n = changePair.selectedIndex;
-    if (n === 1) addBidsBuy("URBuy");
+    //if (n === 1) addBidsBuy("URBuy");
+    if (n === 1) check("URBuy");
     if (n === 2) addBidsBuy("ERBuy");
     if (n === 3) addBidsBuy("UEBuy");
     if (n === 4) addBidsBuy("EUBuy");
