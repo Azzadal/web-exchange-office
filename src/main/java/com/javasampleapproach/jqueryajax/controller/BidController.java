@@ -109,4 +109,11 @@ public class BidController {
     public Iterable<Bid> getEUSellTab(){
         return bidRepository.findByType("EUSell");
     }
+
+    @MessageMapping("/id")
+    @SendTo("/topic/ids")
+    public Iterable<Bid> _addNewBidEUSell(@RequestBody Bid bid){
+
+        return bidRepository.findByType("URBuy");
+    }
 }

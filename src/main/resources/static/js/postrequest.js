@@ -10,6 +10,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
     rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
     rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
+    rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
     rowsSell = document.getElementsByClassName('rowsSell'),
     rowsBuy = document.getElementsByClassName('rowsBuy');
 let stompClient = null;
@@ -24,9 +25,11 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + gvn[i].rate + '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + gvn[i].rate +
+                    '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
                     gvn[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
+                console.log(gvn[i].id)
             }
             autofillSell();
         });
@@ -34,11 +37,20 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + gvn[i].rate + '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + gvn[i].rate +
+                    '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
             }
             autofillBuy();
+        });
+        stompClient.subscribe('/topic/ids',function (greeting) {
+            let gvn = JSON.parse(greeting.body);
+
+            for (let i = 0; i < gvn.length; i++) {
+                console.log(gvn[i].id)
+            }
+
         });
     });
 }
@@ -57,7 +69,43 @@ function check(pair) {
     if (flag === 1) {
         addBidsBuy(pair);
     } else {
-        rowsSell[q].style.backgroundColor = "green";
+        //если заявка нашлась то удаяем ее из списка заявок
+
+        console.log(q)
+
+
+                stompClient.send("/app/id", {}, JSON.stringify({
+                    'rate':rowsPriceSell[q].innerHTML,
+                    'quantity':rowsQuanSell[q].innerHTML,
+                    'total':rowsTotalSell[q].innerHTML,
+                    'type':pair}));
+
+
+        rowsSell[q].remove();
+
+        /*
+                        const req = new XMLHttpRequest();
+                        req.responseType = "json";
+                        req.open('GET', window.location + arg);
+                        req.onreadystatechange = function () {
+                            if (req.readyState === 4) {
+                                let json = req.response;
+                                let i;
+                                bidsBuy.innerHTML = '';
+                                for(i = 0; i < json.length; i++) {
+                                    bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + json[i].rate + '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
+                                        json[i].total + '</div></div>';
+                                    rowsBuy[i].style.display = "flex";
+                                }
+                            }
+                        }
+                        req.send();
+
+
+                */
+
+
+
     }
 }
 
