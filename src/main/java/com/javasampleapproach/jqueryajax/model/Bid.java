@@ -11,14 +11,11 @@ public class Bid {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private BigDecimal rate;
-
     private int quantity;
-
     private BigDecimal total;
-
     private String type;
+    private String status;
 
     public Integer getId() {
         return id;
@@ -58,5 +55,13 @@ public class Bid {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

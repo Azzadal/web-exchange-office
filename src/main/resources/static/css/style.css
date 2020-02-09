@@ -196,6 +196,10 @@ body{
     border: 1px #767676 solid;
 }
 
+.id{
+    display: none;
+}
+
 .prr1{
     width: 20%;
 }

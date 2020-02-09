@@ -12,6 +12,7 @@ import com.javasampleapproach.jqueryajax.model.Bid;
 public class BidController {
     @Autowired
     private BidRepository bidRepository;
+    private Bid bid;
 
     @MessageMapping("/URBuy")
     @SendTo("/topic/buys")
@@ -112,8 +113,7 @@ public class BidController {
 
     @MessageMapping("/id")
     @SendTo("/topic/ids")
-    public Iterable<Bid> _addNewBidEUSell(@RequestBody Bid bid){
-
-        return bidRepository.findByType("URBuy");
+    public void adssssll(@RequestBody Bid bid){
+        bidRepository.save(bid);
     }
 }

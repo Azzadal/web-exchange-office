@@ -1,4 +1,5 @@
 const quantityBuy = document.getElementById('quantityBuy'),
+    id = document.getElementsByClassName('id'),
     quantitySell = document.getElementById('quantitySell'),
     rateBuy = document.getElementById('rateBuy'),
     rateSell = document.getElementById('rateSell'),
@@ -37,7 +38,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + gvn[i].rate +
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="id">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
                     '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
@@ -48,7 +49,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
 
             for (let i = 0; i < gvn.length; i++) {
-                console.log(gvn[i].id)
+                console.log(gvn[i])
             }
 
         });
@@ -58,6 +59,7 @@ function connect() {
 function check(pair) {
     let flag;
     let q;
+    if (rowsSell.length <= 0) flag = 1;
     for (let i = 0; i < rowsSell.length; i++) {
         if (rateBuy.value === rowsPriceSell[i].innerHTML) {
             flag = 0;
@@ -75,34 +77,15 @@ function check(pair) {
 
 
                 stompClient.send("/app/id", {}, JSON.stringify({
+                    'id':id[q].innerHTML,
                     'rate':rowsPriceSell[q].innerHTML,
                     'quantity':rowsQuanSell[q].innerHTML,
                     'total':rowsTotalSell[q].innerHTML,
-                    'type':pair}));
+                    'type':pair,
+                    'status':'done'}));
 
 
         rowsSell[q].remove();
-
-        /*
-                        const req = new XMLHttpRequest();
-                        req.responseType = "json";
-                        req.open('GET', window.location + arg);
-                        req.onreadystatechange = function () {
-                            if (req.readyState === 4) {
-                                let json = req.response;
-                                let i;
-                                bidsBuy.innerHTML = '';
-                                for(i = 0; i < json.length; i++) {
-                                    bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + json[i].rate + '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
-                                        json[i].total + '</div></div>';
-                                    rowsBuy[i].style.display = "flex";
-                                }
-                            }
-                        }
-                        req.send();
-
-
-                */
 
 
 
