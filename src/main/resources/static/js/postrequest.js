@@ -12,6 +12,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
     rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
     rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
+    rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
     rowsSell = document.getElementsByClassName('rowsSell'),
     rowsBuy = document.getElementsByClassName('rowsBuy');
 let stompClient = null;
@@ -26,12 +27,12 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + gvn[i].rate +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="id">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
                     '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
                     gvn[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
-                console.log(gvn[i].id)
             }
+            console.log(gvn)
             autofillSell();
         });
         stompClient.subscribe('/topic/sells',function (greeting) {
@@ -43,20 +44,13 @@ function connect() {
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
             }
+            console.log(gvn)
             autofillBuy();
-        });
-        stompClient.subscribe('/topic/ids',function (greeting) {
-            let gvn = JSON.parse(greeting.body);
-
-            for (let i = 0; i < gvn.length; i++) {
-                console.log(gvn[i])
-            }
-
         });
     });
 }
 
-function check(pair) {
+function checkBuy(pair1, pair2) {
     let flag;
     let q;
     if (rowsSell.length <= 0) flag = 1;
@@ -69,26 +63,48 @@ function check(pair) {
         }
     }
     if (flag === 1) {
-        addBidsBuy(pair);
+        addBidsBuy(pair1);
     } else {
         //если заявка нашлась то удаяем ее из списка заявок
-
         console.log(q)
-
-
                 stompClient.send("/app/id", {}, JSON.stringify({
                     'id':id[q].innerHTML,
                     'rate':rowsPriceSell[q].innerHTML,
                     'quantity':rowsQuanSell[q].innerHTML,
                     'total':rowsTotalSell[q].innerHTML,
-                    'type':pair,
+                    'type':pair2,
                     'status':'done'}));
 
-
         rowsSell[q].remove();
+    }
+}
 
+function checkSell(pair1, pair2) {
+    let flag;
+    let q;
+    if (rowsBuy.length <= 0) flag = 1;
+    for (let i = 0; i < rowsBuy.length; i++) {
+        if (rateSell.value === rowsPriceBuy[i].innerHTML) {
+            flag = 0;
+            q = i;
+        } else {
+            flag = 1;
+        }
+    }
+    if (flag === 1) {
+        addBidsSell(pair1);
+    } else {
+        //если заявка нашлась то удаяем ее из списка заявок
+        console.log(q)
+        stompClient.send("/app/id", {}, JSON.stringify({
+            'id':id[q].innerHTML,
+            'rate':rowsPriceBuy[q].innerHTML,
+            'quantity':rowsQuanBuy[q].innerHTML,
+            'total':rowsTotalBuy[q].innerHTML,
+            'type':pair2,
+            'status':'done'}));
 
-
+        rowsBuy[q].remove();
     }
 }
 
@@ -97,7 +113,8 @@ function addBidsBuy(pair) {
         'rate':rateBuy.value,
         'quantity':quantityBuy.value,
         'total':totalBuy.value,
-        'type':pair}));
+        'type':pair,
+        'status':'not_done'}));
 
     $("#quantityBuy").val("0");
     $("#totalBuy").val("0");
@@ -108,7 +125,8 @@ function addBidsSell(pair) {
         'rate':rateSell.value,
         'quantity':quantitySell.value,
         'total':totalSell.value,
-        'type':pair}));
+        'type':pair,
+        'status':'not_done'}));
 
     $("#quantitySell").val("0");
     $("#totalSell").val("0");
@@ -118,19 +136,19 @@ document.getElementById('butBuy').onclick = function (e) {
     e.preventDefault();
     n = changePair.selectedIndex;
     //if (n === 1) addBidsBuy("URBuy");
-    if (n === 1) check("URBuy");
-    if (n === 2) addBidsBuy("ERBuy");
-    if (n === 3) addBidsBuy("UEBuy");
-    if (n === 4) addBidsBuy("EUBuy");
+    if (n === 1) checkBuy("URBuy", "URSell");
+    if (n === 2) checkBuy("ERBuy", "ERSell");
+    if (n === 3) checkBuy("UEBuy", "UESell");
+    if (n === 4) checkBuy("EUBuy", "EUSell");
 }
 
 document.getElementById('butSell').onclick = function (select) {
     select = changePair;
     n = select.selectedIndex;
-    if (n === 1) addBidsSell("URSell");
-    if (n === 2) addBidsSell("ERSell");
-    if (n === 3) addBidsSell("UESell");
-    if (n === 4) addBidsSell("EUSell");
+    if (n === 1) checkSell("URSell", "URBuy")
+    if (n === 2) checkSell("ERSell", "ERBuy")
+    if (n === 3) checkSell("UESell", "UEBuy")
+    if (n === 4) checkSell("EUSell", "EUBuy")
 }
 
 //автозаполнение формы продажи

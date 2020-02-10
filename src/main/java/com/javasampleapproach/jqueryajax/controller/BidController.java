@@ -18,12 +18,12 @@ public class BidController {
     @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidURBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByType("URBuy");
+        return bidRepository.findByTypeAndStatus("URBuy", "not done");
     }
 
     @GetMapping(value = "URBuy")
     public Iterable<Bid> getURBuyTab(){
-        return bidRepository.findByType("URBuy");
+        return bidRepository.findByTypeAndStatus("URBuy", "not_done");
     }
 
     @MessageMapping("/ERBuy")
