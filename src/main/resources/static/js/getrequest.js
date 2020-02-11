@@ -4,7 +4,6 @@ function outTotal() {
 }
 
 window.onload = function () {
-    testIpReq();
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -103,7 +102,7 @@ window.onload = function () {
                 bidsSell.innerHTML = '';
                 for(i = 0; i < json.length; i++) {
                     bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + json[i].rate + '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
-                        json[i].total + '</div></div>';
+                        json[i].total + '</div><div id="status" STYLE="color: black"> статус: ' + json[i].status + '</div></div>';
                     rowsSell[i].style.display = "flex";
                 }
             }
@@ -141,7 +140,7 @@ window.onload = function () {
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
-        }, 10000);
+        }, 5000);
     }
     const quantityBuy = document.getElementById('quantityBuy'),
     quantitySell = document.getElementById('quantitySell'),

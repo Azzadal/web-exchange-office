@@ -43,7 +43,6 @@ function connect() {
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
             }
-            console.log(gvn)
             autofillBuy();
         });
     });
@@ -55,26 +54,25 @@ function checkBuy(pair1, pair2) {
     if (rowsSell.length <= 0) flag = 1;
     for (let i = 0; i < rowsSell.length; i++) {
         if (rateBuy.value === rowsPriceSell[i].innerHTML) {
-            console.log(i)
             flag = 0;
             q = i;
-            return;
+            break;
         }
         else {
-            addBidsBuy(pair1);
+            flag = 1;
         }
     }
-
-
-    stompClient.send("/app/id", {}, JSON.stringify({
-        'id':id[q].innerHTML,
-        'rate':rowsPriceSell[q].innerHTML,
-        'quantity':rowsQuanSell[q].innerHTML,
-        'total':rowsTotalSell[q].innerHTML,
-        'type':pair2,
-        'status':'done'}));
-
-    rowsSell[q].remove();
+    if(flag === 0) {
+        stompClient.send("/app/id", {}, JSON.stringify({
+            'id': id[q].innerHTML,
+            'rate': rowsPriceSell[q].innerHTML,
+            'quantity': rowsQuanSell[q].innerHTML,
+            'total': rowsTotalSell[q].innerHTML,
+            'type': pair2,
+            'status': 'done'
+        }));
+        rowsSell[q].remove();
+    } else addBidsBuy(pair1);
 }
 
 function checkSell(pair1, pair2) {
@@ -85,25 +83,23 @@ function checkSell(pair1, pair2) {
         if (rateSell.value === rowsPriceBuy[i].innerHTML) {
             flag = 0;
             q = i;
-        } else {
+            break;
+        }
+        else {
             flag = 1;
         }
     }
-    if (flag === 1) {
-        addBidsSell(pair1);
-    } else {
-        //если заявка нашлась то удаяем ее из списка заявок
-        console.log(q)
+    if(flag === 0) {
         stompClient.send("/app/id", {}, JSON.stringify({
-            'id':id[q].innerHTML,
-            'rate':rowsPriceBuy[q].innerHTML,
-            'quantity':rowsQuanBuy[q].innerHTML,
-            'total':rowsTotalBuy[q].innerHTML,
-            'type':pair2,
-            'status':'done'}));
-
+            'id': id[q].innerHTML,
+            'rate': rowsPriceBuy[q].innerHTML,
+            'quantity': rowsQuanBuy[q].innerHTML,
+            'total': rowsTotalBuy[q].innerHTML,
+            'type': pair2,
+            'status': 'done'
+        }));
         rowsBuy[q].remove();
-    }
+    } else addBidsSell(pair1);
 }
 
 function addBidsBuy(pair) {
@@ -151,7 +147,7 @@ document.getElementById('butSell').onclick = function (select) {
 
 //автозаполнение формы продажи
 function autofillSell(){
-    for (let i = 0; i < rowsBuy.length; i++) {
+    for (let i = 0; i <= rowsBuy.length; i++) {
         rowsBuy[i].addEventListener('click',function () {
             rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
             quantitySell.value = rowsQuanBuy[i].innerHTML;
@@ -162,7 +158,7 @@ function autofillSell(){
 
 //автозаполнение формы покупки
 function autofillBuy(){
-    for (let i = 0; i < rowsSell.length; i++) {
+    for (let i = 0; i <= rowsSell.length; i++) {
         rowsSell[i].addEventListener('click',function () {
             rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
             quantityBuy.value = rowsQuanSell[i].innerHTML;
