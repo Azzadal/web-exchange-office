@@ -196,8 +196,8 @@ body{
     border: 1px #767676 solid;
 }
 
-.id{
-    display: none;
+.idBuy, .idSell{
+    color: black;
 }
 
 .prr1{

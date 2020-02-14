@@ -1,5 +1,6 @@
 const quantityBuy = document.getElementById('quantityBuy'),
-    id = document.getElementsByClassName('id'),
+    idBuy = document.getElementsByClassName('idBuy'),
+    idSell = document.getElementsByClassName('idSell'),
     quantitySell = document.getElementById('quantitySell'),
     rateBuy = document.getElementById('rateBuy'),
     rateSell = document.getElementById('rateSell'),
@@ -27,7 +28,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="id">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
+                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
                     '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
                     gvn[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
@@ -38,7 +39,7 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += '<div class="rowsSell"><div class="id">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
+                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
                     '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
@@ -64,7 +65,7 @@ function checkBuy(pair1, pair2) {
     }
     if(flag === 0) {
         stompClient.send("/app/id", {}, JSON.stringify({
-            'id': id[q].innerHTML,
+            'id': idSell[q].innerHTML,
             'rate': rowsPriceSell[q].innerHTML,
             'quantity': rowsQuanSell[q].innerHTML,
             'total': rowsTotalSell[q].innerHTML,
@@ -74,6 +75,7 @@ function checkBuy(pair1, pair2) {
         rowsSell[q].remove();
     } else addBidsBuy(pair1);
 }
+
 
 function checkSell(pair1, pair2) {
     let flag;
@@ -91,7 +93,7 @@ function checkSell(pair1, pair2) {
     }
     if(flag === 0) {
         stompClient.send("/app/id", {}, JSON.stringify({
-            'id': id[q].innerHTML,
+            'id': idBuy[q].innerHTML,
             'rate': rowsPriceBuy[q].innerHTML,
             'quantity': rowsQuanBuy[q].innerHTML,
             'total': rowsTotalBuy[q].innerHTML,
@@ -99,6 +101,8 @@ function checkSell(pair1, pair2) {
             'status': 'done'
         }));
         rowsBuy[q].remove();
+        tableBuy(pair2);
+        console.log(rowsBuy)
     } else addBidsSell(pair1);
 }
 
@@ -152,6 +156,7 @@ function autofillSell(){
             rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
             quantitySell.value = rowsQuanBuy[i].innerHTML;
             outTotal();
+            console.log(i+'   '+idBuy[i].innerHTML)
         })
     }
 }
@@ -163,6 +168,7 @@ function autofillBuy(){
             rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
             quantityBuy.value = rowsQuanSell[i].innerHTML;
             outTotal();
+            console.log(i+'   '+idSell[i].innerHTML)
         })
     }
 }

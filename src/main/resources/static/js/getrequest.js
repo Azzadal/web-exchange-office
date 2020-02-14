@@ -4,6 +4,7 @@ function outTotal() {
 }
 
 window.onload = function () {
+
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -137,6 +138,7 @@ window.onload = function () {
         }
         tableBuy(arg1);
         tableSell(arg2);
+
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
