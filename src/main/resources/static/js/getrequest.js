@@ -73,25 +73,6 @@ window.onload = function () {
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
 
-    function tableBuy(arg) {
-        const req = new XMLHttpRequest();
-        req.responseType = "json";
-        req.open('GET', window.location + arg);
-        req.onreadystatechange = function () {
-            if (req.readyState === 4) {
-                let json = req.response;
-                let i;
-                bidsBuy.innerHTML = '';
-                for(i = 0; i < json.length; i++) {
-                    bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + json[i].rate + '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
-                        json[i].total + '</div></div>';
-                    rowsBuy[i].style.display = "flex";
-                }
-            }
-        }
-        req.send();
-    }
-
     function tableSell(arg) {
         const req = new XMLHttpRequest();
         req.responseType = "json";

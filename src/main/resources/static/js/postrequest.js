@@ -19,6 +19,49 @@ const quantityBuy = document.getElementById('quantityBuy'),
 let stompClient = null;
 let changePair = document.getElementById('pairs');
 
+function tableBuy(arg) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json";
+    req.open('GET', window.location + arg);
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            let json = req.response;
+            let i;
+            bidsBuy.innerHTML = '';
+            for(i = 0; i < json.length; i++) {
+                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
+                    '<div class="rowsPriceBuy">' + json[i].rate +
+                    '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
+                    json[i].total + '</div></div>';
+                rowsBuy[i].style.display = "flex";
+            }
+        }
+        console.log("говно")
+        autofillSell();
+    }
+    req.send();
+}
+function tableSell(arg) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json";
+    req.open('GET', window.location + arg);
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            let json = req.response;
+            let i;
+            bidsSell.innerHTML = '';
+            for(i = 0; i < json.length; i++) {
+                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
+                    '<div class="rowsPriceSell">' + json[i].rate +
+                    '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
+                    json[i].total + '</div></div>';
+                rowsSell[i].style.display = "flex";
+            }
+        }
+    }
+    req.send();
+}
+
 function connect() {
     const socket = new SockJS('/gs-guide-websocket');
     stompClient = Stomp.over(socket);
@@ -73,6 +116,7 @@ function checkBuy(pair1, pair2) {
             'status': 'done'
         }));
         rowsSell[q].remove();
+        tableSell(pair2);
     } else addBidsBuy(pair1);
 }
 
