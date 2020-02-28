@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpringBootJQueryAjaxClient.iml" filepath="$PROJECT_DIR$/SpringBootJQueryAjaxClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web_dev.iml" filepath="$PROJECT_DIR$/web_dev.iml" />
     </modules>
   </component>
 </project>

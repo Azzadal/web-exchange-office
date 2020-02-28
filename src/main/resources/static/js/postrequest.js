@@ -29,14 +29,14 @@ function tableBuy(arg) {
             let i;
             bidsBuy.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
                     '<div class="rowsPriceBuy">' + json[i].rate +
                     '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
                     json[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
             }
         }
-        console.log("говно")
+        console.log("1")
         autofillSell();
     }
     req.send();
@@ -51,13 +51,15 @@ function tableSell(arg) {
             let i;
             bidsSell.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
                     '<div class="rowsPriceSell">' + json[i].rate +
                     '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
-                    json[i].total + '</div></div>';
+                    json[i].total + '</div></div>'+json[i].status;
                 rowsSell[i].style.display = "flex";
             }
         }
+        console.log("2")
+        autofillBuy();
     }
     req.send();
 }
@@ -71,9 +73,9 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
                     '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
-                    gvn[i].total + '</div></div>';
+                    gvn[i].total + '</div></div>'+gvn[i].status;
                 rowsBuy[i].style.display = "flex";
             }
             autofillSell();
@@ -82,9 +84,9 @@ function connect() {
             let gvn = JSON.parse(greeting.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
                     '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
-                    gvn[i].total + '</div></div>';
+                    gvn[i].total + '</div></div>'+gvn[i].status;
                 rowsSell[i].style.display = "flex";
             }
             autofillBuy();
@@ -116,7 +118,8 @@ function checkBuy(pair1, pair2) {
             'status': 'done'
         }));
         rowsSell[q].remove();
-        tableSell(pair2);
+        setTimeout(tableSell, 1000, pair2);
+
     } else addBidsBuy(pair1);
 }
 
@@ -145,7 +148,7 @@ function checkSell(pair1, pair2) {
             'status': 'done'
         }));
         rowsBuy[q].remove();
-        tableBuy(pair2);
+        setTimeout(tableBuy, 1000, pair2);
         console.log(rowsBuy)
     } else addBidsSell(pair1);
 }
@@ -207,14 +210,14 @@ function autofillSell(){
 
 //автозаполнение формы покупки
 function autofillBuy(){
-    for (let i = 0; i <= rowsSell.length; i++) {
-        rowsSell[i].addEventListener('click',function () {
-            rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
-            quantityBuy.value = rowsQuanSell[i].innerHTML;
-            outTotal();
-            console.log(i+'   '+idSell[i].innerHTML)
-        })
-    }
+        for (let i = 0; i <= rowsSell.length; i++) {
+            rowsSell[i].addEventListener('click', function () {
+                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
+                quantityBuy.value = rowsQuanSell[i].innerHTML;
+                outTotal();
+                console.log(i + '   ' + idSell[i].innerHTML)
+            })
+        }
 }
 
 //

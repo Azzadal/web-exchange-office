@@ -197,6 +197,7 @@ body{
 }
 
 .idBuy, .idSell{
+    display: none;
     color: black;
 }
 

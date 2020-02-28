@@ -73,25 +73,6 @@ window.onload = function () {
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
 
-    function tableSell(arg) {
-        const req = new XMLHttpRequest();
-        req.responseType = "json";
-        req.open('GET', window.location + arg);
-        req.onreadystatechange = function () {
-            if (req.readyState === 4) {
-                let json = req.response;
-                let i;
-                bidsSell.innerHTML = '';
-                for(i = 0; i < json.length; i++) {
-                    bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + json[i].rate + '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
-                        json[i].total + '</div><div id="status" STYLE="color: black"> статус: ' + json[i].status + '</div></div>';
-                    rowsSell[i].style.display = "flex";
-                }
-            }
-        }
-        req.send();
-    }
-
     let timerId = null;
 
     changePair.onchange = function () {
@@ -126,9 +107,9 @@ window.onload = function () {
         }, 5000);
     }
     const quantityBuy = document.getElementById('quantityBuy'),
-    quantitySell = document.getElementById('quantitySell'),
-    totalBuy = document.getElementById('totalBuy'),
-    totalSell = document.getElementById('totalSell');
+        quantitySell = document.getElementById('quantitySell'),
+        totalBuy = document.getElementById('totalBuy'),
+        totalSell = document.getElementById('totalSell');
     quantitySell.oninput = function () {
         outTotal();
     }
