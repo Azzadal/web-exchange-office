@@ -113,7 +113,13 @@ public class BidController {
 
     @MessageMapping("/id")
     @SendTo("/topic/ids")
-    public void adssssll(@RequestBody Bid bid){
+    public Iterable<Bid> adssssll(@RequestBody Bid bid){
         bidRepository.save(bid);
+        return bidRepository.findByStatus("done");
+    }
+
+    @GetMapping(value = "tab_compl")
+    public Iterable<Bid> getComplitTab(){
+        return bidRepository.findByStatus("done");
     }
 }

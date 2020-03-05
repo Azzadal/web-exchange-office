@@ -8,6 +8,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     totalSell = document.getElementById('totalSell'),
     bidsSell = document.getElementById('bidsSell'),
     bidsBuy = document.getElementById('bidsBuy'),
+    complBid = document.getElementById('complBid'),
     rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
     rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
     rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
@@ -15,9 +16,33 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
     rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
     rowsSell = document.getElementsByClassName('rowsSell'),
+    rowsHistory = document.getElementsByClassName('rowsHistory'),
     rowsBuy = document.getElementsByClassName('rowsBuy');
 let stompClient = null;
 let changePair = document.getElementById('pairs');
+
+function tableSell(arg) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json";
+    req.open('GET', window.location + arg);
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            let json = req.response;
+            let i;
+            bidsSell.innerHTML = '';
+            for(i = 0; i < json.length; i++) {
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
+                    '<div class="rowsPriceSell">' + json[i].rate +
+                    '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
+                    json[i].total + '</div></div>';
+                rowsSell[i].style.display = "flex";
+            }
+        }
+        console.log("запуск tablesell")
+        autofillBuy();
+    }
+    req.send();
+}
 
 function tableBuy(arg) {
     const req = new XMLHttpRequest();
@@ -29,33 +54,35 @@ function tableBuy(arg) {
             let i;
             bidsBuy.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
                     '<div class="rowsPriceBuy">' + json[i].rate +
                     '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
                     json[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
             }
         }
-        console.log("говно")
+        console.log("запуск tablebuy")
         autofillSell();
     }
     req.send();
 }
-function tableSell(arg) {
+
+function tableComplit() {
     const req = new XMLHttpRequest();
     req.responseType = "json";
-    req.open('GET', window.location + arg);
+    req.open('GET', window.location + "tab_compl");
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
-            bidsSell.innerHTML = '';
-            for(i = 0; i < json.length; i++) {
-                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
-                    '<div class="rowsPriceSell">' + json[i].rate +
-                    '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
-                    json[i].total + '</div></div>';
-                rowsSell[i].style.display = "flex";
+            complBid.innerHTML = '';
+            for (let i = 0; i < json.length; i++) {
+                complBid.innerHTML += '<div class="rowsHistory"><div class="date"></div><div class="type">' +
+                    json[i].type +
+                    '</div><div class="price">' + json[i].rate + '</div><div class="quantity">' + json[i].quantity +
+                    '</div>' +
+                    '<div class="total">' + json[i].total + '</div></div>';
+                rowsHistory[i].style.display = "flex";
             }
         }
     }
@@ -67,27 +94,41 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/buys',function (greeting) {
-            let gvn = JSON.parse(greeting.body);
+        stompClient.subscribe('/topic/buys', function (e) {
+            let gvn = JSON.parse(e.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += i+'<div class="rowsBuy"><div class="idBuy">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + gvn[i].id +
+                    '</div><div class="rowsPriceBuy">' + gvn[i].rate +
                     '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
                     gvn[i].total + '</div></div>';
                 rowsBuy[i].style.display = "flex";
             }
             autofillSell();
         });
-        stompClient.subscribe('/topic/sells',function (greeting) {
-            let gvn = JSON.parse(greeting.body);
+        stompClient.subscribe('/topic/sells', function (e) {
+            let gvn = JSON.parse(e.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += i+'<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div>' +
+                    '<div class="rowsPriceSell">' + gvn[i].rate +
                     '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
                     gvn[i].total + '</div></div>';
                 rowsSell[i].style.display = "flex";
             }
             autofillBuy();
+        });
+        stompClient.subscribe('/topic/ids', function (e) {
+            let gvn = JSON.parse(e.body);
+            complBid.innerHTML = '';
+            for (let i = 0; i < gvn.length; i++) {
+                complBid.innerHTML += '<div class="rowsHistory"><div class="date"></div><div class="type">' +
+                    gvn[i].type +
+                    '</div><div class="price">' + gvn[i].rate + '</div><div class="quantity">' + gvn[i].quantity +
+                    '</div>' +
+                    '<div class="total">' + gvn[i].total + '</div></div>';
+                rowsHistory[i].style.display = "flex";
+            }
         });
     });
 }
@@ -146,7 +187,6 @@ function checkSell(pair1, pair2) {
         }));
         rowsBuy[q].remove();
         tableBuy(pair2);
-        console.log(rowsBuy)
     } else addBidsSell(pair1);
 }
 
@@ -177,16 +217,15 @@ function addBidsSell(pair) {
 document.getElementById('butBuy').onclick = function (e) {
     e.preventDefault();
     n = changePair.selectedIndex;
-    //if (n === 1) addBidsBuy("URBuy");
     if (n === 1) checkBuy("URBuy", "URSell");
     if (n === 2) checkBuy("ERBuy", "ERSell");
     if (n === 3) checkBuy("UEBuy", "UESell");
     if (n === 4) checkBuy("EUBuy", "EUSell");
 }
 
-document.getElementById('butSell').onclick = function (select) {
-    select = changePair;
-    n = select.selectedIndex;
+document.getElementById('butSell').onclick = function (e) {
+    e.preventDefault();
+    n = changePair.selectedIndex;
     if (n === 1) checkSell("URSell", "URBuy")
     if (n === 2) checkSell("ERSell", "ERBuy")
     if (n === 3) checkSell("UESell", "UEBuy")
