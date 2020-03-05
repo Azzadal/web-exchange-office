@@ -2,7 +2,10 @@ function outTotal() {
     totalBuy.value = parseFloat(rateBuy.value) * parseInt(quantityBuy.value).toFixed(2);
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
 }
+
 window.onload = function () {
+
+    connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
@@ -13,11 +16,22 @@ window.onload = function () {
         ]
     };
 
+    function testIpReq() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "ip");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.response)
+                document.getElementById('ip').innerHTML = xhr.response;
+            }
+        }
+        xhr.send();
+    }
+
     function getAjax(pair) {
         const xhr = new XMLHttpRequest();
-
         xhr.responseType = "json";
-
         xhr.open('GET', window.location + pair);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -56,25 +70,46 @@ window.onload = function () {
         new Chartist.Line('.ct-chart', data);
     }
 
+    const bidsBuy = document.getElementById('bidsBuy');
+    const rowsBuy = document.getElementsByClassName('rowsBuy');
+
     let timerId = null;
 
     changePair.onchange = function () {
         n = this.selectedIndex;
-        if (n === 1) choice = "rateUR";
-        if (n === 2) choice = "rateER";
-        if (n === 3) choice = "rateUE";
-        if (n === 4) choice = "rateEU";
+        let arg1, arg2, choice;
+        if (n === 1) {
+            choice = "rateUR";
+            arg1 = "URBuy";
+            arg2 = "URSell";
+        }
+        if (n === 2) {
+            choice = "rateER";
+            arg1 = "ERBuy";
+            arg2 = "ERSell";
+        }
+        if (n === 3) {
+            choice = "rateUE";
+            arg1 = "UEBuy";
+            arg2 = "UESell";
+        }
+        if (n === 4) {
+            choice = "rateEU";
+            arg1 = "EUBuy";
+            arg2 = "EUSell";
+        }
+        tableBuy(arg1);
+        tableSell(arg2);
+
         clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
-        }, 10000);
+        }, 5000);
     }
-
-
-    const quantityBuy = document.getElementById('quantityBuy');
-    const quantitySell = document.getElementById('quantitySell');
-    const totalBuy = document.getElementById('totalBuy');
-    const totalSell = document.getElementById('totalSell');
+    const quantityBuy = document.getElementById('quantityBuy'),
+        quantitySell = document.getElementById('quantitySell'),
+        totalBuy = document.getElementById('totalBuy'),
+        totalSell = document.getElementById('totalSell');
     quantitySell.oninput = function () {
         outTotal();
     }

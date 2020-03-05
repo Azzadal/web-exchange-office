@@ -109,9 +109,9 @@ window.onload = function () {
         }, 5000);
     }
     const quantityBuy = document.getElementById('quantityBuy'),
-    quantitySell = document.getElementById('quantitySell'),
-    totalBuy = document.getElementById('totalBuy'),
-    totalSell = document.getElementById('totalSell');
+        quantitySell = document.getElementById('quantitySell'),
+        totalBuy = document.getElementById('totalBuy'),
+        totalSell = document.getElementById('totalSell');
     quantitySell.oninput = function () {
         outTotal();
     }

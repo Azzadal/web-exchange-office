@@ -112,7 +112,7 @@ var isWindow = function isWindow( obj ) {
 				// becomes browsing-context connected.
 				// See https://github.com/whatwg/html/issues/2369
 				// See https://html.spec.whatwg.org/#nonce-attributes
-				// The `node.getAttribute` check was added for the sake of
+				// The `node.getAttribute` checkBuy was added for the sake of
 				// `jQuery.globalEval` so that it can fake a nonce-containing node
 				// via an object.
 				val = node[ i ] || node.getAttribute && node.getAttribute( i );
@@ -496,7 +496,7 @@ function( i, name ) {
 function isArrayLike( obj ) {
 
 	// Support: real iOS 8.2 only (not reproducible in simulator)
-	// `in` check used to prevent JIT error (gh-2145)
+	// `in` checkBuy used to prevent JIT error (gh-2145)
 	// hasOwn isn't used here due to false negatives
 	// regarding Nodelist length in IE
 	var length = !!obj && "length" in obj && obj.length,
@@ -1009,10 +1009,10 @@ function createDisabledPseudo( disabled ) {
 				}
 
 				// Support: IE 6 - 11
-				// Use the isDisabled shortcut property to check for disabled fieldset ancestors
+				// Use the isDisabled shortcut property to checkBuy for disabled fieldset ancestors
 				return elem.isDisabled === disabled ||
 
-					// Where there is no isDisabled, check manually
+					// Where there is no isDisabled, checkBuy manually
 					/* jshint -W018 */
 					elem.isDisabled !== !disabled &&
 						inDisabledFieldset( elem ) === disabled;
@@ -1457,7 +1457,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
 				0;
 
-		// If the nodes are siblings, we can do a quick check
+		// If the nodes are siblings, we can do a quick checkBuy
 		} else if ( aup === bup ) {
 			return siblingCheck( a, b );
 		}
@@ -1478,7 +1478,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 
 		return i ?
-			// Do a sibling check if the nodes have a common ancestor
+			// Do a sibling checkBuy if the nodes have a common ancestor
 			siblingCheck( ap[i], bp[i] ) :
 
 			// Otherwise nodes in our document sort first
@@ -1890,7 +1890,7 @@ Expr = Sizzle.selectors = {
 							}
 						}
 
-						// Incorporate the offset, then check against cycle size
+						// Incorporate the offset, then checkBuy against cycle size
 						diff -= last;
 						return diff === first || ( diff % first === 0 && diff / first >= 0 );
 					}
@@ -2605,7 +2605,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 		cached = compilerCache[ selector + " " ];
 
 	if ( !cached ) {
-		// Generate a function of recursive functions that can be used to check each element
+		// Generate a function of recursive functions that can be used to checkBuy each element
 		if ( !match ) {
 			match = tokenize( selector );
 		}
@@ -2908,7 +2908,7 @@ jQuery.fn.extend( {
 		return !!winnow(
 			this,
 
-			// If this is a positional/relative selector, check membership in the returned set
+			// If this is a positional/relative selector, checkBuy membership in the returned set
 			// so $("p:first").is("p:last") won't return true for a doc with two "p".
 			typeof selector === "string" && rneedsContext.test( selector ) ?
 				jQuery( selector ) :
@@ -2925,7 +2925,7 @@ jQuery.fn.extend( {
 // A central reference to the root jQuery(document)
 var rootjQuery,
 
-	// A simple way to check for HTML strings
+	// A simple way to checkBuy for HTML strings
 	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
 	// Shortcut simple #id case for speed
@@ -2949,7 +2949,7 @@ var rootjQuery,
 				selector[ selector.length - 1 ] === ">" &&
 				selector.length >= 3 ) {
 
-				// Assume that strings that start and end with <> are HTML and skip the regex check
+				// Assume that strings that start and end with <> are HTML and skip the regex checkBuy
 				match = [ null, selector, null ];
 
 			} else {
@@ -3248,7 +3248,7 @@ function createOptions( options ) {
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
-	// (we check in cache first)
+	// (we checkBuy in cache first)
 	options = typeof options === "string" ?
 		createOptions( options ) :
 		jQuery.extend( {}, options );
@@ -3287,7 +3287,7 @@ jQuery.Callbacks = function( options ) {
 				memory = queue.shift();
 				while ( ++firingIndex < list.length ) {
 
-					// Run callback and check for early termination
+					// Run callback and checkBuy for early termination
 					if ( list[ firingIndex ].apply( memory[ 0 ], memory[ 1 ] ) === false &&
 						options.stopOnFalse ) {
 
@@ -3570,7 +3570,7 @@ jQuery.extend( {
 
 										// Support: Promises/A+ section 2.3.4
 										// https://promisesaplus.com/#point-64
-										// Only check objects and functions for thenability
+										// Only checkBuy objects and functions for thenability
 										( typeof returned === "object" ||
 											typeof returned === "function" ) &&
 										returned.then;
@@ -4502,7 +4502,7 @@ var documentElement = document.documentElement;
 	// Check attachment across shadow DOM boundaries when possible (gh-3504)
 	// Support: iOS 10.0-10.2 only
 	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
-	// leading to errors. We need to check for `getRootNode`.
+	// leading to errors. We need to checkBuy for `getRootNode`.
 	if ( documentElement.getRootNode ) {
 		isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem ) ||
@@ -4519,7 +4519,7 @@ var isHiddenWithinTree = function( elem, el ) {
 		return elem.style.display === "none" ||
 			elem.style.display === "" &&
 
-			// Otherwise, check computed style
+			// Otherwise, checkBuy computed style
 			// Support: Firefox <=43 - 45
 			// Disconnected elements can have computed display: none, so first confirm that elem is
 			// in the document.
@@ -4659,7 +4659,7 @@ function showHide( elements, show ) {
 		if ( show ) {
 
 			// Since we force visibility upon cascade-hidden elements, an immediate (and slow)
-			// check is required in this first loop unless we have a nonempty display value (either
+			// checkBuy is required in this first loop unless we have a nonempty display value (either
 			// inline or about-to-be-restored)
 			if ( display === "none" ) {
 				values[ index ] = dataPriv.get( elem, "display" ) || null;
@@ -5276,7 +5276,7 @@ jQuery.event = {
 
 			for ( ; cur !== this; cur = cur.parentNode || this ) {
 
-				// Don't check non-elements (#13208)
+				// Don't checkBuy non-elements (#13208)
 				// Don't process clicks on disabled elements (#6911, #8165, #11382, #11764)
 				if ( cur.nodeType === 1 && !( event.type === "click" && cur.disabled === true ) ) {
 					matchedHandlers = [];
@@ -6390,7 +6390,7 @@ function curCSS( elem, name, computed ) {
 
 function addGetHookIf( conditionFn, hookFn ) {
 
-	// Define the hook, we'll check on the first run if it's really needed.
+	// Define the hook, we'll checkBuy on the first run if it's really needed.
 	return {
 		get: function() {
 			if ( conditionFn() ) {
@@ -6565,7 +6565,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 	// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
 	// Support: IE 9-11 only
 	// Also use offsetWidth/offsetHeight for when box sizing is unreliable
-	// We use getClientRects() to check for hidden/disconnected.
+	// We use getClientRects() to checkBuy for hidden/disconnected.
 	// In those cases, the computed value can be trusted to be border-box
 	if ( ( !support.boxSizingReliable() && isBorderBox ||
 		val === "auto" ||
@@ -6688,7 +6688,7 @@ jQuery.extend( {
 			}
 
 			// If a number was passed in, add the unit (except for certain CSS properties)
-			// The isCustomProp check can be removed in jQuery 4.0 when we only auto-append
+			// The isCustomProp checkBuy can be removed in jQuery 4.0 when we only auto-append
 			// "px" to a few hardcoded values.
 			if ( type === "number" && !isCustomProp ) {
 				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
@@ -10370,7 +10370,7 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
 // Blink bug: https://bugs.chromium.org/p/chromium/issues/detail?id=589347
 // getComputedStyle returns percent when specified for top/left/bottom/right;
-// rather than make the css module depend on the offset module, just check for it here
+// rather than make the css module depend on the offset module, just checkBuy for it here
 jQuery.each( [ "top", "left" ], function( i, prop ) {
 	jQuery.cssHooks[ prop ] = addGetHookIf( support.pixelPosition,
 		function( elem, computed ) {
@@ -10490,7 +10490,7 @@ jQuery.proxy = function( fn, context ) {
 		fn = tmp;
 	}
 
-	// Quick check to determine if target is callable, in the spec
+	// Quick checkBuy to determine if target is callable, in the spec
 	// this throws a TypeError, but we will just return undefined.
 	if ( !isFunction( fn ) ) {
 		return undefined;

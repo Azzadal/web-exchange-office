@@ -1,126 +1,226 @@
+const quantityBuy = document.getElementById('quantityBuy'),
+    idBuy = document.getElementsByClassName('idBuy'),
+    idSell = document.getElementsByClassName('idSell'),
+    quantitySell = document.getElementById('quantitySell'),
+    rateBuy = document.getElementById('rateBuy'),
+    rateSell = document.getElementById('rateSell'),
+    totalBuy = document.getElementById('totalBuy'),
+    totalSell = document.getElementById('totalSell'),
+    bidsSell = document.getElementById('bidsSell'),
+    bidsBuy = document.getElementById('bidsBuy'),
+    rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
+    rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
+    rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
+    rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
+    rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
+    rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
+    rowsSell = document.getElementsByClassName('rowsSell'),
+    rowsBuy = document.getElementsByClassName('rowsBuy');
+let stompClient = null;
 let changePair = document.getElementById('pairs');
-document.getElementById('butBuy').onclick = function (select) {
-    select = changePair;
-    n = select.selectedIndex;
-    if (n === 1) ajaxPostBuy("URBuy");
-    if (n === 2) ajaxPostBuy("ERBuy");
-    if (n === 3) ajaxPostBuy("UEBuy");
-    if (n === 4) ajaxPostBuy("EUBuy");
-}
 
-document.getElementById('butSell').onclick = function (select) {
-    select = changePair;
-    n = select.selectedIndex;
-    if (n === 1) ajaxPostSell("URSell");
-    if (n === 2) ajaxPostSell("ERSell");
-    if (n === 3) ajaxPostSell("UESell");
-    if (n === 4) ajaxPostSell("EUSell");
-}
-
-const quantityBuy = document.getElementById('quantityBuy');
-const quantitySell = document.getElementById('quantitySell');
-const rateBuy = document.getElementById('rateBuy');
-const rateSell = document.getElementById('rateSell');
-const totalBuy = document.getElementById('totalBuy');
-const bidsSell = document.getElementById('bidsSell');
-const bidsBuy = document.getElementById('bidsBuy');
-const rowsPriceSell = document.getElementsByClassName('rowsPriceSell');
-const rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy');
-const rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy');
-const rowsQuanSell = document.getElementsByClassName('rowsQuanSell');
-const rowsTotalSell = document.getElementsByClassName('rowsTotalSell');
-const rowsSell = document.getElementsByClassName('rowsSell');
-const rowsBuy = document.getElementsByClassName('rowsBuy');
-//отправка заявки
-function ajaxPostBuy(pair){
-    const formData = JSON.stringify({
-        rate: $("#rateBuy").val(),
-        quantity: $("#quantityBuy").val(),
-        total: $("#totalBuy").val(),
-        type: pair
-    });
-    const request = new XMLHttpRequest();
-    request.responseType = "json";
-    request.open('POST', window.location + pair);
-    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    request.onload = function () {
-        if (request.readyState === request.DONE) {
-            if (request.status === 200) {
-                const json = request.response;
-                myJson(json);
-                autofillSell();
+function tableBuy(arg) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json";
+    req.open('GET', window.location + arg);
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            let json = req.response;
+            let i;
+            bidsBuy.innerHTML = '';
+            for(i = 0; i < json.length; i++) {
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + json[i].id + '</div>' +
+                    '<div class="rowsPriceBuy">' + json[i].rate +
+                    '</div><div class="rowsQuanBuy">' + json[i].quantity + '</div><div class="rowsTotalBuy">' +
+                    json[i].total + '</div></div>';
+                rowsBuy[i].style.display = "flex";
             }
         }
+        console.log("1")
+        autofillSell();
     }
-    request.send(formData);
+    req.send();
+}
+function tableSell(arg) {
+    const req = new XMLHttpRequest();
+    req.responseType = "json";
+    req.open('GET', window.location + arg);
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            let json = req.response;
+            let i;
+            bidsSell.innerHTML = '';
+            for(i = 0; i < json.length; i++) {
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + json[i].id + '</div>' +
+                    '<div class="rowsPriceSell">' + json[i].rate +
+                    '</div><div class="rowsQuanSell">' + json[i].quantity + '</div><div class="rowsTotalSell">' +
+                    json[i].total + '</div></div>'+json[i].status;
+                rowsSell[i].style.display = "flex";
+            }
+        }
+        console.log("2")
+        autofillBuy();
+    }
+    req.send();
+}
 
-    function myJson(arr){
-        let i;
-        bidsBuy.innerHTML = '';
-        for(i = 0; i < arr.length; i++) {
-            bidsBuy.innerHTML += '<div class="rowsBuy"><div class="rowsPriceBuy">' + arr[i].rate + '</div><div class="rowsQuanBuy">' + arr[i].quantity + '</div><div class="rowsTotalBuy">' +
-                arr[i].total + '</div></div>';
-            rowsBuy[i].style.display = "flex";
+function connect() {
+    const socket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, frame => {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/buys',function (greeting) {
+            let gvn = JSON.parse(greeting.body);
+            bidsBuy.innerHTML = '';
+            for (let i = 0; i < gvn.length; i++) {
+                bidsBuy.innerHTML += '<div class="rowsBuy"><div class="idBuy">' + gvn[i].id + '</div><div class="rowsPriceBuy">' + gvn[i].rate +
+                    '</div><div class="rowsQuanBuy">' + gvn[i].quantity + '</div><div class="rowsTotalBuy">' +
+                    gvn[i].total + '</div></div>'+gvn[i].status;
+                rowsBuy[i].style.display = "flex";
+            }
+            autofillSell();
+        });
+        stompClient.subscribe('/topic/sells',function (greeting) {
+            let gvn = JSON.parse(greeting.body);
+            bidsSell.innerHTML = '';
+            for (let i = 0; i < gvn.length; i++) {
+                bidsSell.innerHTML += '<div class="rowsSell"><div class="idSell">' + gvn[i].id + '</div><div class="rowsPriceSell">' + gvn[i].rate +
+                    '</div><div class="rowsQuanSell">' + gvn[i].quantity + '</div><div class="rowsTotalSell">' +
+                    gvn[i].total + '</div></div>'+gvn[i].status;
+                rowsSell[i].style.display = "flex";
+            }
+            autofillBuy();
+        });
+    });
+}
+
+function checkBuy(pair1, pair2) {
+    let flag;
+    let q;
+    if (rowsSell.length <= 0) flag = 1;
+    for (let i = 0; i < rowsSell.length; i++) {
+        if (rateBuy.value === rowsPriceSell[i].innerHTML) {
+            flag = 0;
+            q = i;
+            break;
+        }
+        else {
+            flag = 1;
         }
     }
+    if(flag === 0) {
+        stompClient.send("/app/id", {}, JSON.stringify({
+            'id': idSell[q].innerHTML,
+            'rate': rowsPriceSell[q].innerHTML,
+            'quantity': rowsQuanSell[q].innerHTML,
+            'total': rowsTotalSell[q].innerHTML,
+            'type': pair2,
+            'status': 'done'
+        }));
+        rowsSell[q].remove();
+        setTimeout(tableSell, 1000, pair2);
 
-    function autofillSell(){
-        for (let i = 0; i < rowsBuy.length; i++) {
-            rowsBuy[i].addEventListener('click',function () {
-                rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
-                quantitySell.value = rowsQuanBuy[i].innerHTML;
-                outTotal();
-            })
+    } else addBidsBuy(pair1);
+}
+
+
+function checkSell(pair1, pair2) {
+    let flag;
+    let q;
+    if (rowsBuy.length <= 0) flag = 1;
+    for (let i = 0; i < rowsBuy.length; i++) {
+        if (rateSell.value === rowsPriceBuy[i].innerHTML) {
+            flag = 0;
+            q = i;
+            break;
+        }
+        else {
+            flag = 1;
         }
     }
+    if(flag === 0) {
+        stompClient.send("/app/id", {}, JSON.stringify({
+            'id': idBuy[q].innerHTML,
+            'rate': rowsPriceBuy[q].innerHTML,
+            'quantity': rowsQuanBuy[q].innerHTML,
+            'total': rowsTotalBuy[q].innerHTML,
+            'type': pair2,
+            'status': 'done'
+        }));
+        rowsBuy[q].remove();
+        setTimeout(tableBuy, 1000, pair2);
+        console.log(rowsBuy)
+    } else addBidsSell(pair1);
+}
+
+function addBidsBuy(pair) {
+    stompClient.send("/app/" + pair, {}, JSON.stringify({
+        'rate':rateBuy.value,
+        'quantity':quantityBuy.value,
+        'total':totalBuy.value,
+        'type':pair,
+        'status':'not_done'}));
+
     $("#quantityBuy").val("0");
     $("#totalBuy").val("0");
 }
 
-function ajaxPostSell(pair){
-    const formData = JSON.stringify({
-        rate: $("#rateSell").val(),
-        quantity: $("#quantitySell").val(),
-        total: $("#totalSell").val(),
-        type: pair
-    });
-    const request = new XMLHttpRequest();
-    request.responseType = "json";
-    request.open('POST', window.location + pair);
-    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    request.onload = function () {
-        if (request.readyState === request.DONE) {
-            if (request.status === 200) {
-                const json = request.response;
-                myJson(json);
-                autofillBuy();
-            }
-        }
-    }
-    request.send(formData);
-    let i;
-    function myJson(arr){
-        bidsSell.innerHTML = '';
-        for(i = 0; i < arr.length; i++) {
-            bidsSell.innerHTML += '<div class="rowsSell"><div class="rowsPriceSell">' + arr[i].rate + '</div><div class="rowsQuanSell">' + arr[i].quantity + '</div><div class="rowsTotalSell">' +
-                arr[i].total + '</div></div>';
-            rowsSell[i].style.display = "flex";
-        }
-    }
-    function autofillBuy(){
-        for (let i = 0; i < rowsSell.length; i++) {
-            rowsSell[i].addEventListener('click',function () {
-                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
-                quantityBuy.value = rowsQuanSell[i].innerHTML;
-                outTotal();
-            })
-        }
-    }
+function addBidsSell(pair) {
+    stompClient.send("/app/" + pair, {}, JSON.stringify({
+        'rate':rateSell.value,
+        'quantity':quantitySell.value,
+        'total':totalSell.value,
+        'type':pair,
+        'status':'not_done'}));
 
     $("#quantitySell").val("0");
     $("#totalSell").val("0");
 }
 
+document.getElementById('butBuy').onclick = function (e) {
+    e.preventDefault();
+    n = changePair.selectedIndex;
+    //if (n === 1) addBidsBuy("URBuy");
+    if (n === 1) checkBuy("URBuy", "URSell");
+    if (n === 2) checkBuy("ERBuy", "ERSell");
+    if (n === 3) checkBuy("UEBuy", "UESell");
+    if (n === 4) checkBuy("EUBuy", "EUSell");
+}
+
+document.getElementById('butSell').onclick = function (select) {
+    select = changePair;
+    n = select.selectedIndex;
+    if (n === 1) checkSell("URSell", "URBuy")
+    if (n === 2) checkSell("ERSell", "ERBuy")
+    if (n === 3) checkSell("UESell", "UEBuy")
+    if (n === 4) checkSell("EUSell", "EUBuy")
+}
+
+//автозаполнение формы продажи
+function autofillSell(){
+    for (let i = 0; i <= rowsBuy.length; i++) {
+        rowsBuy[i].addEventListener('click',function () {
+            rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
+            quantitySell.value = rowsQuanBuy[i].innerHTML;
+            outTotal();
+            console.log(i+'   '+idBuy[i].innerHTML)
+        })
+    }
+}
+
+//автозаполнение формы покупки
+function autofillBuy(){
+        for (let i = 0; i <= rowsSell.length; i++) {
+            rowsSell[i].addEventListener('click', function () {
+                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
+                quantityBuy.value = rowsQuanSell[i].innerHTML;
+                outTotal();
+                console.log(i + '   ' + idSell[i].innerHTML)
+            })
+        }
+}
+
+//
 function ajaxRate(type) {
     const formData = JSON.stringify({
         rateBuy: $("#rateBuy").val(),
