@@ -197,6 +197,7 @@ body{
     display: flex;
 }
 
+
 .prr, .prr1, .rowsPriceSell, .rowsQuanSell, .rowsTotalSell, .rowsPriceBuy,
 .rowsQuanBuy, .rowsTotalBuy, .date, .type, .price, .quantity, .total{
     text-align: center;
@@ -204,6 +205,10 @@ body{
     width: 33%;
     height: 20px;
     border: 1px #767676 solid;
+}
+
+.rowsHistory, .date, .type, .price, .quantity, .total{
+    height: auto;
 }
 
 .idBuy, .idSell{

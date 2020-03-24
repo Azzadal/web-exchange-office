@@ -38,7 +38,6 @@ function tableSell(arg) {
                 rowsSell[i].style.display = "flex";
             }
         }
-        console.log("запуск tablesell")
         autofillBuy();
     }
     req.send();
@@ -61,7 +60,6 @@ function tableBuy(arg) {
                 rowsBuy[i].style.display = "flex";
             }
         }
-        console.log("запуск tablebuy")
         autofillSell();
     }
     req.send();
@@ -77,11 +75,10 @@ function tableComplit() {
             let i;
             complBid.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
-                complBid.innerHTML += '<div class="rowsHistory"><div class="date"></div><div class="type">' +
+                complBid.innerHTML += '<div class="rowsHistory"><div class="date">' + json[i].date + '</div><div class="type">' +
                     json[i].type +
                     '</div><div class="price">' + json[i].rate + '</div><div class="quantity">' + json[i].quantity +
-                    '</div>' +
-                    '<div class="total">' + json[i].total + '</div></div>';
+                    '</div>' + '<div class="total">' + json[i].total + '</div></div>';
                 rowsHistory[i].style.display = "flex";
             }
         }
@@ -118,22 +115,35 @@ function connect() {
             }
             autofillBuy();
         });
+        let options = {
+            era: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long',
+            timezone: 'UTC',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        };
         stompClient.subscribe('/topic/ids', function (e) {
             let gvn = JSON.parse(e.body);
             complBid.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                complBid.innerHTML += '<div class="rowsHistory"><div class="date"></div><div class="type">' +
+                let parsed = JSON.parse(gvn[i].date);
+                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+                //console.log(moment(gvn[i].date).format('DD-MM-YYYY HH:mm:ss'))
+                complBid.innerHTML += '<div class="rowsHistory"><div class="date">' + date + '</div><div class="type">' +
                     gvn[i].type +
                     '</div><div class="price">' + gvn[i].rate + '</div><div class="quantity">' + gvn[i].quantity +
-                    '</div>' +
-                    '<div class="total">' + gvn[i].total + '</div></div>';
+                    '</div>' + '<div class="total">' + gvn[i].total + '</div></div>';
                 rowsHistory[i].style.display = "flex";
             }
         });
     });
 }
-
 function checkBuy(pair1, pair2) {
+    let date = new Date();
     let flag;
     let q;
     if (rowsSell.length <= 0) flag = 1;
@@ -154,15 +164,17 @@ function checkBuy(pair1, pair2) {
             'quantity': rowsQuanSell[q].innerHTML,
             'total': rowsTotalSell[q].innerHTML,
             'type': pair2,
-            'status': 'done'
+            'status': 'done',
+            'date': date
         }));
         rowsSell[q].remove();
-        tableSell(pair2);
+        setTimeout(tableSell, 1000, pair2);
     } else addBidsBuy(pair1);
 }
 
 
 function checkSell(pair1, pair2) {
+    let date = new Date();
     let flag;
     let q;
     if (rowsBuy.length <= 0) flag = 1;
@@ -183,10 +195,11 @@ function checkSell(pair1, pair2) {
             'quantity': rowsQuanBuy[q].innerHTML,
             'total': rowsTotalBuy[q].innerHTML,
             'type': pair2,
-            'status': 'done'
+            'status': 'done',
+            'date': date
         }));
         rowsBuy[q].remove();
-        tableBuy(pair2);
+        setTimeout(tableBuy, 1000, pair2);
     } else addBidsSell(pair1);
 }
 
@@ -196,7 +209,9 @@ function addBidsBuy(pair) {
         'quantity':quantityBuy.value,
         'total':totalBuy.value,
         'type':pair,
-        'status':'not_done'}));
+        'status':'not_done',
+        'date': 15
+    }));
 
     $("#quantityBuy").val("0");
     $("#totalBuy").val("0");
@@ -208,7 +223,9 @@ function addBidsSell(pair) {
         'quantity':quantitySell.value,
         'total':totalSell.value,
         'type':pair,
-        'status':'not_done'}));
+        'status':'not_done',
+        'date': 15
+    }));
 
     $("#quantitySell").val("0");
     $("#totalSell").val("0");
@@ -239,7 +256,6 @@ function autofillSell(){
             rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
             quantitySell.value = rowsQuanBuy[i].innerHTML;
             outTotal();
-            console.log(i+'   '+idBuy[i].innerHTML)
         })
     }
 }
@@ -251,7 +267,6 @@ function autofillBuy(){
             rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
             quantityBuy.value = rowsQuanSell[i].innerHTML;
             outTotal();
-            console.log(i+'   '+idSell[i].innerHTML)
         })
     }
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 public class Bid {
@@ -16,6 +17,7 @@ public class Bid {
     private BigDecimal total;
     private String type;
     private String status;
+    private Date date;
 
     public Integer getId() {
         return id;
@@ -63,5 +65,13 @@ public class Bid {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
