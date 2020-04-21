@@ -7,12 +7,8 @@ body{
     background-color: #fff7dd;
 }
 #center{
-    position: absolute;
-    left: 27%;
-    right: 27%;
-    width: 45%;
-    height: 100%;
-    border: 1px #451c17 solid;
+
+    border: 5px #451c17 solid;
 }
 
 #completedBids{
@@ -179,10 +175,8 @@ body{
 }
 
 #bidsSells, #bidsBuys{
-    position: absolute;
-    top: 50%;
-    width: 20%;
-    height: 25%;
+
+    border: 3px black solid;
     color: bisque;
 }
 

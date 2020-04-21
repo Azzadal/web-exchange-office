@@ -47,7 +47,7 @@
 .ct-chart-bar.ct-horizontal-bars .ct-label.ct-vertical.ct-end
 {-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:flex-start;-webkit-justify-content:flex-start;-ms-flex-pack:flex-start;justify-content:flex-start;text-align:left;text-anchor:end}
 .ct-grid
-{stroke:rgba(0,0,0,.2);stroke-width:1px;stroke-dasharray:2px}
+{stroke:rgba(45, 45, 41, 1);stroke-width:1px;stroke-dasharray:2px}
 .ct-point {
     stroke: #c76687;
     stroke-width: 5px;
