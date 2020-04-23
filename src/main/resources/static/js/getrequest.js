@@ -4,7 +4,7 @@ function outTotal() {
 }
 
 window.onload = function () {
-    tableComplit();
+    //tableComplit();
 
     connect();
     const changePair = document.getElementById('pairs');
