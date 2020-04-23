@@ -122,4 +122,9 @@ public class BidController {
     public Iterable<Bid> getComplitTab(){
         return bidRepository.findByStatus("done");
     }
+
+    @GetMapping(value = "clear_bid")
+    public void clear_bid(){
+        bidRepository.deleteAll();
+    }
 }

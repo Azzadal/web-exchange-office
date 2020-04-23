@@ -4,18 +4,31 @@ function outTotal() {
 }
 
 window.onload = function () {
-    tableComplit()
+    tableComplit();
 
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
+    const clearBID = document.getElementById('clearBD');
+    document.getElementById('clearBD').onclick = function (e) {
+        e.preventDefault();
+        clearBD();
+        location.reload();
+    };
     const data = {
         series: [
             [],
             []
         ]
     };
+
+    function clearBD() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "clear_bid");
+        xhr.send();
+    }
 
     function testIpReq() {
         const xhr = new XMLHttpRequest();

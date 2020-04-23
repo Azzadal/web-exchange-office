@@ -34,26 +34,7 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col left_panel">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 80vh;">
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                <tr>
-                    <th class="text-center">Цена</th>
-                    <th class="text-center">Количество</th>
-                    <th class="text-center">Итого</th>
-                </tr>
-                </thead>
-                <tbody  id="bidsBuy"></tbody>
-            </table>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-
-        <div class="col-6 badge-info text-center">
+        <div class="col-xs-12 order-xs-0 col-lg-6 order-lg-1 badge-info text-center">
             <div class="row">
                 <div class="col">
                 </div>
@@ -80,7 +61,8 @@
                             <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-control" rows="1" disabled></textarea>
                         </div>
                     </form>
-                    <button class="btn btn-secondary btn-sm float-left badge-light align-top" id="butBuy">Покупка</button>
+                    <button class="btn btn-secondary float-left" id="butBuy">Покупка</button>
+                    <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button>
                 </div>
                 <div class="col-3">
                     <form role="form">
@@ -119,12 +101,32 @@
                             <textarea style="resize: none;" id="totalSell" class="form-control" name="totalSell" rows="1" disabled></textarea>
                         </div>
                     </form>
-                    <button class="btn btn-secondary btn-sm float-right badge-light align-top" id="butSell">Продажа</button>
+                    <button class="btn btn-secondary float-right" id="butSell">Продажа</button>
                 </div>
                 <div class="col"></div>
             </div>
         </div>
-        <div class="col right_panel">
+
+        <div class="col-xs-6 order-xs-1 col-lg-3 order-lg-0 left_panel">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-9 table-responsive" style="height: 80vh;">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th class="text-center">Итого</th>
+                        </tr>
+                        </thead>
+                        <tbody  id="bidsBuy"></tbody>
+                    </table>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 order-xs-2 col-lg-3 order-lg-2 right_panel">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-9 table-responsive" style="height: 80vh;">
