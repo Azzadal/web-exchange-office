@@ -10,12 +10,16 @@ window.onload = function () {
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
-    const clearBID = document.getElementById('clearBD');
     document.getElementById('clearBD').onclick = function (e) {
         e.preventDefault();
         clearBD();
         location.reload();
     };
+    document.getElementById('clearBD1').onclick = function (e) {
+        e.preventDefault();
+        clearBD1();
+        location.reload();
+    }
     const data = {
         series: [
             [],
@@ -27,6 +31,12 @@ window.onload = function () {
         const xhr = new XMLHttpRequest();
         xhr.responseType = "text";
         xhr.open('GET', window.location + "clear_bid");
+        xhr.send();
+    }
+    function clearBD1() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "clear_rate");
         xhr.send();
     }
 

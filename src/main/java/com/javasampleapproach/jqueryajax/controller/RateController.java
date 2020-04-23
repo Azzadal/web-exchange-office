@@ -78,4 +78,9 @@ public class RateController {
         return rate.generateRate(27,50,30,150);
     }
 
+    @GetMapping(value = "clear_rate")
+    public void clear_rate(){
+        rateRepository.deleteAll();
+    }
+
 }
