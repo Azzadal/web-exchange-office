@@ -145,4 +145,7 @@ window.onload = function () {
     quantityBuy.oninput = function () {
         outTotal();
     }
+    rateBuy.onchange = function () {
+        outTotal();
+    }
 }
