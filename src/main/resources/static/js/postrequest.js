@@ -272,10 +272,12 @@ function autofillBuy(){
 }
 
 //
-function ajaxRate(type) {
+function ajaxRate(type, rateBuy, rateSell) {
     const formData = JSON.stringify({
-        rateBuy: $("#rateBuy").val(),
-        rateSell: $("#rateSell").val(),
+        rateBuy: rateBuy,
+        rateSell: rateSell,
+//        rateBuy: $("#rateBuy").val(),
+//        rateSell: $("#rateSell").val(),
         type: type
     });
     const xhr = new XMLHttpRequest();

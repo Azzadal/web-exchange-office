@@ -59,9 +59,9 @@ window.onload = function () {
         xhr.open('GET', window.location + pair);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                rateBuy.innerHTML = xhr.response.rateBuy;
-                rateSell.innerHTML = xhr.response.rateSell;
-                ajaxRate(pair);//сохранение курса в БД
+                //rateBuy.innerHTML = xhr.response.rateBuy;
+               // rateSell.innerHTML = xhr.response.rateSell;
+                ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
                 outTotal();
             }
@@ -75,6 +75,7 @@ window.onload = function () {
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
+
                 const json = req.response;
                 myJson2(json);//обработка ответа
             }
@@ -86,6 +87,9 @@ window.onload = function () {
         for(let i = 0; i < response.length; i++) {
             data.series[0].push(response[i].rateBuy);
             data.series[1].push(response[i].rateSell);
+
+            rateBuy.innerHTML = response[i].rateBuy;
+            rateSell.innerHTML = response[i].rateSell;
             if (data.series[0].length === 20) {
                 data.series[0].shift();
                 data.series[1].shift();
