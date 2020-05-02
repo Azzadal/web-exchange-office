@@ -63,7 +63,7 @@ window.onload = function () {
                // rateSell.innerHTML = xhr.response.rateSell;
                 ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
-                outTotal();
+
             }
         }
         xhr.send();
@@ -90,6 +90,7 @@ window.onload = function () {
 
             rateBuy.innerHTML = response[i].rateBuy;
             rateSell.innerHTML = response[i].rateSell;
+            outTotal();
             if (data.series[0].length === 20) {
                 data.series[0].shift();
                 data.series[1].shift();
@@ -145,7 +146,7 @@ window.onload = function () {
     quantityBuy.oninput = function () {
         outTotal();
     }
-    rateBuy.onchange = function () {
+    rateBuy.oninput = function () {
         outTotal();
     }
 }
