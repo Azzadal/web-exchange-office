@@ -72,7 +72,6 @@ function tableComplit() {
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
             let json = req.response;
-            let i;
             complBid.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
                 complBid.innerHTML += '<div class="rowsHistory"><div class="date">' + json[i].date + '</div><div class="type">' +

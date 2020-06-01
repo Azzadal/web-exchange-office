@@ -34,11 +34,67 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 order-xs-0 col-md-6 order-md-1 badge-info text-center">
+        <div class="col-xs-12  col-md-6 order-md-1">
+            <div class="row">
+                <div class="col table-responsive" style="height: 50vh;">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th class="text-center">Итого</th>
+                        </tr>
+                        </thead>
+                        <tbody  id="bidsHistory"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!--таблица успешных сделок-->
+
+        <div class="col-xs-6 order-xs-1 col-md-3 order-md-0 left_panel">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-9 table-responsive" style="height: 50vh;">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th class="text-center">Итого</th>
+                        </tr>
+                        </thead>
+                        <tbody  id="bidsBuy"></tbody>
+                    </table>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div><!--таблица покупок-->
+
+        <div class="col-xs-6 order-xs-2 col-md-3 order-md-2 right_panel">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-9 table-responsive" style="height: 50vh;">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th class="text-center">Итого</th>
+                        </tr>
+                        </thead>
+                        <tbody  id="bidsSell"></tbody>
+                    </table>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div><!--таблица продаж-->
+    </div>
+    <div class="row">
+        <div class="col">
             <div class="row">
                 <div class="col">
                 </div>
-                <div class="col-10">
+                <div class="col-7">
                     <div id="schedule" class="ct-chart ct-perfect-fourth"></div>
                 </div>
                 <div class="col">
@@ -46,7 +102,7 @@
             </div>
             <div class="row">
                 <div class="col"></div>
-                <div class="col-3">
+                <div class="col-2">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="rateBuy">Цена</label>
@@ -64,7 +120,7 @@
                     <button class="btn btn-secondary float-left" id="butBuy">Покупка</button>
                     <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="priceLim">Цена</label>
@@ -86,7 +142,7 @@
                     <button class="btn btn-secondary btn-xs float-left badge-light align-top">Покупка</button>
                     <button class="btn btn-secondary btn-xs float-right badge-light align-top">Продажа</button>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="rateSell">Цена</label>
@@ -103,44 +159,6 @@
                     </form>
                     <button class="btn btn-secondary float-right" id="butSell">Продажа</button>
                     <button class="btn btn-secondary float-left" id="clearBD1">очистка т. rate</button>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-
-        <div class="col-xs-6 order-xs-1 col-md-3 order-md-0 left_panel">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 80vh;">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                        </tr>
-                        </thead>
-                        <tbody  id="bidsBuy"></tbody>
-                    </table>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-
-        <div class="col-xs-6 order-xs-2 col-md-3 order-md-2 right_panel">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 80vh;">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                        </tr>
-                        </thead>
-                        <tbody  id="bidsSell"></tbody>
-                    </table>
                 </div>
                 <div class="col"></div>
             </div>
