@@ -125,11 +125,12 @@ function connect() {
         };
         stompClient.subscribe('/topic/ids', function (e) {
             let gvn = JSON.parse(e.body);
+            console.log(gvn)
             bidsHistory.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                let parsed = JSON.parse(gvn[i].date);
+                //let parsed = JSON.parse(gvn[i].date);
                 let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                //console.log(moment(gvn[i].date).format('DD-MM-YYYY HH:mm:ss'))
+
                 bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
                     + gvn[i].rate +
                     '</td><td class="text-center">' + gvn[i].quantity + '</td><td class="text-center">' +
@@ -173,7 +174,6 @@ function checkSell(pair1, pair2) {
     let date = new Date();
     let flag;
     let q;
-    console.log()
     if (rowsBuy.length <= 0) flag = 1;
     for (let i = 0; i < rowsBuy.length; i++) {
         if (rateSell.value === rowsPriceBuy[i].innerHTML) {
@@ -208,7 +208,7 @@ function addBidsBuy(pair) {
         'total':totalBuy.value,
         'type':pair,
         'status':'not_done',
-        'date': 15
+        'date': null
     }));
 
     $("#quantityBuy").val("0");
@@ -222,7 +222,7 @@ function addBidsSell(pair) {
         'total':totalSell.value,
         'type':pair,
         'status':'not_done',
-        'date': 15
+        'date': null
     }));
 
     $("#quantitySell").val("0");

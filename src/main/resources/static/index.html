@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/jquery-3.4.1.js"></script>
     <script defer src="js/getrequest.js"></script>
     <script defer src="js/postrequest.js"></script>
@@ -34,7 +34,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-xs-6 order-xs-1 col-md-3 order-md-0 left_panel">
+        <div class="col-xs-6 order-xs-1 col-md order-md-0 left_panel">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-9 table-responsive" style="height: 50vh;">
@@ -53,7 +53,7 @@
             </div>
         </div><!--таблица покупок-->
 
-        <div class="col-xs-6 order-xs-2 col-md-3 order-md-2 right_panel">
+        <div class="col-xs-6 order-xs-2 col-md order-md-2 right_panel">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-9 table-responsive" style="height: 50vh;">
@@ -72,19 +72,17 @@
             </div>
         </div><!--таблица продаж-->
 
-        <div class="col-xs-12  col-md-6 order-md-1">
+        <div class="col-xs-12  col-md-5 order-md-1">
             <div class="row">
-                <div class="col">
-                </div>
-                <div class="col-7">
+
+                <div class="col-12">
                     <div id="schedule" class="ct-chart ct-perfect-fourth"></div>
                 </div>
-                <div class="col">
-                </div>
+
             </div>
             <div class="row">
-                <div class="col"></div>
-                <div class="col-2">
+
+                <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="rateBuy">Цена</label>
@@ -99,10 +97,10 @@
                             <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-control" rows="1" disabled></textarea>
                         </div>
                     </form>
-                    <button class="btn btn-secondary float-left" id="butBuy">Покупка</button>
+                    <button class="btn btn-secondary float-left" id="butBuy" style="margin-bottom: 5px;">Покупка</button>
                     <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button>
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="priceLim">Цена</label>
@@ -124,7 +122,7 @@
                     <button class="btn btn-secondary btn-xs float-left badge-light align-top">Покупка</button>
                     <button class="btn btn-secondary btn-xs float-right badge-light align-top">Продажа</button>
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
                             <label class="text-white float-left" for="rateSell">Цена</label>
@@ -139,18 +137,16 @@
                             <textarea style="resize: none;" id="totalSell" class="form-control" name="totalSell" rows="1" disabled></textarea>
                         </div>
                     </form>
-                    <button class="btn btn-secondary float-right" id="butSell">Продажа</button>
+                    <button class="btn btn-secondary float-right" id="butSell" style="margin-bottom: 5px;">Продажа</button>
                     <button class="btn btn-secondary float-left" id="clearBD1">очистка т. rate</button>
                 </div>
-                <div class="col"></div>
+
             </div>
         </div>
 
             </div>
         </div><!--таблица успешных сделок-->
 
-
-    </div>
     <div class="row">
         <div class="col">
             <div class="row">
