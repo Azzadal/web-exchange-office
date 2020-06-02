@@ -14,15 +14,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <style>
-        .prr{
-            border: 2px white solid;
-        }
+
     </style>
     <title>Сайт</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container">
+        <div>Ваш ip: <code id="ip"></code></div>
         <select id="pairs" class="rounded text-secondary">
             <option>Выберите пару</option>
             <option>USD/RUR</option>
@@ -34,22 +33,6 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12  col-md-6 order-md-1">
-            <div class="row">
-                <div class="col table-responsive" style="height: 50vh;">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                        </tr>
-                        </thead>
-                        <tbody  id="bidsHistory"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div><!--таблица успешных сделок-->
 
         <div class="col-xs-6 order-xs-1 col-md-3 order-md-0 left_panel">
             <div class="row">
@@ -88,9 +71,8 @@
                 <div class="col"></div>
             </div>
         </div><!--таблица продаж-->
-    </div>
-    <div class="row">
-        <div class="col">
+
+        <div class="col-xs-12  col-md-6 order-md-1">
             <div class="row">
                 <div class="col">
                 </div>
@@ -163,6 +145,29 @@
                 <div class="col"></div>
             </div>
         </div>
+
+            </div>
+        </div><!--таблица успешных сделок-->
+
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col table-responsive" style="height: 50vh;">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Дата</th>
+                            <th class="text-center">Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th class="text-center">Итого</th>
+                            <th class="text-center">Пара</th>
+                        </tr>
+                        </thead>
+                        <tbody  id="bidsHistory"></tbody>
+                    </table>
+                </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
