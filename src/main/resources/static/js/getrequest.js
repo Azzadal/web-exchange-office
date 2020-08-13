@@ -47,7 +47,6 @@ window.onload = function () {
         xhr.open('GET', window.location + "ip");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                console.log(xhr.response)
                 document.getElementById('ip').innerHTML = xhr.response;
             }
         }
@@ -58,10 +57,12 @@ window.onload = function () {
         const xhr = new XMLHttpRequest();
         xhr.responseType = "json";
         xhr.open('GET', window.location + pair);
+        console.log(xhr.response)
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 //rateBuy.innerHTML = xhr.response.rateBuy;
                // rateSell.innerHTML = xhr.response.rateSell;
+                console.log(xhr.response.rateBuy + " " + xhr.response.rateSell)
                 ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
 
@@ -134,6 +135,7 @@ window.onload = function () {
 
         clearInterval(timerId);
         timerId = setInterval(function () {
+            console.log(choice)
             getAjax(choice);
         }, 5000);
     }

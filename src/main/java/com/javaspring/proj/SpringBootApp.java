@@ -1,12 +1,12 @@
-package com.javasampleapproach.jqueryajax;
+package com.javaspring.proj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootJQueryAjaxClientApplication {
+public class SpringBootApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootJQueryAjaxClientApplication.class, args);
+		SpringApplication.run(SpringBootApp.class, args);
 	}
 }

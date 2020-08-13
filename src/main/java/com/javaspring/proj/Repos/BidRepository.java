@@ -1,9 +1,7 @@
-package com.javasampleapproach.jqueryajax.Repos;
+package com.javaspring.proj.Repos;
 
-import com.javasampleapproach.jqueryajax.model.Bid;
+import com.javaspring.proj.model.Bid;
 import org.springframework.data.repository.CrudRepository;
-
-import java.math.BigDecimal;
 
 public interface BidRepository extends CrudRepository<Bid, Integer> {
     Iterable<Bid> findByTypeAndStatus(String type, String status);

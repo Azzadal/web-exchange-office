@@ -22,6 +22,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
 let stompClient = null;
 let changePair = document.getElementById('pairs');
 
+//первоначальный вывод данных
 function tableSell(arg) {
     const req = new XMLHttpRequest();
     req.responseType = "json";
@@ -39,10 +40,11 @@ function tableSell(arg) {
             }
         }
         autofillBuy();
-    }
+    };
     req.send();
 }
 
+//первоначальный вывод данных
 function tableBuy(arg) {
     const req = new XMLHttpRequest();
     req.responseType = "json";
@@ -60,10 +62,11 @@ function tableBuy(arg) {
             }
         }
         autofillSell();
-    }
+    };
     req.send();
 }
 
+//первоначальный вывод данных
 function tableComplit() {
     const req = new XMLHttpRequest();
     req.responseType = "json";
@@ -72,16 +75,16 @@ function tableComplit() {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
-            console.log(json)
             bidsHistory.innerHTML = '';
             for (i = 0; i < json.length; i++) {
-                bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="text-center">' + json[i].date + '</td><td class="text-center">'
+                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+                bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
                     + json[i].rate +
                     '</td><td class="text-center">' + json[i].quantity + '</td><td class="text-center">' +
                     json[i].total + '</td></tr>';
             }
         }
-    }
+    };
     req.send();
 }
 
@@ -112,25 +115,12 @@ function connect() {
             }
             autofillBuy();
         });
-        let options = {
-            era: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            weekday: 'long',
-            timezone: 'UTC',
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric'
-        };
+
         stompClient.subscribe('/topic/ids', function (e) {
             let gvn = JSON.parse(e.body);
-            console.log(gvn)
             bidsHistory.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                //let parsed = JSON.parse(gvn[i].date);
                 let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-
                 bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
                     + gvn[i].rate +
                     '</td><td class="text-center">' + gvn[i].quantity + '</td><td class="text-center">' +
@@ -236,16 +226,16 @@ document.getElementById('butBuy').onclick = function (e) {
     if (n === 2) checkBuy("ERBuy", "ERSell");
     if (n === 3) checkBuy("UEBuy", "UESell");
     if (n === 4) checkBuy("EUBuy", "EUSell");
-}
+};
 
 document.getElementById('butSell').onclick = function (e) {
     e.preventDefault();
     n = changePair.selectedIndex;
-    if (n === 1) checkSell("URSell", "URBuy")
-    if (n === 2) checkSell("ERSell", "ERBuy")
-    if (n === 3) checkSell("UESell", "UEBuy")
-    if (n === 4) checkSell("EUSell", "EUBuy")
-}
+    if (n === 1) checkSell("URSell", "URBuy");
+    if (n === 2) checkSell("ERSell", "ERBuy");
+    if (n === 3) checkSell("UESell", "UEBuy");
+    if (n === 4) checkSell("EUSell", "EUBuy");
+};
 
 //автозаполнение формы продажи
 function autofillSell(){
@@ -262,24 +252,19 @@ function autofillSell(){
 //автозаполнение формы покупки
 function autofillBuy(){
     for (let i = 0; i <= rowsSell.length; i++) {
-
             rowsSell[i].addEventListener('click', function () {
                 console.log(rowsPriceSell[i].innerHTML)
                 rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
                 quantityBuy.value = rowsQuanSell[i].innerHTML;
                 outTotal();
             })
-
     }
 }
 
-//
 function ajaxRate(type, rateBuy, rateSell) {
     const formData = JSON.stringify({
         rateBuy: rateBuy,
         rateSell: rateSell,
-//        rateBuy: $("#rateBuy").val(),
-//        rateSell: $("#rateSell").val(),
         type: type
     });
     const xhr = new XMLHttpRequest();

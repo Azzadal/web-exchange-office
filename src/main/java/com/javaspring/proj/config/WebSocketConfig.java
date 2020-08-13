@@ -1,4 +1,4 @@
-package com.javasampleapproach.jqueryajax.config;
+package com.javaspring.proj.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MessageConverter;

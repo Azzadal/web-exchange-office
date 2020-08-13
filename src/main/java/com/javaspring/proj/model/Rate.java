@@ -1,4 +1,4 @@
-package com.javasampleapproach.jqueryajax.model;
+package com.javaspring.proj.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

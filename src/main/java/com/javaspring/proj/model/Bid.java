@@ -1,4 +1,4 @@
-package com.javasampleapproach.jqueryajax.model;
+package com.javaspring.proj.model;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;

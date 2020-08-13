@@ -1,6 +1,6 @@
-package com.javasampleapproach.jqueryajax.Repos;
+package com.javaspring.proj.Repos;
 
-import com.javasampleapproach.jqueryajax.model.Rate;
+import com.javaspring.proj.model.Rate;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RateRepository extends CrudRepository<Rate, Integer> {

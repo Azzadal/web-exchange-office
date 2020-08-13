@@ -4,17 +4,42 @@ function outTotal() {
 }
 
 window.onload = function () {
+    tableComplit();
+    testIpReq();
 
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
+    document.getElementById('clearBD').onclick = function (e) {
+        e.preventDefault();
+        clearBD();
+        location.reload();
+    };
+    document.getElementById('clearBD1').onclick = function (e) {
+        e.preventDefault();
+        clearBD1();
+        location.reload();
+    }
     const data = {
         series: [
             [],
             []
         ]
     };
+
+    function clearBD() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "clear_bid");
+        xhr.send();
+    }
+    function clearBD1() {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "text";
+        xhr.open('GET', window.location + "clear_rate");
+        xhr.send();
+    }
 
     function testIpReq() {
         const xhr = new XMLHttpRequest();
@@ -33,13 +58,15 @@ window.onload = function () {
         const xhr = new XMLHttpRequest();
         xhr.responseType = "json";
         xhr.open('GET', window.location + pair);
+        console.log(xhr.response)
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                rateBuy.innerHTML = xhr.response.rateBuy;
-                rateSell.innerHTML = xhr.response.rateSell;
-                ajaxRate(pair);//сохранение курса в БД
+                //rateBuy.innerHTML = xhr.response.rateBuy;
+               // rateSell.innerHTML = xhr.response.rateSell;
+                console.log(xhr.response.rateBuy + " " + xhr.response.rateSell)
+                ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
-                outTotal();
+
             }
         }
         xhr.send();
@@ -51,6 +78,7 @@ window.onload = function () {
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
+
                 const json = req.response;
                 myJson2(json);//обработка ответа
             }
@@ -62,6 +90,10 @@ window.onload = function () {
         for(let i = 0; i < response.length; i++) {
             data.series[0].push(response[i].rateBuy);
             data.series[1].push(response[i].rateSell);
+
+            rateBuy.innerHTML = response[i].rateBuy;
+            rateSell.innerHTML = response[i].rateSell;
+            outTotal();
             if (data.series[0].length === 20) {
                 data.series[0].shift();
                 data.series[1].shift();
@@ -101,8 +133,10 @@ window.onload = function () {
         tableBuy(arg1);
         tableSell(arg2);
 
+
         clearInterval(timerId);
         timerId = setInterval(function () {
+            console.log(choice)
             getAjax(choice);
         }, 5000);
     }
@@ -114,6 +148,9 @@ window.onload = function () {
         outTotal();
     }
     quantityBuy.oninput = function () {
+        outTotal();
+    }
+    rateBuy.oninput = function () {
         outTotal();
     }
 }

@@ -1,7 +1,7 @@
-package com.javasampleapproach.jqueryajax.controller;
+package com.javaspring.proj.controller;
 
-import com.javasampleapproach.jqueryajax.Repos.RateRepository;
-import com.javasampleapproach.jqueryajax.model.Rate;
+import com.javaspring.proj.Repos.RateRepository;
+import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

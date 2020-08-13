@@ -1,11 +1,11 @@
-package com.javasampleapproach.jqueryajax.controller;
+package com.javaspring.proj.controller;
 
-import com.javasampleapproach.jqueryajax.Repos.BidRepository;
+import com.javaspring.proj.Repos.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
-import com.javasampleapproach.jqueryajax.model.Bid;
+import com.javaspring.proj.model.Bid;
 
 @RestController
 @RequestMapping("/")
