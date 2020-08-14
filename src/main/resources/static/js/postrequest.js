@@ -77,7 +77,7 @@ function tableComplit() {
             let i;
             bidsHistory.innerHTML = '';
             for (i = 0; i < json.length; i++) {
-                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+                let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
                 bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
                     + json[i].rate +
                     '</td><td class="text-center">' + json[i].quantity + '</td><td class="text-center">' +
@@ -89,7 +89,7 @@ function tableComplit() {
 }
 
 function connect() {
-    const socket = new SockJS('/gs-guide-websocket');
+    const socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
@@ -158,7 +158,6 @@ function checkBuy(pair1, pair2) {
         setTimeout(tableSell, 1000, pair2);
     } else addBidsBuy(pair1);
 }
-
 
 function checkSell(pair1, pair2) {
     let date = new Date();
@@ -252,11 +251,11 @@ function autofillSell(){
 //автозаполнение формы покупки
 function autofillBuy(){
     for (let i = 0; i <= rowsSell.length; i++) {
-            rowsSell[i].addEventListener('click', function () {
-                console.log(rowsPriceSell[i].innerHTML)
-                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
-                quantityBuy.value = rowsQuanSell[i].innerHTML;
-                outTotal();
+        rowsSell[i].addEventListener('click', function () {
+            console.log(rowsPriceSell[i].innerHTML)
+            rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
+            quantityBuy.value = rowsQuanSell[i].innerHTML;
+            outTotal();
             })
     }
 }

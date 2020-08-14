@@ -20,7 +20,7 @@ window.onload = function () {
         e.preventDefault();
         clearBD1();
         location.reload();
-    }
+    };
     const data = {
         series: [
             [],
@@ -49,7 +49,7 @@ window.onload = function () {
             if (xhr.readyState === 4) {
                 document.getElementById('ip').innerHTML = xhr.response;
             }
-        }
+        };
         xhr.send();
     }
 
@@ -57,17 +57,12 @@ window.onload = function () {
         const xhr = new XMLHttpRequest();
         xhr.responseType = "json";
         xhr.open('GET', window.location + pair);
-        console.log(xhr.response)
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                //rateBuy.innerHTML = xhr.response.rateBuy;
-               // rateSell.innerHTML = xhr.response.rateSell;
-                console.log(xhr.response.rateBuy + " " + xhr.response.rateSell)
                 ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
                 getRateLib(pair);//получение курса из БД
-
             }
-        }
+        };
         xhr.send();
     }
 
@@ -81,7 +76,7 @@ window.onload = function () {
                 const json = req.response;
                 myJson2(json);//обработка ответа
             }
-        }
+        };
         req.send();
     }
 
@@ -107,7 +102,7 @@ window.onload = function () {
     let timerId = null;
 
     changePair.onchange = function () {
-        n = this.selectedIndex;
+        let n = this.selectedIndex;
         let arg1, arg2, choice;
         if (n === 1) {
             choice = "rateUR";
@@ -132,24 +127,21 @@ window.onload = function () {
         tableBuy(arg1);
         tableSell(arg2);
 
-
-        clearInterval(timerId);
         timerId = setInterval(function () {
-            console.log(choice)
             getAjax(choice);
         }, 5000);
-    }
+    };
     const quantityBuy = document.getElementById('quantityBuy'),
         quantitySell = document.getElementById('quantitySell'),
         totalBuy = document.getElementById('totalBuy'),
         totalSell = document.getElementById('totalSell');
     quantitySell.oninput = function () {
         outTotal();
-    }
+    };
     quantityBuy.oninput = function () {
         outTotal();
-    }
+    };
     rateBuy.oninput = function () {
         outTotal();
     }
-}
+};
