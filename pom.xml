@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.javasampleapproach.jqueryajax</groupId>
-	<artifactId>SpringBootJQueryAjaxClient</artifactId>
-	<version>0.0.1</version>
+	<groupId>com.javaspring.proj</groupId>
+	<artifactId>SpringBootApp</artifactId>
+	<version>1.7</version>
 	<packaging>jar</packaging>
 
-	<name>SpringBootJQueryAjaxClient</name>
-	<description>SpringBootJQueryAjaxClient</description>
+	<name>SpringBootApp</name>
+	<description>SpringBootApp</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
