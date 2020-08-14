@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/SpringBootJQueryAjaxClient-0.0.1.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/SpringBootApp-1.7.jar
