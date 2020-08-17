@@ -102,6 +102,7 @@ window.onload = function () {
     let timerId = null;
 
     changePair.onchange = function () {
+
         let n = this.selectedIndex;
         let arg1, arg2, choice;
         if (n === 1) {
@@ -126,7 +127,7 @@ window.onload = function () {
         }
         tableBuy(arg1);
         tableSell(arg2);
-
+        clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
         }, 5000);
