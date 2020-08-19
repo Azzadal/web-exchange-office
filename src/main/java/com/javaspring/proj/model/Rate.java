@@ -1,9 +1,6 @@
 package com.javaspring.proj.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +8,7 @@ import java.util.Map;
 @Entity
 public class Rate {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
     private BigDecimal rateBuy;
     private BigDecimal rateSell;

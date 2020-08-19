@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -60,7 +61,7 @@ public class RateController {
 
     @GetMapping(value = "rateUR")
     public Map<String, BigDecimal> genUR(){
-        return rate.generateRate(20,150,90,125);
+        return rate.generateRate(30,160,100,135);
     }
 
     @GetMapping(value = "rateER")
@@ -80,7 +81,7 @@ public class RateController {
 
     @GetMapping(value = "clear_rate")
     public void clear_rate(){
-        rateRepository.deleteAll();
+        rateRepository.getAllFromEmp();
     }
 
 }

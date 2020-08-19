@@ -72,7 +72,6 @@ window.onload = function () {
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
-
                 const json = req.response;
                 myJson2(json);//обработка ответа
             }
@@ -84,6 +83,8 @@ window.onload = function () {
         for(let i = 0; i < response.length; i++) {
             data.series[0].push(response[i].rateBuy);
             data.series[1].push(response[i].rateSell);
+
+            console.log(response[i].id);
 
             rateBuy.innerHTML = response[i].rateBuy;
             rateSell.innerHTML = response[i].rateSell;
@@ -102,6 +103,7 @@ window.onload = function () {
     let timerId = null;
 
     changePair.onchange = function () {
+
         let n = this.selectedIndex;
         let arg1, arg2, choice;
         if (n === 1) {
@@ -126,7 +128,7 @@ window.onload = function () {
         }
         tableBuy(arg1);
         tableSell(arg2);
-
+        clearInterval(timerId);
         timerId = setInterval(function () {
             getAjax(choice);
         }, 5000);
