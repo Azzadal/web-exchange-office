@@ -8,6 +8,11 @@ public class WebController {
 	
     @RequestMapping(value="/")
     public String homepage(){
+        return "greeting.html";
+    }
+
+    @RequestMapping(value="/main")
+    public String mainpage(){
         return "index.html";
     }
 }
