@@ -20,11 +20,6 @@ public class WebController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value="/greeting")
-    public String homepage(){
-        return "greeting.html";
-    }
-
     @RequestMapping(value="/")
     public String mainpage(){
         return "index.html";
