@@ -7,6 +7,21 @@ window.onload = function () {
     tableComplit();
     testIpReq();
 
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "text";
+    xhr.open('GET', window.location + "count");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            let count = xhr.response;
+            console.log("Кол-во записей " + count);
+            if (count >= 1000) {
+                clearBD1();
+                location.reload();
+            }
+        }
+    };
+    xhr.send();
+
     connect();
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
@@ -59,39 +74,37 @@ window.onload = function () {
         xhr.open('GET', window.location + pair);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                ajaxRate(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
-                getRateLib(pair);//получение курса из БД
+                saveRateInDb(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
+                getRateFromDb(pair);//получение курса из БД
             }
         };
         xhr.send();
     }
 
-    function getRateLib(pair) {
+    function getRateFromDb(pair) {
         const req = new XMLHttpRequest();
         req.responseType = "json";
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
                 const json = req.response;
-                myJson2(json);//обработка ответа
+                (function() {
+                    for(let i = 0; i < json.length; i++) {
+                        data.series[0].push(json[i].rateBuy);
+                        data.series[1].push(json[i].rateSell);
+                        rateBuy.innerHTML = json[i].rateBuy;
+                        rateSell.innerHTML = json[i].rateSell;
+                        outTotal();
+                        if (data.series[0].length === 20) {
+                            data.series[0].shift();
+                            data.series[1].shift();
+                        }
+                    }
+                    new Chartist.Line('.ct-chart', data);
+                }());
             }
         };
         req.send();
-    }
-
-    function myJson2(response){
-        for(let i = 0; i < response.length; i++) {
-            data.series[0].push(response[i].rateBuy);
-            data.series[1].push(response[i].rateSell);
-            rateBuy.innerHTML = response[i].rateBuy;
-            rateSell.innerHTML = response[i].rateSell;
-            outTotal();
-            if (data.series[0].length === 20) {
-                data.series[0].shift();
-                data.series[1].shift();
-            }
-        }
-        new Chartist.Line('.ct-chart', data);
     }
 
     const bidsBuy = document.getElementById('bidsBuy');

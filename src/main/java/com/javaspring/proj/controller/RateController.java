@@ -84,4 +84,9 @@ public class RateController {
         rateRepository.getAllFromEmp();
     }
 
+    @GetMapping(value = "count")
+    public long getCount(){
+        return rateRepository.count();
+    }
+
 }

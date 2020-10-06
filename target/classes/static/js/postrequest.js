@@ -39,7 +39,7 @@ function tableSell(arg) {
                     json[i].total + '</td></tr>';
             }
         }
-        autofillBuy();
+            autofillBuy();
     };
     req.send();
 }
@@ -61,7 +61,7 @@ function tableBuy(arg) {
                     json[i].total + '</td></tr>';
             }
         }
-        autofillSell();
+            autofillSell();
     };
     req.send();
 }
@@ -102,7 +102,7 @@ function connect() {
                     '</td><td class="text-center rowsQuanBuy">' + gvn[i].quantity + '</td><td class="text-center rowsTotalBuy">' +
                     gvn[i].total + '</td></tr>';
             }
-            autofillSell();
+                autofillSell();
         });
         stompClient.subscribe('/topic/sells', function (e) {
             let gvn = JSON.parse(e.body);
@@ -113,7 +113,7 @@ function connect() {
                     '</td><td class="text-center rowsQuanSell">' + gvn[i].quantity + '</td><td class="text-center rowsTotalSell">' +
                     gvn[i].total + '</td></tr>';
             }
-            autofillBuy();
+                autofillBuy();
         });
 
         stompClient.subscribe('/topic/ids', function (e) {
@@ -238,29 +238,27 @@ document.getElementById('butSell').onclick = function (e) {
 
 //автозаполнение формы продажи
 function autofillSell(){
-    for (let i = 0; i <= rowsBuy.length; i++) {
-        rowsBuy[i].addEventListener('click',function () {
-            console.log(rowsQuanBuy[i].innerHTML)
-            rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
-            quantitySell.value = rowsQuanBuy[i].innerHTML;
-            outTotal();
-        })
-    }
+        for (let i = 0; i <= rowsBuy.length - 1; i++) {
+            rowsBuy[i].addEventListener('click', function () {
+                rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
+                quantitySell.value = rowsQuanBuy[i].innerHTML;
+                outTotal();
+            })
+        }
 }
 
 //автозаполнение формы покупки
 function autofillBuy(){
-    for (let i = 0; i <= rowsSell.length; i++) {
-        rowsSell[i].addEventListener('click', function () {
-            console.log(rowsPriceSell[i].innerHTML)
-            rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
-            quantityBuy.value = rowsQuanSell[i].innerHTML;
-            outTotal();
+        for (let i = 0; i <= rowsSell.length - 1; i++) {
+            rowsSell[i].addEventListener('click', function () {
+                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
+                quantityBuy.value = rowsQuanSell[i].innerHTML;
+                outTotal();
             })
-    }
+        }
 }
 
-function ajaxRate(type, rateBuy, rateSell) {
+function saveRateInDb(type, rateBuy, rateSell) {
     const formData = JSON.stringify({
         rateBuy: rateBuy,
         rateSell: rateSell,
