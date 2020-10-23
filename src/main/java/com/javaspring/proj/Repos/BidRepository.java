@@ -7,4 +7,5 @@ public interface BidRepository extends CrudRepository<Bid, Integer> {
     Iterable<Bid> findByTypeAndStatus(String type, String status);
     Iterable<Bid> findByType(String type);
     Iterable<Bid> findByStatus(String status);
+    Iterable<Bid> findByStatusOrderByDate(String status);
 }

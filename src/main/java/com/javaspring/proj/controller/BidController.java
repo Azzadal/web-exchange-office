@@ -35,7 +35,7 @@ public class BidController {
 
     @GetMapping(value = "ERBuy")
     public Iterable<Bid> getERBuyTab(){
-        return bidRepository.findByType("ERBuy");
+        return bidRepository.findByTypeAndStatus("ERBuy", "not_done");
     }
 
 
@@ -48,7 +48,7 @@ public class BidController {
 
     @GetMapping(value = "UEBuy")
     public Iterable<Bid> getUEBuyTab(){
-        return bidRepository.findByType("UEBuy");
+        return bidRepository.findByTypeAndStatus("UEBuy", "not_done");
     }
 
     @MessageMapping("/EUBuy")
@@ -60,7 +60,7 @@ public class BidController {
 
     @GetMapping(value = "EUBuy")
     public Iterable<Bid> getEUBuyTab(){
-        return bidRepository.findByType("EUBuy");
+        return bidRepository.findByTypeAndStatus("EUBuy", "not_done");
     }
 
     @MessageMapping("/URSell")
@@ -84,7 +84,7 @@ public class BidController {
 
     @GetMapping(value = "ERSell")
     public Iterable<Bid> getERSellTab(){
-        return bidRepository.findByType("ERSell");
+        return bidRepository.findByTypeAndStatus("ERSell", "not_done");
     }
 
     @MessageMapping("/UESell")
@@ -96,7 +96,7 @@ public class BidController {
 
     @GetMapping(value = "UESell")
     public Iterable<Bid> getUESellTab(){
-        return bidRepository.findByType("UESell");
+        return bidRepository.findByTypeAndStatus("UESell", "not_done");
     }
 
     @MessageMapping("/EUSell")
@@ -108,7 +108,7 @@ public class BidController {
 
     @GetMapping(value = "EUSell")
     public Iterable<Bid> getEUSellTab(){
-        return bidRepository.findByType("EUSell");
+        return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
 
     @MessageMapping("/id")
