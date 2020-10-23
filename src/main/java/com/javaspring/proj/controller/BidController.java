@@ -120,7 +120,7 @@ public class BidController {
 
     @GetMapping(value = "tab_compl")
     public Iterable<Bid> getComplitTab(){
-        return bidRepository.findByStatus("done");
+        return bidRepository.findByStatusOrderByDate("done");
     }
 
     @GetMapping(value = "clear_bid")
