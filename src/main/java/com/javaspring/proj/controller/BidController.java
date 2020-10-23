@@ -115,12 +115,12 @@ public class BidController {
     @SendTo("/topic/ids")
     public Iterable<Bid> adssssll(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByStatus("done");
+        return bidRepository.findByStatusOrderByDate("done");
     }
 
     @GetMapping(value = "tab_compl")
     public Iterable<Bid> getComplitTab(){
-        return bidRepository.findByStatus("done");
+        return bidRepository.findByStatusOrderByDate("done");
     }
 
     @GetMapping(value = "clear_bid")
