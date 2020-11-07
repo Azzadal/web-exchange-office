@@ -43,7 +43,7 @@ public class BidController {
     @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidUEBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByType("UEBuy");
+        return bidRepository.findByTypeAndStatus("UEBuy", "not_done");
     }
 
     @GetMapping(value = "UEBuy")
@@ -55,7 +55,7 @@ public class BidController {
     @SendTo("/topic/buys")
     public Iterable<Bid> addNewBidEUBuy(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByType("EUBuy");
+        return bidRepository.findByTypeAndStatus("EUBuy", "not_done");
     }
 
     @GetMapping(value = "EUBuy")
@@ -91,7 +91,7 @@ public class BidController {
     @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidUESell(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByType("UESell");
+        return bidRepository.findByTypeAndStatus("UESell", "not_done");
     }
 
     @GetMapping(value = "UESell")
@@ -103,7 +103,7 @@ public class BidController {
     @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidEUSell(@RequestBody Bid bid){
         bidRepository.save(bid);
-        return bidRepository.findByType("EUSell");
+        return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
 
     @GetMapping(value = "EUSell")

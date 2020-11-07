@@ -191,6 +191,9 @@ body{
     display: flex;
 }
 
+.btn-limit{
+    height: 5px;
+}
 
 .prr, .prr1, .rowsPriceSell, .rowsQuanSell, .rowsTotalSell, .rowsPriceBuy,
 .rowsQuanBuy, .rowsTotalBuy, .date, .type, .price, .quantity, .total{

@@ -80,10 +80,8 @@
                 <div class="col-12">
                     <div id="schedule" class="ct-chart ct-perfect-fourth"></div>
                 </div>
-
             </div>
             <div class="row">
-
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
@@ -100,7 +98,7 @@
                         </div>
                     </form>
                     <button class="btn btn-secondary float-left" id="butBuy" style="margin-bottom: 5px;">Покупка</button>
-                    <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button>
+                <!--    <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button> -->
                 </div>
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
@@ -118,11 +116,13 @@
                         </div>
                         <div class="form-group">
                             <label class="text-white float-left" for="totalLim">Итого</label>
-                            <textarea id="totalLim" class="form-control" rows="1" type="text"></textarea>
+                            <textarea style="resize: none;" id="totalLim" class="form-control" rows="1" type="text"></textarea>
                         </div>
                     </form>
-                    <button class="btn btn-secondary btn-xs float-left badge-light align-top">Покупка</button>
-                    <button class="btn btn-secondary btn-xs float-right badge-light align-top">Продажа</button>
+                    <div style="display: flex">
+                        <button style="margin-right: 3px; padding: 3px" class="btn btn-secondary btn-xs float-left badge-light align-top">Покупка</button>
+                        <button style="margin-left: 3px; padding: 3px" class="btn btn-secondary btn-xs float-right badge-light align-top">Продажа</button>
+                    </div>
                 </div>
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
@@ -140,14 +140,14 @@
                         </div>
                     </form>
                     <button class="btn btn-secondary float-right" id="butSell" style="margin-bottom: 5px;">Продажа</button>
-                    <button class="btn btn-secondary float-left" id="clearBD1">очистка т. rate</button>
-                </div>
+                    <!--   <button class="btn btn-secondary float-left" id="clearBD1">очистка т. rate</button> -->
+                   </div>
 
-            </div>
-        </div>
+               </div>
+           </div>
 
-            </div>
-        </div><!--таблица успешных сделок-->
+               </div>
+           </div><!--таблица успешных сделок-->
 
     <div class="row">
         <div class="col">

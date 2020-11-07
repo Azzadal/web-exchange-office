@@ -26,16 +26,16 @@ window.onload = function () {
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
-    document.getElementById('clearBD').onclick = function (e) {
-        e.preventDefault();
-        clearBD();
-        location.reload();
-    };
-    document.getElementById('clearBD1').onclick = function (e) {
-        e.preventDefault();
-        clearBD1();
-        location.reload();
-    };
+    // document.getElementById('clearBD').onclick = function (e) {
+    //     e.preventDefault();
+    //     clearBD();
+    //     location.reload();
+    // };
+    // document.getElementById('clearBD1').onclick = function (e) {
+    //     e.preventDefault();
+    //     clearBD1();
+    //     location.reload();
+    // };
     const data = {
         series: [
             [],
@@ -139,6 +139,7 @@ window.onload = function () {
         tableBuy(arg1);
         tableSell(arg2);
         clearInterval(timerId);
+        getAjax(choice);
         timerId = setInterval(function () {
             getAjax(choice);
         }, 5000);
