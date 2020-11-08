@@ -3,6 +3,7 @@ package com.javaspring.proj.controller;
 import com.javaspring.proj.Repos.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,23 +59,28 @@ public class RateController {
     public Iterable<Rate> getRateEULib(){
         return rateRepository.findByType("rateEU");
     }
-
+    private int i = 0;
     @GetMapping(value = "rateUR")
+    @Scheduled(fixedDelay = 1000)
     public Map<String, BigDecimal> genUR(){
         return rate.generateRate(30,160,100,135);
     }
 
     @GetMapping(value = "rateER")
-    public Map<String, BigDecimal> genER(){
+    @Scheduled(fixedDelay = 1000)
+    public Map<String, BigDecimal> genER()
+    {
         return rate.generateRate(10,20,5,10);
     }
 
     @GetMapping(value = "rateUE")
+    @Scheduled(fixedDelay = 1000)
     public Map<String, BigDecimal> genUE(){
         return rate.generateRate(15,22,10,13);
     }
 
     @GetMapping(value = "rateEU")
+    @Scheduled(fixedDelay = 1000)
     public Map<String, BigDecimal> genEU(){
         return rate.generateRate(27,50,30,150);
     }
