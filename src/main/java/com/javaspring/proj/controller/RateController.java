@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,32 @@ public class RateController {
     public void addRateBuy(@RequestBody Rate rate){
         rateRepository.save(rate);
     }
+    int i = 0;
+    @Scheduled(fixedDelay = 3000)
+    public void addRateUR(){
+       rate = new Rate();
+       Map<String,BigDecimal> rateUR = genUR();
+       rate.setType("rateUR");
+       rate.setRateBuy(rateUR.get("rateBuy"));
+       rate.setRateSell(rateUR.get("rateSell"));
+        synchronized (this) {
+            rateRepository.save(rate);
+            System.out.println("addRateUR" + i++);
+        }
+    }
+
+    @Scheduled(fixedDelay = 3000)
+    public void addRateER(){
+        rate = new Rate();
+        Map<String,BigDecimal> rateER = genER();
+        rate.setType("rateER");
+        rate.setRateBuy(rateER.get("rateBuy"));
+        rate.setRateSell(rateER.get("rateSell"));
+        synchronized (this) {
+            rateRepository.save(rate);
+            System.out.println("addRateER" + i++);
+        }
+    }
 
     @GetMapping(value = "rate/rateUR")
     public Iterable<Rate> getRateLib(){
@@ -59,35 +86,34 @@ public class RateController {
     public Iterable<Rate> getRateEULib(){
         return rateRepository.findByType("rateEU");
     }
-    private int i = 0;
+
     @GetMapping(value = "rateUR")
-    @Scheduled(fixedDelay = 1000)
     public Map<String, BigDecimal> genUR(){
         return rate.generateRate(30,160,100,135);
     }
 
     @GetMapping(value = "rateER")
-    @Scheduled(fixedDelay = 1000)
+
     public Map<String, BigDecimal> genER()
     {
         return rate.generateRate(10,20,5,10);
     }
 
     @GetMapping(value = "rateUE")
-    @Scheduled(fixedDelay = 1000)
+
     public Map<String, BigDecimal> genUE(){
         return rate.generateRate(15,22,10,13);
     }
 
     @GetMapping(value = "rateEU")
-    @Scheduled(fixedDelay = 1000)
+
     public Map<String, BigDecimal> genEU(){
         return rate.generateRate(27,50,30,150);
     }
 
     @GetMapping(value = "clear_rate")
     public void clear_rate(){
-        rateRepository.getAllFromEmp();
+        rateRepository.clearRate();
     }
 
     @GetMapping(value = "count")

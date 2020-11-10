@@ -139,9 +139,13 @@ window.onload = function () {
         tableBuy(arg1);
         tableSell(arg2);
         clearInterval(timerId);
-        getAjax(choice);
+        // getAjax(choice);
+        // timerId = setInterval(function () {
+        //     getAjax(choice);
+        // }, 5000);
+        getRateFromDb(choice);
         timerId = setInterval(function () {
-            getAjax(choice);
+            getRateFromDb(choice);
         }, 5000);
     };
     const quantityBuy = document.getElementById('quantityBuy'),

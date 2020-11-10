@@ -13,5 +13,5 @@ public interface RateRepository extends CrudRepository<Rate, Integer> {
     @Modifying
     @Transactional
     @Query(value="TRUNCATE TABLE rate RESTART IDENTITY;", nativeQuery=true)
-    void getAllFromEmp();
+    void clearRate();
 }
