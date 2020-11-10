@@ -19,7 +19,7 @@ import java.util.Map;
 public class RateController {
     @Autowired
     private RateRepository rateRepository;
-    private Rate rate = new Rate();
+    private Rate rate;
     //test user ip
     @GetMapping(value = "ip")
     private static String getClientIp(HttpServletRequest request) {
@@ -36,10 +36,10 @@ public class RateController {
         return remoteAddr;
     }
 
-    @PostMapping(value = "rate")
-    public void addRateBuy(@RequestBody Rate rate){
-        rateRepository.save(rate);
-    }
+//    @PostMapping(value = "rate")
+//    public void addRateBuy(@RequestBody Rate rate){
+//        rateRepository.save(rate);
+//    }
     int i = 0;
     @Scheduled(fixedDelay = 3000)
     public void addRateUR(){
