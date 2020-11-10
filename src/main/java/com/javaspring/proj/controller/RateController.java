@@ -19,7 +19,7 @@ import java.util.Map;
 public class RateController {
     @Autowired
     private RateRepository rateRepository;
-    private Rate rate;
+    private Rate rate = new Rate();;
     //test user ip
     @GetMapping(value = "ip")
     private static String getClientIp(HttpServletRequest request) {
@@ -43,12 +43,12 @@ public class RateController {
     int i = 0;
     @Scheduled(fixedDelay = 3000)
     public void addRateUR(){
-       rate = new Rate();
        Map<String,BigDecimal> rateUR = genUR();
+        synchronized (this) {
        rate.setType("rateUR");
        rate.setRateBuy(rateUR.get("rateBuy"));
        rate.setRateSell(rateUR.get("rateSell"));
-        synchronized (this) {
+
             rateRepository.save(rate);
             System.out.println("addRateUR" + i++);
         }
@@ -56,12 +56,12 @@ public class RateController {
 
     @Scheduled(fixedDelay = 3000)
     public void addRateER(){
-        rate = new Rate();
         Map<String,BigDecimal> rateER = genER();
+        synchronized (this) {
         rate.setType("rateER");
         rate.setRateBuy(rateER.get("rateBuy"));
         rate.setRateSell(rateER.get("rateSell"));
-        synchronized (this) {
+
             rateRepository.save(rate);
             System.out.println("addRateER" + i++);
         }
