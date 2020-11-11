@@ -19,7 +19,8 @@ import java.util.Map;
 public class RateController {
     @Autowired
     private RateRepository rateRepository;
-    private Rate rate = new Rate();;
+    private Rate rate = new Rate();
+    //private Rate rate = new Rate();;
     //test user ip
     @GetMapping(value = "ip")
     private static String getClientIp(HttpServletRequest request) {
@@ -40,31 +41,27 @@ public class RateController {
 //    public void addRateBuy(@RequestBody Rate rate){
 //        rateRepository.save(rate);
 //    }
+
     int i = 0;
     @Scheduled(fixedDelay = 3000)
     public void addRateUR(){
        Map<String,BigDecimal> rateUR = genUR();
-        synchronized (this) {
-       rate.setType("rateUR");
-       rate.setRateBuy(rateUR.get("rateBuy"));
-       rate.setRateSell(rateUR.get("rateSell"));
+       Rate rate = new Rate();
+        rate.setType("rateUR");
+        rate.setRateBuy(rateUR.get("rateBuy"));
+        rate.setRateSell(rateUR.get("rateSell"));
+        rateRepository.save(rate);
 
-            rateRepository.save(rate);
-            System.out.println("addRateUR" + i++);
-        }
     }
 
     @Scheduled(fixedDelay = 3000)
     public void addRateER(){
         Map<String,BigDecimal> rateER = genER();
-        synchronized (this) {
+        Rate rate = new Rate();
         rate.setType("rateER");
         rate.setRateBuy(rateER.get("rateBuy"));
         rate.setRateSell(rateER.get("rateSell"));
-
-            rateRepository.save(rate);
-            System.out.println("addRateER" + i++);
-        }
+        rateRepository.save(rate);
     }
 
     @GetMapping(value = "rate/rateUR")
