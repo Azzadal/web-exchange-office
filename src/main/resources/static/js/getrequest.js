@@ -146,7 +146,7 @@ window.onload = function () {
         getRateFromDb(choice);
         timerId = setInterval(function () {
             getRateFromDb(choice);
-        }, 5000);
+        }, 10000);
     };
     const quantityBuy = document.getElementById('quantityBuy'),
         quantitySell = document.getElementById('quantitySell'),
