@@ -45,23 +45,32 @@ public class RateController {
     int i = 0;
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
-       Map<String,BigDecimal> rateUR = genUR();
-       Rate rate = new Rate();
-        rate.setType("rateUR");
-        rate.setRateBuy(rateUR.get("rateBuy"));
-        rate.setRateSell(rateUR.get("rateSell"));
-        rateRepository.save(rate);
-
+        if (getCount() < 9999) {
+            Map<String,BigDecimal> rateUR = genUR();
+            Rate rate = new Rate();
+            rate.setType("rateUR");
+            rate.setRateBuy(rateUR.get("rateBuy"));
+            rate.setRateSell(rateUR.get("rateSell"));
+            rateRepository.save(rate);
+        }
+        else{
+            clear_rate();
+        }
     }
 
     @Scheduled(fixedDelay = 10000)
     public void addRateER(){
-        Map<String,BigDecimal> rateER = genER();
-        Rate rate = new Rate();
-        rate.setType("rateER");
-        rate.setRateBuy(rateER.get("rateBuy"));
-        rate.setRateSell(rateER.get("rateSell"));
-        rateRepository.save(rate);
+        if (getCount() < 9999) {
+            Map<String, BigDecimal> rateER = genER();
+            Rate rate = new Rate();
+            rate.setType("rateER");
+            rate.setRateBuy(rateER.get("rateBuy"));
+            rate.setRateSell(rateER.get("rateSell"));
+            rateRepository.save(rate);
+        }
+        else{
+            clear_rate();
+        }
     }
 
     @GetMapping(value = "rate/rateUR")
