@@ -257,16 +257,3 @@ function autofillBuy(){
             })
         }
 }
-
-function saveRateInDb(type, rateBuy, rateSell) {
-    const formData = JSON.stringify({
-        rateBuy: rateBuy,
-        rateSell: rateSell,
-        type: type
-    });
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = "json";
-    xhr.open('POST', window.location + "rate");
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.send(formData);
-}

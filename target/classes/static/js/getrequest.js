@@ -13,11 +13,6 @@ window.onload = function () {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let count = xhr.response;
-            console.log("Кол-во записей " + count);
-            if (count >= 1000) {
-                clearBD1();
-                location.reload();
-            }
         }
     };
     xhr.send();
@@ -63,19 +58,6 @@ window.onload = function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 document.getElementById('ip').innerHTML = xhr.response;
-            }
-        };
-        xhr.send();
-    }
-
-    function getAjax(pair) {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "json";
-        xhr.open('GET', window.location + pair);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                saveRateInDb(pair, xhr.response.rateBuy, xhr.response.rateSell);//сохранение курса в БД
-                getRateFromDb(pair);//получение курса из БД
             }
         };
         xhr.send();
@@ -139,10 +121,10 @@ window.onload = function () {
         tableBuy(arg1);
         tableSell(arg2);
         clearInterval(timerId);
-        getAjax(choice);
+        getRateFromDb(choice);
         timerId = setInterval(function () {
-            getAjax(choice);
-        }, 5000);
+            getRateFromDb(choice);
+        }, 10000);
     };
     const quantityBuy = document.getElementById('quantityBuy'),
         quantitySell = document.getElementById('quantitySell'),
