@@ -20,7 +20,6 @@ public class RateController {
     @Autowired
     private RateRepository rateRepository;
     private Rate rate = new Rate();
-    //private Rate rate = new Rate();;
     //test user ip
     @GetMapping(value = "ip")
     private static String getClientIp(HttpServletRequest request) {
@@ -37,12 +36,6 @@ public class RateController {
         return remoteAddr;
     }
 
-//    @PostMapping(value = "rate")
-//    public void addRateBuy(@RequestBody Rate rate){
-//        rateRepository.save(rate);
-//    }
-
-    int i = 0;
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
         if (getCount() < 9999) {
@@ -66,6 +59,36 @@ public class RateController {
             rate.setType("rateER");
             rate.setRateBuy(rateER.get("rateBuy"));
             rate.setRateSell(rateER.get("rateSell"));
+            rateRepository.save(rate);
+        }
+        else{
+            clear_rate();
+        }
+    }
+
+    @Scheduled(fixedDelay = 10000)
+    public void addRateUE(){
+        if (getCount() < 9999) {
+            Map<String,BigDecimal> rateUE = genUE();
+            Rate rate = new Rate();
+            rate.setType("rateUE");
+            rate.setRateBuy(rateUE.get("rateBuy"));
+            rate.setRateSell(rateUE.get("rateSell"));
+            rateRepository.save(rate);
+        }
+        else{
+            clear_rate();
+        }
+    }
+
+    @Scheduled(fixedDelay = 10000)
+    public void addRateEU(){
+        if (getCount() < 9999) {
+            Map<String,BigDecimal> rateEU = genEU();
+            Rate rate = new Rate();
+            rate.setType("rateEU");
+            rate.setRateBuy(rateEU.get("rateBuy"));
+            rate.setRateSell(rateEU.get("rateSell"));
             rateRepository.save(rate);
         }
         else{
