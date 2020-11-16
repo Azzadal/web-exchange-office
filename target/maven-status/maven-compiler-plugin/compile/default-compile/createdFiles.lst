@@ -1,9 +1,0 @@
-com\javaspring\proj\controller\BidController.class
-com\javaspring\proj\Repos\BidRepository.class
-com\javaspring\proj\SpringBootApp.class
-com\javaspring\proj\controller\WebController.class
-com\javaspring\proj\model\Rate.class
-com\javaspring\proj\controller\RateController.class
-com\javaspring\proj\config\WebSocketConfig.class
-com\javaspring\proj\Repos\RateRepository.class
-com\javaspring\proj\model\Bid.class

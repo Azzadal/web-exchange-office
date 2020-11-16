@@ -13,6 +13,7 @@ window.onload = function () {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let count = xhr.response;
+            console.log("записей " + count)
         }
     };
     xhr.send();
@@ -21,47 +22,12 @@ window.onload = function () {
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
-    // document.getElementById('clearBD').onclick = function (e) {
-    //     e.preventDefault();
-    //     clearBD();
-    //     location.reload();
-    // };
-    // document.getElementById('clearBD1').onclick = function (e) {
-    //     e.preventDefault();
-    //     clearBD1();
-    //     location.reload();
-    // };
     const data = {
         series: [
             [],
             []
         ]
     };
-
-    function clearBD() {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "text";
-        xhr.open('GET', window.location + "clear_bid");
-        xhr.send();
-    }
-    function clearBD1() {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "text";
-        xhr.open('GET', window.location + "clear_rate");
-        xhr.send();
-    }
-
-    function testIpReq() {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "text";
-        xhr.open('GET', window.location + "ip");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                document.getElementById('ip').innerHTML = xhr.response;
-            }
-        };
-        xhr.send();
-    }
 
     function getRateFromDb(pair) {
         const req = new XMLHttpRequest();

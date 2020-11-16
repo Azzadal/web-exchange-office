@@ -47,16 +47,12 @@ public class Rate {
     }
 
 
-    public Map<String, BigDecimal> generateRate(int minBuy, int maxBuy, int minSell, int maxSell){
+    public static Map<String, BigDecimal> generateRate(int minBuy, int maxBuy, int minSell, int maxSell){
         HashMap<String, BigDecimal> map = new HashMap<>();
         double randomBuy = (Math.random() * (maxBuy - minBuy)) + minBuy;
         double randomSell = (Math.random() * (maxSell - minSell)) + minSell;
-        BigDecimal rateBuy = new BigDecimal(randomBuy);
-        BigDecimal rateSell = new BigDecimal(randomSell);
-        setRateBuy(rateBuy.setScale(2, BigDecimal.ROUND_CEILING));
-        setRateSell(rateSell.setScale(2, BigDecimal.ROUND_CEILING));
-        BigDecimal buy = getRateBuy();
-        BigDecimal sell = getRateSell();
+        BigDecimal buy = new BigDecimal(randomBuy).setScale(2, BigDecimal.ROUND_CEILING);
+        BigDecimal sell = new BigDecimal(randomSell).setScale(2, BigDecimal.ROUND_CEILING);
         map.put("rateBuy", buy);
         map.put("rateSell", sell);
         return map;
