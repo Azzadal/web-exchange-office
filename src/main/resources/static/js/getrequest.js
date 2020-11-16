@@ -5,8 +5,6 @@ function outTotal() {
 
 window.onload = function () {
     tableComplit();
-    testIpReq();
-
     const xhr = new XMLHttpRequest();
     xhr.responseType = "text";
     xhr.open('GET', window.location + "count");
