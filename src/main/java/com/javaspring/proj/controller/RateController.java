@@ -17,7 +17,7 @@ public class RateController {
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
-        if (getCount() < 9999) {
+        if (getCount() < 6999) {
             Map<String,BigDecimal> rateUR = genUR();
             Rate rate = new Rate();
             rate.setType("rateUR");
@@ -26,13 +26,13 @@ public class RateController {
             rateRepository.save(rate);
         }
         else{
-            clear_rate();
+            clearRate();
         }
     }
 
     @Scheduled(fixedDelay = 10000)
     public void addRateER(){
-        if (getCount() < 9999) {
+        if (getCount() < 6999) {
             Map<String, BigDecimal> rateER = genER();
             Rate rate = new Rate();
             rate.setType("rateER");
@@ -41,13 +41,13 @@ public class RateController {
             rateRepository.save(rate);
         }
         else{
-            clear_rate();
+            clearRate();
         }
     }
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUE(){
-        if (getCount() < 9999) {
+        if (getCount() < 6999) {
             Map<String,BigDecimal> rateUE = genUE();
             Rate rate = new Rate();
             rate.setType("rateUE");
@@ -56,13 +56,13 @@ public class RateController {
             rateRepository.save(rate);
         }
         else{
-            clear_rate();
+            clearRate();
         }
     }
 
     @Scheduled(fixedDelay = 10000)
     public void addRateEU(){
-        if (getCount() < 9999) {
+        if (getCount() < 6999) {
             Map<String,BigDecimal> rateEU = genEU();
             Rate rate = new Rate();
             rate.setType("rateEU");
@@ -71,7 +71,7 @@ public class RateController {
             rateRepository.save(rate);
         }
         else{
-            clear_rate();
+            clearRate();
         }
     }
 
@@ -120,7 +120,7 @@ public class RateController {
     }
 
     @GetMapping(value = "clear_rate")
-    private void clear_rate(){
+    private void clearRate(){
         rateRepository.clearRate();
     }
 
