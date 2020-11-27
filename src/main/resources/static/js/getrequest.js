@@ -26,6 +26,7 @@ window.onload = function () {
             []
         ]
     };
+    let y = 0;
 
     function getRateFromDb(pair) {
         const req = new XMLHttpRequest();
@@ -33,15 +34,17 @@ window.onload = function () {
         req.open('GET', window.location + "rate/" + pair);
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
+                console.log(y++)
                 const json = req.response;
                 (function() {
                     for(let i = 0; i < json.length; i++) {
+                        console.log(json[i].rateBuy)
                         data.series[0].push(json[i].rateBuy);
                         data.series[1].push(json[i].rateSell);
                         rateBuy.innerHTML = json[i].rateBuy;
                         rateSell.innerHTML = json[i].rateSell;
                         outTotal();
-                        if (data.series[0].length === 20) {
+                        if (data.series[0].length === 40) {
                             data.series[0].shift();
                             data.series[1].shift();
                         }

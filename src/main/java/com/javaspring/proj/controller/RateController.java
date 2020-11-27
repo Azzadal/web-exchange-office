@@ -77,39 +77,39 @@ public class RateController {
 
     @GetMapping(value = "rate/rateUR")
     public Iterable<Rate> getRateLib(){
-        return rateRepository.findByType("rateUR");
+        return rateRepository.findByTypeOrderByIdAsc("rateUR");
     }
 
     @GetMapping(value = "rate/rateER")
     public Iterable<Rate> getRateERLib(){
-        return rateRepository.findByType("rateER");
+        return rateRepository.findByTypeOrderByIdAsc("rateER");
     }
 
     @GetMapping(value = "rate/rateUE")
     public Iterable<Rate> getRateUELib(){
-        return rateRepository.findByType("rateUE");
+        return rateRepository.findByTypeOrderByIdAsc("rateUE");
     }
 
     @GetMapping(value = "rate/rateEU")
     public Iterable<Rate> getRateEULib(){
-        return rateRepository.findByType("rateEU");
+        return rateRepository.findByTypeOrderByIdAsc("rateEU");
     }
 
     private Map<String, BigDecimal> genUR(){
-        return Rate.generateRate(30,160,100,135);
+        return Rate.generateRate(60,70,50,60);
     }
 
     private Map<String, BigDecimal> genER()
     {
-        return Rate.generateRate(10,20,5,10);
+        return Rate.generateRate(20,30,10,20);
     }
 
     private Map<String, BigDecimal> genUE(){
-        return Rate.generateRate(15,22,10,13);
+        return Rate.generateRate(22,28,15,22);
     }
 
     private Map<String, BigDecimal> genEU(){
-        return Rate.generateRate(27,50,30,150);
+        return Rate.generateRate(31,40,23,30);
     }
 
     @GetMapping(value = "clear_rate")
