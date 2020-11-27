@@ -1,6 +1,6 @@
 package com.javaspring.proj.controller;
 
-import com.javaspring.proj.Repos.RateRepository;
+import com.javaspring.proj.Repository.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,7 +17,7 @@ public class RateController {
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
-        if (getCount() < 6999) {
+        if (getCount() < 5000) {
             Map<String,BigDecimal> rateUR = genUR();
             Rate rate = new Rate();
             rate.setType("rateUR");
@@ -32,7 +32,7 @@ public class RateController {
 
     @Scheduled(fixedDelay = 10000)
     public void addRateER(){
-        if (getCount() < 6999) {
+        if (getCount() < 5000) {
             Map<String, BigDecimal> rateER = genER();
             Rate rate = new Rate();
             rate.setType("rateER");
@@ -47,7 +47,7 @@ public class RateController {
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUE(){
-        if (getCount() < 6999) {
+        if (getCount() < 5000) {
             Map<String,BigDecimal> rateUE = genUE();
             Rate rate = new Rate();
             rate.setType("rateUE");
@@ -62,7 +62,7 @@ public class RateController {
 
     @Scheduled(fixedDelay = 10000)
     public void addRateEU(){
-        if (getCount() < 6999) {
+        if (getCount() < 5000) {
             Map<String,BigDecimal> rateEU = genEU();
             Rate rate = new Rate();
             rate.setType("rateEU");
@@ -95,27 +95,20 @@ public class RateController {
         return rateRepository.findByType("rateEU");
     }
 
-    @GetMapping(value = "rateUR")
-    public Map<String, BigDecimal> genUR(){
+    private Map<String, BigDecimal> genUR(){
         return Rate.generateRate(30,160,100,135);
     }
 
-    @GetMapping(value = "rateER")
-
-    public Map<String, BigDecimal> genER()
+    private Map<String, BigDecimal> genER()
     {
         return Rate.generateRate(10,20,5,10);
     }
 
-    @GetMapping(value = "rateUE")
-
-    public Map<String, BigDecimal> genUE(){
+    private Map<String, BigDecimal> genUE(){
         return Rate.generateRate(15,22,10,13);
     }
 
-    @GetMapping(value = "rateEU")
-
-    public Map<String, BigDecimal> genEU(){
+    private Map<String, BigDecimal> genEU(){
         return Rate.generateRate(27,50,30,150);
     }
 

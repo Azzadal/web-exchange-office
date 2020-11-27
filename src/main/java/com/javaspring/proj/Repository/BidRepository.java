@@ -1,4 +1,4 @@
-package com.javaspring.proj.Repos;
+package com.javaspring.proj.Repository;
 
 import com.javaspring.proj.model.Bid;
 import org.springframework.data.repository.CrudRepository;

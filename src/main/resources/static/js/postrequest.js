@@ -166,7 +166,6 @@ function checkSell(pair1, pair2) {
     if (rowsBuy.length <= 0) flag = 1;
     for (let i = 0; i < rowsBuy.length; i++) {
         if (rateSell.value === rowsPriceBuy[i].innerHTML) {
-
             flag = 0;
             q = i;
             break;
@@ -220,7 +219,7 @@ function addBidsSell(pair) {
 
 document.getElementById('butBuy').onclick = function (e) {
     e.preventDefault();
-    n = changePair.selectedIndex;
+    let n = changePair.selectedIndex;
     if (n === 1) checkBuy("URBuy", "URSell");
     if (n === 2) checkBuy("ERBuy", "ERSell");
     if (n === 3) checkBuy("UEBuy", "UESell");
@@ -229,7 +228,7 @@ document.getElementById('butBuy').onclick = function (e) {
 
 document.getElementById('butSell').onclick = function (e) {
     e.preventDefault();
-    n = changePair.selectedIndex;
+    let n = changePair.selectedIndex;
     if (n === 1) checkSell("URSell", "URBuy");
     if (n === 2) checkSell("ERSell", "ERBuy");
     if (n === 3) checkSell("UESell", "UEBuy");

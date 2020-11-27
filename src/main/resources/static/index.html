@@ -7,7 +7,7 @@
     <script defer src="js/getrequest.js"></script>
     <script defer src="js/postrequest.js"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <!--<link rel="stylesheet" href="css/style.css">-->
+   <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link rel="stylesheet" href="css/chartist.css">
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js"></script>
@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>Сайт</title>
 </head>
-<body>
+<body style="margin-left: 15px; margin-right: 15px">
 <div>
     <form action="/logout" method="post">
         <input class="btn btn-secondary" type="submit" value="Выйти"/>
@@ -33,7 +33,7 @@
         </select>
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-left: 15px;margin-right: 15px">
     <div class="row">
 
         <div class="col-xs-6 order-xs-1 col-md order-md-0 left_panel">
@@ -152,7 +152,8 @@
     <div class="row">
         <div class="col">
             <div class="row">
-                <div class="col table-responsive" style="height: 50vh;">
+
+                <div class="col table-responsive" style="height: 50vh">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -163,9 +164,10 @@
                             <th class="text-center">Пара</th>
                         </tr>
                         </thead>
-                        <tbody  id="bidsHistory"></tbody>
+                        <tbody id="bidsHistory"></tbody>
                     </table>
                 </div>
+            </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>

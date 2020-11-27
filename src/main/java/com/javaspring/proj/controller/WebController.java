@@ -1,6 +1,6 @@
 package com.javaspring.proj.controller;
 
-import com.javaspring.proj.Repos.UserRepo;
+import com.javaspring.proj.Repository.UserRepo;
 import com.javaspring.proj.model.Role;
 import com.javaspring.proj.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
-import java.util.Map;
 
 @Controller
 public class WebController {

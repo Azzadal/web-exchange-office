@@ -1,6 +1,6 @@
 package com.javaspring.proj.controller;
 
-import com.javaspring.proj.Repos.BidRepository;
+import com.javaspring.proj.Repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
