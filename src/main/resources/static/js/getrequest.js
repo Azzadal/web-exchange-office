@@ -59,7 +59,6 @@ window.onload = function () {
     let timerId = null;
 
     changePair.onchange = function () {
-
         let n = this.selectedIndex;
         let arg1, arg2, choice;
         if (n === 1) {
