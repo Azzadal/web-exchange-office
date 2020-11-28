@@ -38,7 +38,6 @@ window.onload = function () {
                 const json = req.response;
                 (function() {
                     for(let i = 0; i < json.length; i++) {
-                        console.log(json[i].rateBuy)
                         data.series[0].push(json[i].rateBuy);
                         data.series[1].push(json[i].rateSell);
                         rateBuy.innerHTML = json[i].rateBuy;

@@ -7,7 +7,7 @@
     <script defer src="js/getrequest.js"></script>
     <script defer src="js/postrequest.js"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-   <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/chartist.css">
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js"></script>
@@ -15,7 +15,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>Сайт</title>
 </head>
-<body style="margin-left: 15px; margin-right: 15px">
+<body style="
+    margin-left: 15px;
+    margin-right: 15px;
+">
 <div>
     <form action="/logout" method="post">
         <input class="btn btn-secondary" type="submit" value="Выйти"/>
@@ -34,11 +37,10 @@
 </nav>
 <div class="container-fluid" style="margin-left: 15px;margin-right: 15px">
     <div class="row">
-
         <div class="col-xs-6 order-xs-1 col-md order-md-0 left_panel">
             <div class="row">
                 <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 50vh;">
+                <div class="col-9 table-responsive" style="height: 30vh;">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -57,7 +59,7 @@
         <div class="col-xs-6 order-xs-2 col-md order-md-2 right_panel">
             <div class="row">
                 <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 50vh;">
+                <div class="col-9 table-responsive" style="height: 30vh;">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -76,83 +78,81 @@
         <div class="col-xs-12  col-md-5 order-md-1">
             <div class="row">
 
-                <div class="col-12">
-                    <div id="schedule" class="ct-chart ct-perfect-fourth"></div>
+                <div class="col-12" style="height: 30vh">
+                    <div id="schedule" style="height: 30vh" class="ct-chart ct-perfect-fourth"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
-                            <label class="text-white float-left" for="rateBuy">Цена</label>
+
                             <textarea style="resize: none;" id="rateBuy" type="text" class="form-control" name="rateBuy" rows="1" disabled></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="quantityBuy">Количество</label>
+
                             <input id="quantityBuy" class="form-control" type="text" value="0" name="quantityBuy">
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="totalBuy">Итого</label>
+
                             <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-control" rows="1" disabled></textarea>
                         </div>
                     </form>
                     <button class="btn btn-secondary float-left" id="butBuy" style="margin-bottom: 5px;">Покупка</button>
-                <!--    <button class="btn btn-secondary float-left" id="clearBD">очистка т. bid</button> -->
+
                 </div>
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
-                            <label class="text-white float-left" for="priceLim">Цена</label>
+
                             <textarea style="resize: none;" id="priceLim" class="form-control" rows="1" type="text"></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="limit">Лимит</label>
+
                             <input id="limit" class="form-control" type="text" value="0">
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="quantityLim">Количество</label>
+
                             <input id="quantityLim" class="form-control" type="text">
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="totalLim">Итого</label>
+
                             <textarea style="resize: none;" id="totalLim" class="form-control" rows="1" type="text"></textarea>
                         </div>
                     </form>
-                    <div style="display: flex; margin-bottom: 5px">
-                        <button style="margin-right: 3px; padding: 3px" class="btn btn-secondary btn-xs float-left badge-light align-top">Покупка</button>
-                        <button style="margin-left: 3px; padding: 3px" class="btn btn-secondary btn-xs float-right badge-light align-top">Продажа</button>
+                    <div id="butLimit">
+                        <input type="button" value="Покупка" class="btnlmt"/>
+                        <input type="button" value="Продажа" class="btnlmt"/>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-3">
                     <form role="form">
                         <div class="form-group">
-                            <label class="text-white float-left" for="rateSell">Цена</label>
+
                             <textarea style="resize: none;" id="rateSell" type="text" name="rateSell" class="form-control" rows="1" disabled></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="quantitySell">Количество</label>
+
                             <input id="quantitySell" class="form-control" type="text" value="0" name="quantitySell">
                         </div>
                         <div class="form-group">
-                            <label class="text-white float-left" for="totalSell">Итого</label>
+
                             <textarea style="resize: none;" id="totalSell" class="form-control" name="totalSell" rows="1" disabled></textarea>
                         </div>
                     </form>
                     <button class="btn btn-secondary float-right" id="butSell" style="margin-bottom: 5px;">Продажа</button>
-                    <!--   <button class="btn btn-secondary float-left" id="clearBD1">очистка т. rate</button> -->
                    </div>
-
                </div>
            </div>
-
                </div>
-           </div><!--таблица успешных сделок-->
+           </div>
+<!--таблица успешных сделок-->
 
     <div class="row">
         <div class="col">
             <div class="row">
 
-                <div class="col table-responsive" style="height: 50vh">
+                <div class="col table-responsive" style="height: 30vh">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
