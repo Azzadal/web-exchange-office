@@ -89,7 +89,7 @@ function tableComplit() {
 }
 
 function connect() {
-    const socket = new SockJS('/websocket');
+    let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
@@ -106,7 +106,6 @@ function connect() {
         });
         stompClient.subscribe('/topic/sells', function (e) {
             let gvn = JSON.parse(e.body);
-            console.log("sells" + gvn)
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
                 bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + gvn[i].id + '</td>' +
@@ -115,11 +114,6 @@ function connect() {
                     gvn[i].total + '</td></tr>';
             }
                 autofillBuy();
-        });
-
-        stompClient.subscribe('/topic/rate', function (e) {
-            let gvn = JSON.parse(e.body);
-            console.log(gvn)
         });
 
 //table history

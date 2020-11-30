@@ -3,6 +3,7 @@ package com.javaspring.proj.controller;
 import com.javaspring.proj.Repository.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class RateController {
     @Autowired
     private RateRepository rateRepository;
+
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
@@ -77,23 +79,26 @@ public class RateController {
         }
     }
 
+    @MessageMapping("/rateUR")
     @SendTo("/topic/rate")
-    @GetMapping(value = "rate/rateUR")
     public Iterable<Rate> getRateLib(){
         return rateRepository.findByTypeOrderByIdAsc("rateUR");
     }
 
-    @GetMapping(value = "rate/rateER")
+    @MessageMapping("/rateER")
+    @SendTo("/topic/rate")
     public Iterable<Rate> getRateERLib(){
         return rateRepository.findByTypeOrderByIdAsc("rateER");
     }
 
-    @GetMapping(value = "rate/rateUE")
+    @MessageMapping("/rateUE")
+    @SendTo("/topic/rate")
     public Iterable<Rate> getRateUELib(){
         return rateRepository.findByTypeOrderByIdAsc("rateUE");
     }
 
-    @GetMapping(value = "rate/rateEU")
+    @MessageMapping("/rateEU")
+    @SendTo("/topic/rate")
     public Iterable<Rate> getRateEULib(){
         return rateRepository.findByTypeOrderByIdAsc("rateEU");
     }

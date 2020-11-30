@@ -3,6 +3,7 @@ function outTotal() {
     totalSell.value = parseFloat(rateSell.value) * parseInt(quantitySell.value).toFixed(2);
 }
 
+
 window.onload = function () {
     tableComplit();
     const xhr = new XMLHttpRequest();
@@ -27,8 +28,6 @@ window.onload = function () {
         ]
     };
     let y = 0;
-
-
 
     function getRateFromDb(pair) {
         const req = new XMLHttpRequest();
@@ -89,9 +88,9 @@ window.onload = function () {
         tableSell(arg2);
         clearInterval(timerId);
         getRateFromDb(choice);
-        timerId = setInterval(function () {
-            getRateFromDb(choice);
-        }, 10000);
+        // timerId = setInterval(function () {
+        //     getRateFromDb(choice);
+        // }, 10000);
     };
     const quantityBuy = document.getElementById('quantityBuy'),
         quantitySell = document.getElementById('quantitySell'),
