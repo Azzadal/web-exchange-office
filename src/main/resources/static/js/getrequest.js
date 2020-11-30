@@ -28,6 +28,8 @@ window.onload = function () {
     };
     let y = 0;
 
+
+
     function getRateFromDb(pair) {
         const req = new XMLHttpRequest();
         req.responseType = "json";

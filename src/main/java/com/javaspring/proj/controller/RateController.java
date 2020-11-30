@@ -3,6 +3,7 @@ package com.javaspring.proj.controller;
 import com.javaspring.proj.Repository.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,12 +70,14 @@ public class RateController {
             rate.setRateBuy(rateEU.get("rateBuy"));
             rate.setRateSell(rateEU.get("rateSell"));
             rateRepository.save(rate);
+
         }
         else{
             clearRate();
         }
     }
 
+    @SendTo("/topic/rate")
     @GetMapping(value = "rate/rateUR")
     public Iterable<Rate> getRateLib(){
         return rateRepository.findByTypeOrderByIdAsc("rateUR");
