@@ -29,6 +29,7 @@ window.onload = function () {
     };
 
     function getRateFromDb(pair) {
+        stompClient.unsubscribe("myTopicId");
         stompClient.subscribe('/topic/' + pair, function (e) {
             let json = JSON.parse(e.body);
             for(let i = 0; i < json.length; i++) {
@@ -43,7 +44,7 @@ window.onload = function () {
                 }
             }
             new Chartist.Line('.ct-chart', data);
-        });
+        }, { id: "myTopicId"});
 
 
         // const req = new XMLHttpRequest();

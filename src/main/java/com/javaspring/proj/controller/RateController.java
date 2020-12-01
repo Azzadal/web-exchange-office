@@ -4,8 +4,6 @@ import com.javaspring.proj.Repository.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.core.MessageSendingOperations;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +17,7 @@ public class RateController {
     private RateRepository rateRepository;
 
     private final MessageSendingOperations<String> messagingTemplate;
+
     @Autowired
     public RateController(MessageSendingOperations<String> messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
@@ -33,7 +32,7 @@ public class RateController {
             rate.setRateBuy(rateUR.get("rateBuy"));
             rate.setRateSell(rateUR.get("rateSell"));
             rateRepository.save(rate);
-            getRateLib();
+            getRateLib("rateUR");
         }
         else{
             clearRate();
@@ -49,7 +48,7 @@ public class RateController {
             rate.setRateBuy(rateER.get("rateBuy"));
             rate.setRateSell(rateER.get("rateSell"));
             rateRepository.save(rate);
-            getRateERLib();
+            getRateLib("rateER");
         }
         else{
             clearRate();
@@ -65,7 +64,7 @@ public class RateController {
             rate.setRateBuy(rateUE.get("rateBuy"));
             rate.setRateSell(rateUE.get("rateSell"));
             rateRepository.save(rate);
-            getRateUELib();
+            getRateLib("rateUE");
         }
         else{
             clearRate();
@@ -81,47 +80,17 @@ public class RateController {
             rate.setRateBuy(rateEU.get("rateBuy"));
             rate.setRateSell(rateEU.get("rateSell"));
             rateRepository.save(rate);
-            getRateEULib();
+            getRateLib("rateEU");
         }
         else{
             clearRate();
         }
     }
 
-    //@SendTo("/topic/rateUR")
-    private void getRateLib(){
-        System.out.println("rateUR");
-        String destination = "/topic/rateUR";
-        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateUR"));
-    }
-
-//    private synchronized void getRateLib(String pair){
-//        System.out.println(pair);
-//        String destination = "/topic/" + pair;
-//        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc(pair));
-//    }
-
-//    @SendTo("/topic/rateER")
-    public void getRateERLib(){
-        System.out.println("rateER");
-        String destination = "/topic/rateER";
-        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateER"));
-    }
-
-//    @MessageMapping("/rateUE")
-//    @SendTo("/topic/rate")
-    public void getRateUELib(){
-        System.out.println("rateUE");
-        String destination = "/topic/rateUE";
-        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateUE"));
-    }
-
-//    @MessageMapping("/rateEU")
-//    @SendTo("/topic/rate")
-    public void getRateEULib(){
-        System.out.println("rateEU");
-        String destination = "/topic/rateEU";
-        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateEU"));
+    private void getRateLib(String pair){
+        System.out.println(pair);
+        String destination = "/topic/" + pair;
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc(pair));
     }
 
     private Map<String, BigDecimal> genUR(){
