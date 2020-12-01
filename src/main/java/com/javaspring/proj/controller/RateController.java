@@ -3,6 +3,7 @@ package com.javaspring.proj.controller;
 import com.javaspring.proj.Repository.RateRepository;
 import com.javaspring.proj.model.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +18,11 @@ public class RateController {
     @Autowired
     private RateRepository rateRepository;
 
+    private final MessageSendingOperations<String> messagingTemplate;
+    @Autowired
+    public RateController(MessageSendingOperations<String> messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
 
     @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
@@ -27,6 +33,7 @@ public class RateController {
             rate.setRateBuy(rateUR.get("rateBuy"));
             rate.setRateSell(rateUR.get("rateSell"));
             rateRepository.save(rate);
+            getRateLib();
         }
         else{
             clearRate();
@@ -42,6 +49,7 @@ public class RateController {
             rate.setRateBuy(rateER.get("rateBuy"));
             rate.setRateSell(rateER.get("rateSell"));
             rateRepository.save(rate);
+            getRateERLib();
         }
         else{
             clearRate();
@@ -57,6 +65,7 @@ public class RateController {
             rate.setRateBuy(rateUE.get("rateBuy"));
             rate.setRateSell(rateUE.get("rateSell"));
             rateRepository.save(rate);
+            getRateUELib();
         }
         else{
             clearRate();
@@ -72,35 +81,47 @@ public class RateController {
             rate.setRateBuy(rateEU.get("rateBuy"));
             rate.setRateSell(rateEU.get("rateSell"));
             rateRepository.save(rate);
-
+            getRateEULib();
         }
         else{
             clearRate();
         }
     }
 
-    @MessageMapping("/rateUR")
-    @SendTo("/topic/rate")
-    public Iterable<Rate> getRateLib(){
-        return rateRepository.findByTypeOrderByIdAsc("rateUR");
+    //@SendTo("/topic/rateUR")
+    private void getRateLib(){
+        System.out.println("rateUR");
+        String destination = "/topic/rateUR";
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateUR"));
     }
 
-    @MessageMapping("/rateER")
-    @SendTo("/topic/rate")
-    public Iterable<Rate> getRateERLib(){
-        return rateRepository.findByTypeOrderByIdAsc("rateER");
+//    private synchronized void getRateLib(String pair){
+//        System.out.println(pair);
+//        String destination = "/topic/" + pair;
+//        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc(pair));
+//    }
+
+//    @SendTo("/topic/rateER")
+    public void getRateERLib(){
+        System.out.println("rateER");
+        String destination = "/topic/rateER";
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateER"));
     }
 
-    @MessageMapping("/rateUE")
-    @SendTo("/topic/rate")
-    public Iterable<Rate> getRateUELib(){
-        return rateRepository.findByTypeOrderByIdAsc("rateUE");
+//    @MessageMapping("/rateUE")
+//    @SendTo("/topic/rate")
+    public void getRateUELib(){
+        System.out.println("rateUE");
+        String destination = "/topic/rateUE";
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateUE"));
     }
 
-    @MessageMapping("/rateEU")
-    @SendTo("/topic/rate")
-    public Iterable<Rate> getRateEULib(){
-        return rateRepository.findByTypeOrderByIdAsc("rateEU");
+//    @MessageMapping("/rateEU")
+//    @SendTo("/topic/rate")
+    public void getRateEULib(){
+        System.out.println("rateEU");
+        String destination = "/topic/rateEU";
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc("rateEU"));
     }
 
     private Map<String, BigDecimal> genUR(){

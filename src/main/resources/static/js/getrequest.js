@@ -27,33 +27,49 @@ window.onload = function () {
             []
         ]
     };
-    let y = 0;
 
     function getRateFromDb(pair) {
-        const req = new XMLHttpRequest();
-        req.responseType = "json";
-        req.open('GET', window.location + "rate/" + pair);
-        req.onreadystatechange = function () {
-            if (req.readyState === 4) {
-                console.log(y++)
-                const json = req.response;
-                (function() {
-                    for(let i = 0; i < json.length; i++) {
-                        data.series[0].push(json[i].rateBuy);
-                        data.series[1].push(json[i].rateSell);
-                        rateBuy.innerHTML = json[i].rateBuy;
-                        rateSell.innerHTML = json[i].rateSell;
-                        outTotal();
-                        if (data.series[0].length === 40) {
-                            data.series[0].shift();
-                            data.series[1].shift();
-                        }
-                    }
-                    new Chartist.Line('.ct-chart', data);
-                }());
+        stompClient.subscribe('/topic/' + pair, function (e) {
+            let json = JSON.parse(e.body);
+            for(let i = 0; i < json.length; i++) {
+                data.series[0].push(json[i].rateBuy);
+                data.series[1].push(json[i].rateSell);
+                rateBuy.innerHTML = json[i].rateBuy;
+                rateSell.innerHTML = json[i].rateSell;
+                outTotal();
+                if (data.series[0].length === 40) {
+                    data.series[0].shift();
+                    data.series[1].shift();
+                }
             }
-        };
-        req.send();
+            new Chartist.Line('.ct-chart', data);
+        });
+
+
+        // const req = new XMLHttpRequest();
+        // req.responseType = "json";
+        // req.open('GET', window.location + "rate/" + pair);
+        // req.onreadystatechange = function () {
+        //     if (req.readyState === 4) {
+        //         console.log(y++)
+        //         const json = req.response;
+        //         (function() {
+        //             for(let i = 0; i < json.length; i++) {
+        //                 data.series[0].push(json[i].rateBuy);
+        //                 data.series[1].push(json[i].rateSell);
+        //                 rateBuy.innerHTML = json[i].rateBuy;
+        //                 rateSell.innerHTML = json[i].rateSell;
+        //                 outTotal();
+        //                 if (data.series[0].length === 40) {
+        //                     data.series[0].shift();
+        //                     data.series[1].shift();
+        //                 }
+        //             }
+        //             new Chartist.Line('.ct-chart', data);
+        //         }());
+        //     }
+        // };
+        // req.send();
     }
 
     const bidsBuy = document.getElementById('bidsBuy');
