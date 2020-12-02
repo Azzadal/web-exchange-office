@@ -26,6 +26,11 @@ let rateUEObj;
 let rateEUObj;
 let changePair = document.getElementById('pairs');
 
+function test() {
+    return rateERObj;
+}
+
+
 //первоначальный вывод данных
 function tableSell(arg) {
     const req = new XMLHttpRequest();
