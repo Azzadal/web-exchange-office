@@ -20,6 +20,10 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsHistory = document.getElementsByClassName('rowsHistory'),
     rowsBuy = document.getElementsByClassName('rowsBuy');
 let stompClient = null;
+let rateURObj;
+let rateERObj;
+let rateUEObj;
+let rateEUObj;
 let changePair = document.getElementById('pairs');
 
 //первоначальный вывод данных
@@ -127,6 +131,18 @@ function connect() {
                     '</td><td class="text-center">' + gvn[i].quantity + '</td><td class="text-center">' +
                     gvn[i].total + '</td><td class="text-center">' + gvn[i].type + '</td></tr>';
             }
+        });
+        stompClient.subscribe('/topic/rateUR', function (e) {
+            rateURObj = JSON.parse(e.body);
+        });
+        stompClient.subscribe('/topic/rateER', function (e) {
+            rateERObj = JSON.parse(e.body);
+        });
+        stompClient.subscribe('/topic/rateUE', function (e) {
+            rateUEObj = JSON.parse(e.body);
+        });
+        stompClient.subscribe('/topic/rateEU', function (e) {
+            rateEUObj = JSON.parse(e.body);
         });
     });
 }

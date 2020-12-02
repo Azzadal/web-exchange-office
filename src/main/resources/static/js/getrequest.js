@@ -6,6 +6,11 @@ function outTotal() {
 
 window.onload = function () {
     tableComplit();
+    connect();
+
+
+
+
     const xhr = new XMLHttpRequest();
     xhr.responseType = "text";
     xhr.open('GET', window.location + "count");
@@ -17,7 +22,7 @@ window.onload = function () {
     };
     xhr.send();
 
-    connect();
+
     const changePair = document.getElementById('pairs');
     const rateBuy = document.getElementById('rateBuy');
     const rateSell = document.getElementById('rateSell');
@@ -29,9 +34,22 @@ window.onload = function () {
     };
 
     function getRateFromDb(pair) {
-        stompClient.unsubscribe("myTopicId");
-        stompClient.subscribe('/topic/' + pair, function (e) {
-            let json = JSON.parse(e.body);
+
+        if (pair === "rateUR"){
+            getRate(rateURObj);
+        }
+        else if (pair === "rateER") {
+            getRate(rateERObj);
+        }
+        else if (pair === "rateUE") {
+            getRate(rateUEObj);
+        }
+        else {
+            getRate(rateEUObj);
+        }
+
+
+        function getRate(json){
             for(let i = 0; i < json.length; i++) {
                 data.series[0].push(json[i].rateBuy);
                 data.series[1].push(json[i].rateSell);
@@ -44,33 +62,24 @@ window.onload = function () {
                 }
             }
             new Chartist.Line('.ct-chart', data);
-        }, { id: "myTopicId"});
+        }
 
-
-        // const req = new XMLHttpRequest();
-        // req.responseType = "json";
-        // req.open('GET', window.location + "rate/" + pair);
-        // req.onreadystatechange = function () {
-        //     if (req.readyState === 4) {
-        //         console.log(y++)
-        //         const json = req.response;
-        //         (function() {
-        //             for(let i = 0; i < json.length; i++) {
-        //                 data.series[0].push(json[i].rateBuy);
-        //                 data.series[1].push(json[i].rateSell);
-        //                 rateBuy.innerHTML = json[i].rateBuy;
-        //                 rateSell.innerHTML = json[i].rateSell;
-        //                 outTotal();
-        //                 if (data.series[0].length === 40) {
-        //                     data.series[0].shift();
-        //                     data.series[1].shift();
-        //                 }
-        //             }
-        //             new Chartist.Line('.ct-chart', data);
-        //         }());
+        // stompClient.unsubscribe("myTopicId");
+        // stompClient.subscribe('/topic/' + pair, function (e) {
+        //     let json = JSON.parse(e.body);
+        //     for(let i = 0; i < json.length; i++) {
+        //         data.series[0].push(json[i].rateBuy);
+        //         data.series[1].push(json[i].rateSell);
+        //         rateBuy.innerHTML = json[i].rateBuy;
+        //         rateSell.innerHTML = json[i].rateSell;
+        //         outTotal();
+        //         if (data.series[0].length === 40) {
+        //             data.series[0].shift();
+        //             data.series[1].shift();
+        //         }
         //     }
-        // };
-        // req.send();
+        //     new Chartist.Line('.ct-chart', data);
+        // }, { id: "myTopicId"});
     }
 
     const bidsBuy = document.getElementById('bidsBuy');
@@ -105,9 +114,6 @@ window.onload = function () {
         tableSell(arg2);
         clearInterval(timerId);
         getRateFromDb(choice);
-        // timerId = setInterval(function () {
-        //     getRateFromDb(choice);
-        // }, 10000);
     };
     const quantityBuy = document.getElementById('quantityBuy'),
         quantitySell = document.getElementById('quantitySell'),
