@@ -139,6 +139,25 @@ function connect() {
         });
         stompClient.subscribe('/topic/rateUR', function (e) {
             rateURObj = JSON.parse(e.body);
+            console.log("Говно")
+            const fp = new Proxy({}, {
+                apply(target, thisArg, argArray) {
+                    console.log("Вызов функции...")
+                    return  target.apply(thisArg, argArray);
+                }
+            });
+            fp();
+
+            // rateURObj = new Proxy(rateURObj, {
+            //     get(target, prop){
+            //         console.log(`Get prop ${prop}`)
+            //         return target[prop]
+            //     },
+            //     set(target, prop, val) {
+            //
+            //         target[prop] = val;
+            //     }
+            // })
         });
         stompClient.subscribe('/topic/rateER', function (e) {
             rateERObj = JSON.parse(e.body);
