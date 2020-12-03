@@ -26,9 +26,6 @@ let rateUEObj;
 let rateEUObj;
 let changePair = document.getElementById('pairs');
 
-function test() {
-    return rateERObj;
-}
 
 
 //первоначальный вывод данных
@@ -137,10 +134,10 @@ function connect() {
                     gvn[i].total + '</td><td class="text-center">' + gvn[i].type + '</td></tr>';
             }
         });
-        stompClient.subscribe('/topic/rateUR', function (e) {
+        stompClient.subscribe('/topic/rateUR', function ttt (e) {
             rateURObj = JSON.parse(e.body);
             console.log("Говно")
-            const fp = new Proxy({}, {
+            const fp = new Proxy(ttt, {
                 apply(target, thisArg, argArray) {
                     console.log("Вызов функции...")
                     return  target.apply(thisArg, argArray);
