@@ -24,9 +24,7 @@ let rateURObj;
 let rateERObj;
 let rateUEObj;
 let rateEUObj;
-let changePair = document.getElementById('pairs');
-
-
+let changePair = document.getElementById('current');
 
 //первоначальный вывод данных
 function tableSell(arg) {
@@ -134,36 +132,27 @@ function connect() {
                     gvn[i].total + '</td><td class="text-center">' + gvn[i].type + '</td></tr>';
             }
         });
-        stompClient.subscribe('/topic/rateUR', function ttt (e) {
+        stompClient.subscribe('/topic/rateUR', function (e) {
             rateURObj = JSON.parse(e.body);
-            console.log("Говно")
-            const fp = new Proxy(ttt, {
-                apply(target, thisArg, argArray) {
-                    console.log("Вызов функции...")
-                    return  target.apply(thisArg, argArray);
-                }
-            });
-            fp();
-
-            // rateURObj = new Proxy(rateURObj, {
-            //     get(target, prop){
-            //         console.log(`Get prop ${prop}`)
-            //         return target[prop]
-            //     },
-            //     set(target, prop, val) {
-            //
-            //         target[prop] = val;
-            //     }
-            // })
+            rateBuyUR.innerHTML = rateURObj[0].rateBuy;
+            rateSellUR.innerHTML = rateURObj[0].rateSell;
+            ttt.gr('rateUR')
         });
         stompClient.subscribe('/topic/rateER', function (e) {
             rateERObj = JSON.parse(e.body);
+            rateBuyER.innerHTML = rateERObj[0].rateBuy;
+            rateSellER.innerHTML = rateERObj[0].rateSell;
+            ttt.gr('rateER')
         });
         stompClient.subscribe('/topic/rateUE', function (e) {
             rateUEObj = JSON.parse(e.body);
+            rateBuyUE.innerHTML = rateUEObj[0].rateBuy;
+            rateSellUE.innerHTML = rateUEObj[0].rateSell;
         });
         stompClient.subscribe('/topic/rateEU', function (e) {
             rateEUObj = JSON.parse(e.body);
+            rateBuyEU.innerHTML = rateEUObj[0].rateBuy;
+            rateSellEU.innerHTML = rateEUObj[0].rateSell;
         });
     });
 }
@@ -257,20 +246,22 @@ function addBidsSell(pair) {
 
 document.getElementById('butBuy').onclick = function (e) {
     e.preventDefault();
-    let n = changePair.selectedIndex;
-    if (n === 1) checkBuy("URBuy", "URSell");
-    if (n === 2) checkBuy("ERBuy", "ERSell");
-    if (n === 3) checkBuy("UEBuy", "UESell");
-    if (n === 4) checkBuy("EUBuy", "EUSell");
+    let n = changePair.innerText;
+    console.log('choice1', n)
+    if (n === 'USD/RUR') checkBuy("URBuy", "URSell");
+    if (n === 'EUR/RUR') checkBuy("ERBuy", "ERSell");
+    if (n === 'USD/EUR') checkBuy("UEBuy", "UESell");
+    if (n === 'EUR/USD') checkBuy("EUBuy", "EUSell");
 };
 
 document.getElementById('butSell').onclick = function (e) {
     e.preventDefault();
-    let n = changePair.selectedIndex;
-    if (n === 1) checkSell("URSell", "URBuy");
-    if (n === 2) checkSell("ERSell", "ERBuy");
-    if (n === 3) checkSell("UESell", "UEBuy");
-    if (n === 4) checkSell("EUSell", "EUBuy");
+    let n = changePair.innerText;
+    console.log('choice2', n)
+    if (n === 'USD/RUR') checkSell("URSell", "URBuy");
+    if (n === 'EUR/RUR') checkSell("ERSell", "ERBuy");
+    if (n === 'USD/EUR') checkSell("UESell", "UEBuy");
+    if (n === 'EUR/USD') checkSell("EUSell", "EUBuy");
 };
 
 //автозаполнение формы продажи

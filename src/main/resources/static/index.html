@@ -1,175 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/jquery-3.4.1.js"></script>
-    <script defer src="js/getrequest.js"></script>
     <script defer src="js/postrequest.js"></script>
+    <script defer src="js/getrequest.js"></script>
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/chartist.css">
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="js/sockjs.min.js"></script>
     <script src="js/stomp.min.js"></script>
-    <title>Сайт</title>
+    <script defer src="js/select.js"></script>
+    <script defer src="js/panel.js"></script>
+    <title>Мой проект</title>
 </head>
-<body style="
-    margin-left: 15px;
-    margin-right: 15px;
-">
-<div>
-    <form action="/logout" method="post">
-        <input class="btn btn-secondary" type="submit" value="Выйти"/>
-    </form>
-</div>
-<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-    <div class="container">
-        <select id="pairs" class="rounded text-secondary">
-            <option>Выберите пару</option>
-            <option>USD/RUR</option>
-            <option>EUR/RUR</option>
-            <option>USD/EUR</option>
-            <option>EUR/USD</option>
-        </select>
+<body>
+<header>
+    <div class="select__pair">
+        <fieldset class="circuit">
+            <legend>выбор пары</legend>
+            <div class="select__pair__header">
+                <div id="current" class="select__pair__current">Выберите пару</div>
+                <div id="pairs" class="select__pair__body">
+                    <div class="select__pair__item">USD/RUR</div>
+                    <div class="select__pair__item">EUR/RUR</div>
+                    <div class="select__pair__item">USD/EUR</div>
+                    <div class="select__pair__item">EUR/USD</div>
+                </div>
+            </div>
+        </fieldset>
     </div>
-</nav>
-<div class="container-fluid" style="margin-left: 15px;margin-right: 15px">
-    <div class="row">
-        <div class="col-xs-6 order-xs-1 col-md order-md-0 left_panel">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 30vh;">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                        </tr>
-                        </thead>
-                        <tbody  id="bidsBuy"></tbody>
-                    </table>
+    <div class="course__rate">
+        <fieldset class="circuit">
+            <legend>курсы валют</legend>
+            <div class="course__rate__body">
+                <div class="course__rate__current_rate">
+                    <div id="rateBuyUR" class="rate_buy"></div>
+                    <div id="rateSellUR" class="rate_sell"></div>
                 </div>
-                <div class="col"></div>
-            </div>
-        </div><!--таблица покупок-->
-
-        <div class="col-xs-6 order-xs-2 col-md order-md-2 right_panel">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col-9 table-responsive" style="height: 30vh;">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                        </tr>
-                        </thead>
-                        <tbody  id="bidsSell"></tbody>
-                    </table>
+                <div class="course__rate__current_rate">
+                    <div id="rateBuyER" class="rate_buy"></div>
+                    <div id="rateSellER" class="rate_sell"></div>
                 </div>
-                <div class="col"></div>
-            </div>
-        </div><!--таблица продаж-->
-
-        <div class="col-xs-12  col-md-5 order-md-1">
-            <div class="row">
-
-                <div class="col-12" style="height: 30vh">
-                    <div id="schedule" style="height: 30vh" class="ct-chart ct-perfect-fourth"></div>
+                <div class="course__rate__current_rate">
+                    <div id="rateBuyUE" class="rate_buy"></div>
+                    <div id="rateSellUE" class="rate_sell"></div>
+                </div>
+                <div class="course__rate__current_rate">
+                    <div id="rateBuyEU" class="rate_buy"></div>
+                    <div id="rateSellEU" class="rate_sell"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-3">
-                    <form role="form">
-                        <div class="form-group">
+        </fieldset>
+    </div>
+</header>
+<main>
+    <div class="main__header">
+        <div class="panels">
+            <section id="lp" class="l__panel">
+                <div class="l__panel__item">
+                    <div id="lp_title" class="l__panel__title">Покупка</div>
+                    <div id="l_content" class="l__panel__content">
+                        <div class="table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Итого</th>
+                                </tr>
+                                </thead>
+                                <tbody  id="bidsBuy"></tbody>
+                            </table>
 
-                            <textarea style="resize: none;" id="rateBuy" type="text" class="form-control" name="rateBuy" rows="1" disabled></textarea>
+                            <button id="butBuy">Купить</button>
                         </div>
-                        <div class="form-group">
-
-                            <input id="quantityBuy" class="form-control" type="text" value="0" name="quantityBuy">
+                        <div class="form">
+                            <div>
+                                <label for="quantityBuy">Количество</label>
+                                <input id="quantityBuy" class="form-quantity" type="number" value="0" name="quantityBuy">
+                            </div>
+                            <div>
+                                <label for="totalBuy">Итого</label>
+                                <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-total" rows="1"           disabled>
+                                </textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-
-                            <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-control" rows="1" disabled></textarea>
-                        </div>
-                    </form>
-                    <button class="btn btn-secondary float-left" id="butBuy" style="margin-bottom: 5px;">Покупка</button>
-
-                </div>
-                <div class="col-md-4 col-xs-3">
-                    <form role="form">
-                        <div class="form-group">
-
-                            <textarea style="resize: none;" id="priceLim" class="form-control" rows="1" type="text"></textarea>
-                        </div>
-                        <div class="form-group">
-
-                            <input id="limit" class="form-control" type="text" value="0">
-                        </div>
-                        <div class="form-group">
-
-                            <input id="quantityLim" class="form-control" type="text">
-                        </div>
-                        <div class="form-group">
-
-                            <textarea style="resize: none;" id="totalLim" class="form-control" rows="1" type="text"></textarea>
-                        </div>
-                    </form>
-                    <div id="butLimit">
-                        <input type="button" value="Покупка" class="btnlmt"/>
-                        <input type="button" value="Продажа" class="btnlmt"/>
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-3">
-                    <form role="form">
-                        <div class="form-group">
-
-                            <textarea style="resize: none;" id="rateSell" type="text" name="rateSell" class="form-control" rows="1" disabled></textarea>
+            </section>
+            <section id="rp" class="r__panel">
+                <div class="r__panel__item">
+                    <div id="rp_title" class="r__panel__title">Продажа</div>
+                    <div id="r_content" class="r__panel__content">
+                        <div class="table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Итого</th>
+                                </tr>
+                                </thead>
+                                <tbody  id="bidsSell"></tbody>
+                            </table>
+                            <button id="butSell">Продать</button>
                         </div>
-                        <div class="form-group">
-
-                            <input id="quantitySell" class="form-control" type="text" value="0" name="quantitySell">
+                        <div class="form">
+                            <div>
+                                <label for="quantitySell">Количество</label>
+                                <input id="quantitySell" class="form-quantity" type="number" value="0" name="quantitySell">
+                            </div>
+                            <div>
+                                <label for="totalSell">Итого</label>
+                                <textarea style="resize: none;" id="totalSell" name="totalSell" class="form-total" rows="1"           disabled>
+                                </textarea>
+                            </div>
                         </div>
-                        <div class="form-group">
-
-                            <textarea style="resize: none;" id="totalSell" class="form-control" name="totalSell" rows="1" disabled></textarea>
-                        </div>
-                    </form>
-                    <button class="btn btn-secondary float-right" id="butSell" style="margin-bottom: 5px;">Продажа</button>
-                   </div>
-               </div>
-           </div>
-               </div>
-           </div>
-<!--таблица успешных сделок-->
-
-    <div class="row">
-        <div class="col">
-            <div class="row">
-
-                <div class="col table-responsive" style="height: 30vh">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center">Дата</th>
-                            <th class="text-center">Цена</th>
-                            <th class="text-center">Количество</th>
-                            <th class="text-center">Итого</th>
-                            <th class="text-center">Пара</th>
-                        </tr>
-                        </thead>
-                        <tbody id="bidsHistory"></tbody>
-                    </table>
+                    </div>
                 </div>
-            </div>
+            </section>
+        </div>
+        <section id="schedule" class="ct-chart ct-perfect-fourth schedule"></section>
     </div>
-</div>
+</main>
 </body>
 </html>

@@ -90,7 +90,7 @@ public class RateController {
     private void getRateLib(String pair){
         System.out.println(pair);
         String destination = "/topic/" + pair;
-        this.messagingTemplate.convertAndSend(destination, rateRepository.findByTypeOrderByIdAsc(pair));
+        this.messagingTemplate.convertAndSend(destination, rateRepository.findFirstByTypeOrderByIdDesc(pair));
     }
 
     private Map<String, BigDecimal> genUR(){
