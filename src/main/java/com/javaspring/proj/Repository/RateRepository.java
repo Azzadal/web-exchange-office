@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface RateRepository extends CrudRepository<Rate, Integer> {
     Iterable<Rate> findByType(String type);
-    Iterable<Rate> findFirstByTypeOrderByIdDesc(String type);
+    Iterable<Rate> findFirst50ByTypeOrderByIdDesc(String type);
     @Modifying
     @Transactional
     @Query(value="TRUNCATE TABLE rate RESTART IDENTITY;", nativeQuery=true) void clearRate();

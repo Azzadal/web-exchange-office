@@ -136,33 +136,35 @@ function connect() {
             rateURObj = JSON.parse(e.body);
             rateBuyUR.innerHTML = rateURObj[0].rateBuy;
             rateSellUR.innerHTML = rateURObj[0].rateSell;
-            ttt.gr('rateUR')
+            rate.gr('rateUR')
         });
         stompClient.subscribe('/topic/rateER', function (e) {
             rateERObj = JSON.parse(e.body);
             rateBuyER.innerHTML = rateERObj[0].rateBuy;
             rateSellER.innerHTML = rateERObj[0].rateSell;
-            ttt.gr('rateER')
+            rate.gr('rateER')
         });
         stompClient.subscribe('/topic/rateUE', function (e) {
             rateUEObj = JSON.parse(e.body);
             rateBuyUE.innerHTML = rateUEObj[0].rateBuy;
             rateSellUE.innerHTML = rateUEObj[0].rateSell;
+            rate.gr('rateUE')
         });
         stompClient.subscribe('/topic/rateEU', function (e) {
             rateEUObj = JSON.parse(e.body);
             rateBuyEU.innerHTML = rateEUObj[0].rateBuy;
             rateSellEU.innerHTML = rateEUObj[0].rateSell;
+            rate.gr('rateEU')
         });
     });
 }
-function checkBuy(pair1, pair2) {
+function checkBuy(pair1, pair2, rateBuy) {
     let date = new Date();
     let flag;
     let q;
     if (rowsSell.length <= 0) flag = 1;
     for (let i = 0; i < rowsSell.length; i++) {
-        if (rateBuy.value === rowsPriceSell[i].innerHTML) {
+        if (rateBuy === rowsPriceSell[i].innerHTML) {
             flag = 0;
             q = i;
             break;
@@ -183,7 +185,7 @@ function checkBuy(pair1, pair2) {
         }));
         rowsSell[q].remove();
         setTimeout(tableSell, 1000, pair2);
-    } else addBidsBuy(pair1);
+    } else addBidsBuy(pair1, rateBuy);
 }
 
 function checkSell(pair1, pair2) {
@@ -216,18 +218,25 @@ function checkSell(pair1, pair2) {
     } else addBidsSell(pair1);
 }
 
-function addBidsBuy(pair) {
-    stompClient.send("/app/" + pair, {}, JSON.stringify({
-        'rate':rateBuy.value,
-        'quantity':quantityBuy.value,
-        'total':totalBuy.value,
-        'type':pair,
-        'status':'not_done',
-        'date': null
-    }));
+function addBidsBuy(pair, rateBuy) {
 
-    $("#quantityBuy").val("0");
-    $("#totalBuy").val("0");
+        // if (pair === "rateUR") rateBuy = parseFloat(rateBuyUR.innerHTML);
+        // if (pair === "rateER") rateBuy = parseFloat(rateBuyER.innerHTML);
+        // if (pair === "rateUE") rateBuy = parseFloat(rateBuyUE.innerHTML);
+        // if (pair === "rateEU") rateBuy = parseFloat(rateBuyEU.innerHTML);
+
+        stompClient.send("/app/" + pair, {}, JSON.stringify({
+            'rate': rateBuy,
+            'quantity': quantityBuy.value,
+            'total': totalBuy.value,
+            'type': pair,
+            'status': 'not_done',
+            'date': null
+        }));
+
+        $("#quantityBuy").val("0");
+        $("#totalBuy").val("0");
+
 }
 
 function addBidsSell(pair) {
@@ -245,13 +254,26 @@ function addBidsSell(pair) {
 }
 
 document.getElementById('butBuy').onclick = function (e) {
+    let rateBuy
     e.preventDefault();
     let n = changePair.innerText;
-    console.log('choice1', n)
-    if (n === 'USD/RUR') checkBuy("URBuy", "URSell");
-    if (n === 'EUR/RUR') checkBuy("ERBuy", "ERSell");
-    if (n === 'USD/EUR') checkBuy("UEBuy", "UESell");
-    if (n === 'EUR/USD') checkBuy("EUBuy", "EUSell");
+
+    if (n === 'USD/RUR'){
+        rateBuy = parseFloat(rateBuyUR.innerHTML);
+        checkBuy("URBuy", "URSell", rateBuy);
+    }
+    if (n === 'EUR/RUR'){
+        rateBuy = parseFloat(rateBuyER.innerHTML);
+        checkBuy("ERBuy", "ERSell", rateBuy);
+    }
+    if (n === 'USD/EUR'){
+        rateBuy = parseFloat(rateBuyUE.innerHTML);
+        checkBuy("UEBuy", "UESell", rateBuy);
+    }
+    if (n === 'EUR/USD'){
+        rateBuy = parseFloat(rateBuyEU.innerHTML);
+        checkBuy("EUBuy", "EUSell", rateBuy);
+    }
 };
 
 document.getElementById('butSell').onclick = function (e) {
