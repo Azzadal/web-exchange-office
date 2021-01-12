@@ -7,6 +7,8 @@ const rateSellUR = document.getElementById('rateSellUR');
 const rateSellER = document.getElementById('rateSellER');
 const rateSellUE = document.getElementById('rateSellUE');
 const rateSellEU = document.getElementById('rateSellEU');
+const rateBuyAll = document.getElementsByClassName('rate_buy');
+const rateSellAll = document.getElementsByClassName('rate_sell');
 
 const data = {
     series: [
@@ -48,7 +50,7 @@ const rate = {
         }
         else console.log('не сошлось', pair + ' ' + chekedPair)
     }
-}
+};
 
 function outTotal() {
     let rateBuy, rateSell;
@@ -91,56 +93,66 @@ window.onload = function () {
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
 
-    let timerId = null;
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(mutation => {
 
-    changePair.addEventListener("DOMSubtreeModified", function () {
+            let n = mutation.addedNodes[0].data;
+            let arg1, arg2, choice;
 
-        let n = changePair.innerText;
+            if (n === 'USD/RUR') {
+                choice = "rateUR";
+                arg1 = "URBuy";
+                arg2 = "URSell";
+            }
+            if (n === 'EUR/RUR') {
+                choice = "rateER";
+                arg1 = "ERBuy";
+                arg2 = "ERSell";
+            }
+            if (n === 'USD/EUR') {
+                choice = "rateUE";
+                arg1 = "UEBuy";
+                arg2 = "UESell";
+            }
+            if (n === 'EUR/USD') {
+                choice = "rateEU";
+                arg1 = "EUBuy";
+                arg2 = "EUSell";
+            }
 
-        let arg1, arg2, choice;
-        if (n === 'USD/RUR') {
-            choice = "rateUR";
-            arg1 = "URBuy";
-            arg2 = "URSell";
-
-        }
-        if (n === 'EUR/RUR') {
-            choice = "rateER";
-            arg1 = "ERBuy";
-            arg2 = "ERSell";
-            // chekedPair = 'ER';
-        }
-        if (n === 'USD/EUR') {
-            choice = "rateUE";
-            arg1 = "UEBuy";
-            arg2 = "UESell";
-            // chekedPair = 'UE';
-        }
-        if (n === 'EUR/USD') {
-            choice = "rateEU";
-            arg1 = "EUBuy";
-            arg2 = "EUSell";
-            // chekedPair = 'EU';
-        }
-        tableBuy(arg1);
-        tableSell(arg2);
-        clearInterval(timerId);
-
-        rate.gr(choice);
-        chekedPair = choice;
+            tableBuy(arg1);
+            tableSell(arg2);
+            rate.gr(choice);
+            chekedPair = choice;
+        });
     });
+    observer.observe(
+        changePair,
+        {
+            childList: true,
+            attributes: true,
+            subtree: true,
+            characterData: true
+        }
+    );
+
     const quantityBuy = document.getElementById('quantityBuy'),
-        quantitySell = document.getElementById('quantitySell'),
-        totalBuy = document.getElementById('totalBuy'),
-        totalSell = document.getElementById('totalSell');
+        quantitySell = document.getElementById('quantitySell');
+
     quantitySell.oninput = function () {
         outTotal();
     };
+
     quantityBuy.oninput = function () {
-        console.log('Работает инпут')
         outTotal();
     };
-    rateBuy.oninput = function () {
-        outTotal();
+
+    for (let i = 0; i < rateBuyAll.length; i++){
+        rateBuyAll[i].addEventListener('DOMSubtreeModified', () => {
+            outTotal();
+        });
+        rateSellAll[i].addEventListener('DOMSubtreeModified', () => {
+            outTotal();
+        });
     }
 };

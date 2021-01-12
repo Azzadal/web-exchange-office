@@ -23,7 +23,7 @@ public class RateController {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 10000)
     public void addRateUR(){
         if (getCount() < 5000) {
             Map<String,BigDecimal> rateUR = genUR();
@@ -39,7 +39,7 @@ public class RateController {
         }
     }
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 10000)
     public void addRateER(){
         if (getCount() < 5000) {
             Map<String, BigDecimal> rateER = genER();
@@ -55,7 +55,7 @@ public class RateController {
         }
     }
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 10000)
     public void addRateUE(){
         if (getCount() < 5000) {
             Map<String,BigDecimal> rateUE = genUE();
@@ -71,7 +71,7 @@ public class RateController {
         }
     }
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 10000)
     public void addRateEU(){
         if (getCount() < 5000) {
             Map<String,BigDecimal> rateEU = genEU();

@@ -37,14 +37,15 @@ function tableSell(arg) {
             let i;
             bidsSell.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + json[i].id + '</td><td class="text-center rowsPriceSell">'
+                bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + json[i].id + '</td><td class="rowsPriceSell">'
                     + json[i].rate +
-                    '</td><td class="text-center rowsQuanSell">' + json[i].quantity + '</td><td class="text-center rowsTotalSell">' +
+                    '</td><td class="rowsQuanSell">' + json[i].quantity + '</td><td class="rowsTotalSell">' +
                     json[i].total + '</td></tr>';
             }
         }
             autofillBuy();
     };
+    console.log('tableSell(arg)', arg)
     req.send();
 }
 
@@ -59,14 +60,15 @@ function tableBuy(arg) {
             let i;
             bidsBuy.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="text-center rowsPriceBuy">'
+                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="rowsPriceBuy">'
                     + json[i].rate +
-                    '</td><td class="text-center rowsQuanBuy">' + json[i].quantity + '</td><td class="text-center rowsTotalBuy">' +
+                    '</td><td class="rowsQuanBuy">' + json[i].quantity + '</td><td class="rowsTotalBuy">' +
                     json[i].total + '</td></tr>';
             }
         }
             autofillSell();
     };
+    console.log('tableBuy(arg)', arg)
     req.send();
 }
 
@@ -82,9 +84,9 @@ function tableComplit() {
             bidsHistory.innerHTML = '';
             for (i = 0; i < json.length; i++) {
                 let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
+                bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
                     + json[i].rate +
-                    '</td><td class="text-center">' + json[i].quantity + '</td><td class="text-center">' +
+                    '</td><td>' + json[i].quantity + '</td><td">' +
                     json[i].total + '</td></tr>';
             }
         }
@@ -113,8 +115,8 @@ function connect() {
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
                 bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + gvn[i].id + '</td>' +
-                    '<td class="text-center rowsPriceSell">' + gvn[i].rate +
-                    '</td><td class="text-center rowsQuanSell">' + gvn[i].quantity + '</td><td class="text-center rowsTotalSell">' +
+                    '<td class="rowsPriceSell">' + gvn[i].rate +
+                    '</td><td class="rowsQuanSell">' + gvn[i].quantity + '</td><td class="rowsTotalSell">' +
                     gvn[i].total + '</td></tr>';
             }
                 autofillBuy();
@@ -126,10 +128,10 @@ function connect() {
             bidsHistory.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
                 let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td class="text-center">' + date + '</td><td class="text-center">'
+                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
                     + gvn[i].rate +
-                    '</td><td class="text-center">' + gvn[i].quantity + '</td><td class="text-center">' +
-                    gvn[i].total + '</td><td class="text-center">' + gvn[i].type + '</td></tr>';
+                    '</td><td>' + gvn[i].quantity + '</td><td>' +
+                    gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
             }
         });
         stompClient.subscribe('/topic/rateUR', function (e) {
@@ -253,8 +255,8 @@ function addBidsSell(pair) {
     $("#totalSell").val("0");
 }
 
-document.getElementById('butBuy').onclick = function (e) {
-    let rateBuy
+document.getElementById('butBuy').onclick = e => {
+    let rateBuy;
     e.preventDefault();
     let n = changePair.innerText;
 
@@ -276,14 +278,27 @@ document.getElementById('butBuy').onclick = function (e) {
     }
 };
 
-document.getElementById('butSell').onclick = function (e) {
+document.getElementById('butSell').onclick = e => {
+    let rateSell;
     e.preventDefault();
     let n = changePair.innerText;
-    console.log('choice2', n)
-    if (n === 'USD/RUR') checkSell("URSell", "URBuy");
-    if (n === 'EUR/RUR') checkSell("ERSell", "ERBuy");
-    if (n === 'USD/EUR') checkSell("UESell", "UEBuy");
-    if (n === 'EUR/USD') checkSell("EUSell", "EUBuy");
+
+    if (n === 'USD/RUR'){
+        rateSell = parseFloat(rateSellUR.innerHTML);
+        checkSell("URSell", "URBuy", rateSell);
+    }
+    if (n === 'EUR/RUR'){
+        rateSell = parseFloat(rateSellER.innerHTML);
+        checkSell("ERSell", "ERBuy", rateSell);
+    }
+    if (n === 'USD/EUR'){
+        rateSell = parseFloat(rateSellUE.innerHTML);
+        checkSell("UESell", "UEBuy", rateSell);
+    }
+    if (n === 'EUR/USD'){
+        rateSell = parseFloat(rateSellEU.innerHTML);
+        checkSell("EUSell", "EUBuy", rateSell);
+    }
 };
 
 //автозаполнение формы продажи
