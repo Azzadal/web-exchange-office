@@ -18,7 +18,8 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
     rowsSell = document.getElementsByClassName('rowsSell'),
     rowsHistory = document.getElementsByClassName('rowsHistory'),
-    rowsBuy = document.getElementsByClassName('rowsBuy');
+    rowsBuy = document.getElementsByClassName('rowsBuy'),
+    greet = document.getElementById('greet');
 let stompClient = null;
 let rateURObj;
 let rateERObj;
@@ -99,6 +100,11 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
+        console.log('пользователь', frame.headers['user-name']);
+        let user_name = frame.headers['user-name'];
+
+        greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + user_name + '</span>');
+
         stompClient.subscribe('/topic/buys', function (e) {
             let gvn = JSON.parse(e.body);
             bidsBuy.innerHTML = '';

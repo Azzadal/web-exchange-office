@@ -49,9 +49,24 @@ tr:hover td{
     background: #D1C7BF;
     font-weight: bold;
 }
-
-
-
+#greet{
+    color: #ffbc00;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: flex;
+}
+#greet input{
+    margin-left: 10px;
+    border-radius: 8px;
+    background-color: antiquewhite;
+    color: initial;
+    letter-spacing: 1px;
+}
+#greet span{
+    margin-left: 5px;
+    color: #30e224;
+}
 .circuit{
     border-radius: 8px;
     padding: 0;
