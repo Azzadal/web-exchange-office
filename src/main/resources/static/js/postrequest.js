@@ -144,6 +144,7 @@ function connect() {
             rateURObj = JSON.parse(e.body);
             rateBuyUR.innerHTML = rateURObj[0].rateBuy;
             rateSellUR.innerHTML = rateURObj[0].rateSell;
+            datastatus.innerHTML = '';
             rate.gr('rateUR')
         });
         stompClient.subscribe('/topic/rateER', function (e) {

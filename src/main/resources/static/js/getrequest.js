@@ -9,6 +9,7 @@ const rateSellUE = document.getElementById('rateSellUE');
 const rateSellEU = document.getElementById('rateSellEU');
 const rateBuyAll = document.getElementsByClassName('rate_buy');
 const rateSellAll = document.getElementsByClassName('rate_sell');
+const datastatus = document.getElementById('data_status');
 
 const data = {
     series: [
@@ -77,6 +78,7 @@ function outTotal() {
 }
 
 window.onload = function () {
+    if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterBegin', 'Ожидание данных...')
     tableComplit();
     connect();
     const xhr = new XMLHttpRequest();
@@ -119,11 +121,12 @@ window.onload = function () {
                 arg1 = "EUBuy";
                 arg2 = "EUSell";
             }
-
+            chekedPair = choice;
             tableBuy(arg1);
             tableSell(arg2);
             rate.gr(choice);
-            chekedPair = choice;
+
+            console.log('произошла смена select')
         });
     });
     observer.observe(

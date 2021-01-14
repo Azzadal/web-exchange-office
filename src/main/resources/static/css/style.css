@@ -67,6 +67,10 @@ tr:hover td{
     margin-left: 5px;
     color: #30e224;
 }
+#data_status{
+    margin-left: 4px;
+    color: #7c8672;
+}
 .circuit{
     border-radius: 8px;
     padding: 0;
