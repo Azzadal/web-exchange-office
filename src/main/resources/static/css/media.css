@@ -54,10 +54,13 @@
 		width: 100%;
 	}
 	.rate_buy, .rate_sell{
-		font-size: 18px;
+		font-size: 12px;
 	}
 	.form-quantity{
 		padding-top: 9px;
+	}
+	legend{
+		font-size: 12px;
 	}
 }
 
@@ -80,6 +83,9 @@
 		width: 100%;
 	}
 	.rate_buy, .rate_sell{
-		font-size: 18px;
+		font-size: 12px;
+	}
+	legend{
+		font-size: 12px;
 	}
 }
