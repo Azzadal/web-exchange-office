@@ -1,0 +1,80 @@
+@media screen and (max-width: 470px){
+	header{
+		width: 94.5%;
+	    height: 5.9%;
+	    display: flex;
+	    margin: 7.1% 2% 0 3.5%;
+	}
+	.course__rate__body{
+		display: grid;
+	    margin: 0 0.5vw 1.2vh 12px;
+	    grid-template-columns: 115px 115px;
+	    grid-column-gap: 7px;
+	    grid-row-gap: 18px;
+	}
+	.pair_name p:nth-child(1) {
+	    margin-left: 74px;
+	    margin-top: -70px;
+	}
+	.pair_name p:nth-child(2) {
+	    position: relative;
+	    top: -70px;
+	    left: 60px;
+	}
+	.pair_name p:nth-child(3) {
+	    position: relative;
+	    left: -132px;
+	}
+	.pair_name p:nth-child(4) {
+	    position: relative;
+	    left: -78px;
+	}
+	.course__rate .course__rate__current_rate{
+		width: 23vw;
+	}
+	.course__rate{
+		width: 60.5%;
+		margin-right: 8px;
+	}
+	.select__pair {
+    	width: 35.5%;
+	}
+	.select__pair__header{
+		font-size: 18px;
+	}
+	.panels{
+		width: 90%;
+	    margin-left: 21px;
+	}
+	.main__header{
+		display: block;
+	}
+	.schedule{
+		margin: 0;
+	}
+	.l__panel__title, .r__panel__title{
+		z-index: -1;
+	}
+}
+
+@media (min-width: 471px) and (max-width: 768px){
+	header{
+		width: 94.5%;
+	    height: 5.9%;
+	    display: flex;
+	    margin: 7.1% 2% 0 3.5%;
+	}
+	.panels{
+		width: 90%;
+	    margin-left: 21px;
+	}
+	.main__header{
+		display: block;
+	}
+	.schedule{
+		margin: 0;
+	}
+	.l__panel__title, .r__panel__title{
+		z-index: -1;
+	}
+}
