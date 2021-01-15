@@ -14,11 +14,11 @@
 	}
 	.pair_name p:nth-child(1) {
 	    margin-left: 74px;
-	    margin-top: -70px;
+	    margin-top: -76px;
 	}
 	.pair_name p:nth-child(2) {
 	    position: relative;
-	    top: -70px;
+	    top: -76px;
 	    left: 60px;
 	}
 	.pair_name p:nth-child(3) {
@@ -52,8 +52,8 @@
 	.schedule{
 		margin: 0;
 	}
-	.l__panel__title, .r__panel__title{
-		z-index: -1;
+	.rate_buy, .rate_sell{
+		font-size: 18px;
 	}
 }
 
@@ -73,8 +73,5 @@
 	}
 	.schedule{
 		margin: 0;
-	}
-	.l__panel__title, .r__panel__title{
-		z-index: -1;
 	}
 }

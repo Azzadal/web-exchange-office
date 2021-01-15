@@ -1,4 +1,9 @@
 let x = document.getElementById('pairs');
+let panels = document.getElementsByClassName('panels');
+let g = document.getElementsByClassName('select__pair__item');
+let lPanelTitle = document.getElementsByClassName('l__panel__title');
+let rPanelTitle = document.getElementsByClassName('r__panel__title');
+let schedule = document.getElementById('schedule');
 let select = function(){
     let selectItem = document.querySelectorAll('.select__pair__item');
 
@@ -12,20 +17,20 @@ let select = function(){
         x.classList.remove('show');
         panels[0].style.zIndex = '0';
         schedule.style.zIndex = '0';
+        lPanelTitle[0].style.zIndex = '0';
+        rPanelTitle[0].style.zIndex = '0';
     }
     let current = document.getElementById('current');
 }
 select();
-
-let panels = document.getElementsByClassName('panels');
-let g = document.getElementsByClassName('select__pair__item');
-let schedule = document.getElementById('schedule');
 
 document.getElementById('current').addEventListener('click', function(event){
     event.preventDefault();
     if (!x.classList.contains('show')) {
     
         panels[0].style.zIndex = '-1';
+        lPanelTitle[0].style.zIndex = '-1';
+        rPanelTitle[0].style.zIndex = '-1';
         x.classList.add('show');
         x.style.height = 'auto';
         schedule.style.zIndex = '-1';
