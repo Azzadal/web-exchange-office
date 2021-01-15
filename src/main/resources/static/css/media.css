@@ -55,6 +55,9 @@
 	.rate_buy, .rate_sell{
 		font-size: 18px;
 	}
+	.form-quantity{
+		padding-top: 9px;
+	}
 }
 
 @media (min-width: 471px) and (max-width: 768px){
