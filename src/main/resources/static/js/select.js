@@ -45,7 +45,9 @@ document.getElementById('current').addEventListener('click', function(event){
         x.style.height = '0px';
         panels[0].style.zIndex = '0';
         schedule.style.zIndex = '0';
-
+        lPanelTitle[0].style.zIndex = '0';
+        rPanelTitle[0].style.zIndex = '0';
+        
         x.addEventListener('transitionend', 
             function () {
                 
