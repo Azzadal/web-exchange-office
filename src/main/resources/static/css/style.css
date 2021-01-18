@@ -49,6 +49,14 @@ tr:hover td{
     background: #D1C7BF;
     font-weight: bold;
 }
+.pivot_table{
+    height: auto;
+    max-height: 30vh;
+    overflow: scroll;
+}
+.pivot_table table{
+    width: 100%;
+}
 #greet{
     color: #ffbc00;
     position: absolute;
@@ -175,6 +183,7 @@ main{
 }
 .schedule{
     width: 62.1%;
+    height: 60vh;
     background-image: url(../images/sched_bg.png);
     background-position: 0 0;
     background-size: 100% 100%;

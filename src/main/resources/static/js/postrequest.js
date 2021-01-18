@@ -85,10 +85,10 @@ function tableComplit() {
             bidsHistory.innerHTML = '';
             for (i = 0; i < json.length; i++) {
                 let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
+                bidsHistory.innerHTML += '<tr><td style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
                     + json[i].rate +
-                    '</td><td>' + json[i].quantity + '</td><td">' +
-                    json[i].total + '</td></tr>';
+                    '</td><td>' + json[i].quantity + '</td><td>' +
+                    json[i].total + '</td><td>' + json[i].type + '</td></tr>';
             }
         }
     };
