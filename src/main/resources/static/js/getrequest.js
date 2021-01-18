@@ -32,7 +32,7 @@ const rate = {
 
             function getRate(json, fieldBuy, fieldSell) {
                 if (json !== undefined) {
-                    for (let i = 0; i < json.length; i++) {
+                    for (let i = json.length-1; i > 0; i--) {
                         data.series[0].push(json[i].rateBuy);
                         data.series[1].push(json[i].rateSell);
                         fieldBuy.innerHTML = json[i].rateBuy;
