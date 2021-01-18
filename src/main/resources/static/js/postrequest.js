@@ -82,6 +82,18 @@ function tableComplit() {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
+
+            for (let i = 0; i < json.length; i++){
+                if (json[i].type === 'URSell')  json[i].type = 'USD/RUR продажа';
+                if (json[i].type === 'URBuy')  json[i].type = 'USD/RUR покупка';
+                if (json[i].type === 'ERSell')  json[i].type = 'EUR/RUR продажа';
+                if (json[i].type === 'ERBuy')  json[i].type = 'EUR/RUR покупка';
+                if (json[i].type === 'EUSell')  json[i].type = 'EUR/USD продажа';
+                if (json[i].type === 'EUBuy')  json[i].type = 'EUR/USD покупка';
+                if (json[i].type === 'UESell')  json[i].type = 'USD/EUR продажа';
+                if (json[i].type === 'UEBuy')  json[i].type = 'USD/EUR покупка';
+            }
+
             bidsHistory.innerHTML = '';
             for (i = 0; i < json.length; i++) {
                 let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
@@ -129,17 +141,37 @@ function connect() {
         });
 
 //table history
-        stompClient.subscribe('/topic/ids', function (e) {
-            let gvn = JSON.parse(e.body);
-            bidsHistory.innerHTML = '';
-            for (let i = 0; i < gvn.length; i++) {
-                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
-                    + gvn[i].rate +
-                    '</td><td>' + gvn[i].quantity + '</td><td>' +
-                    gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
-            }
-        });
+//
+//         stompClient.subscribe('/topic/ids', function (e) {
+//             let gvn = JSON.parse(e.body);
+//
+//             console.log('GVN', gvn)
+//
+//             alert('Проверка')
+//             for (let i = 0; i < gvn.length; i++){
+//                 if (gvn[i].type === 'ERSell')  gvn[i].type = 'EUR/RUR продажа'
+//             }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//             bidsHistory.innerHTML = '';
+//             for (let i = 0; i < gvn.length; i++) {
+//                 let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+//                 bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
+//                     + gvn[i].rate +
+//                     '</td><td>' + gvn[i].quantity + '</td><td>' +
+//                     gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
+//             }
+//         });
         stompClient.subscribe('/topic/rateUR', function (e) {
             rateURObj = JSON.parse(e.body);
             rateBuyUR.innerHTML = rateURObj[0].rateBuy;

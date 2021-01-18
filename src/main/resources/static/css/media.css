@@ -137,6 +137,10 @@
 	.pair_name{
 		font-size: 14px;
 	}
+	tr{
+		word-break: break-word;
+		font-size: 12px;
+	}
 }
 
 @media (min-height: 641px) and (max-width: 600px) and (min-width: 360px){
