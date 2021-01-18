@@ -1,4 +1,4 @@
-@media screen and (max-width: 470px){
+@media (max-height: 650px) and (max-width: 470px){
 	header{
 		width: 94.5%;
 	    height: 5.9%;
@@ -13,21 +13,21 @@
 	    grid-row-gap: 18px;
 	}
 	.pair_name p:nth-child(1) {
-	    margin-left: 74px;
-	    margin-top: -76px;
+		margin-left: 97px;
+		margin-top: -78px;
 	}
 	.pair_name p:nth-child(2) {
 	    position: relative;
-	    top: -76px;
-	    left: 60px;
+	    top: -78px;
+	    left: 53px;
 	}
 	.pair_name p:nth-child(3) {
 	    position: relative;
-	    left: -132px;
+	    left: -138px;
 	}
 	.pair_name p:nth-child(4) {
 	    position: relative;
-	    left: -78px;
+	    left: -85px;
 	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
@@ -40,7 +40,7 @@
     	width: 35.5%;
 	}
 	.select__pair__header{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.panels{
 		width: 90%;
@@ -61,6 +61,9 @@
 	}
 	legend{
 		font-size: 12px;
+	}
+	#data_status{
+		font-size: ;
 	}
 }
 

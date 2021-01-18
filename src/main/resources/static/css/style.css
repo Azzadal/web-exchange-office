@@ -202,7 +202,7 @@ main{
     position: relative;
     padding: 0 0 0 25px;
     cursor: pointer;
-    font-family: 'Microsoft-Sans-Serif';
+    font-family: 'Microsoft-Sans-Serif', serif;
     font-size: 20px;
     color: #e2c6a4;
 }
@@ -213,9 +213,9 @@ main{
     content: '';
     width: 10px;
     height: 1px;
-    background-color: black;
     position: absolute;
     top: 8px;
+    background-color: #f2dec4;
 }
 .l__panel__title:before,
 .r__panel__title:before{

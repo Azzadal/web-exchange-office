@@ -77,6 +77,9 @@ function outTotal() {
     totalSell.value = parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2);
 }
 
+let screenWidth = screen.width;
+let screenHeight = screen.height
+
 window.onload = function () {
     if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterBegin', 'Ожидание данных...')
     tableComplit();
@@ -91,6 +94,9 @@ window.onload = function () {
         }
     };
     xhr.send();
+
+    alert(`Размеры экрана ${screenWidth} ${screenHeight}`)
+    console.log('шир, выс', `${screenWidth} ${screenHeight}`)
 
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');
