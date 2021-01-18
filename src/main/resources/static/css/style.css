@@ -56,6 +56,7 @@ tr:hover td{
 }
 .pivot_table table{
     width: 100%;
+    table-layout: fixed;
 }
 #greet{
     color: #ffbc00;
@@ -279,7 +280,7 @@ main{
     margin-top: 1vh;
 }
 .form label{
-    font-family: 'Microsoft-Sans-Serif';
+    font-family: 'Microsoft-Sans-Serif', serif;
     font-size: 16px;
     color: #e2c6a4;
 }
@@ -288,4 +289,8 @@ main{
     background-color: #f2dec4;
     height: auto;
     overflow: scroll;
+}
+::-webkit-scrollbar{
+    width: 0;
+    background: transparent;
 }
