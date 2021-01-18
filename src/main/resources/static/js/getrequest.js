@@ -21,22 +21,20 @@ const rate = {
     gr (pair) {
         if (pair === chekedPair) {
             if (pair === "rateUR") {
-                getRate(rateURObj, rateBuyUR, rateSellUR);
+                getRate(rateURObj);
             } else if (pair === "rateER") {
-                getRate(rateERObj, rateBuyER, rateSellER);
+                getRate(rateERObj);
             } else if (pair === "rateUE") {
-                getRate(rateUEObj, rateBuyUE, rateSellUE);
+                getRate(rateUEObj);
             } else {
-                getRate(rateEUObj, rateBuyEU, rateSellEU);
+                getRate(rateEUObj);
             }
 
-            function getRate(json, fieldBuy, fieldSell) {
+            function getRate(json) {
                 if (json !== undefined) {
-                    for (let i = json.length-1; i > 0; i--) {
+                    for (let i = json.length-1; i >= 0; i--) {
                         data.series[0].push(json[i].rateBuy);
                         data.series[1].push(json[i].rateSell);
-                        fieldBuy.innerHTML = json[i].rateBuy;
-                        fieldSell.innerHTML = json[i].rateSell;
                         outTotal();
                         if (data.series[0].length === 40) {
                             data.series[0].shift();
@@ -78,10 +76,10 @@ function outTotal() {
 }
 
 let screenWidth = screen.width;
-let screenHeight = screen.height
+let screenHeight = screen.height;
 
 window.onload = function () {
-    if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterBegin', 'Ожидание данных...')
+    if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterBegin', 'Ожидание данных...');
     tableComplit();
     connect();
     const xhr = new XMLHttpRequest();
@@ -95,8 +93,7 @@ window.onload = function () {
     };
     xhr.send();
 
-    alert(`Размеры экрана ${screenWidth} ${screenHeight}`)
-    console.log('шир, выс', `${screenWidth} ${screenHeight}`)
+    console.log(`Размеры экрана ${screenWidth} ${screenHeight}`)
 
     const bidsBuy = document.getElementById('bidsBuy');
     const rowsBuy = document.getElementsByClassName('rowsBuy');

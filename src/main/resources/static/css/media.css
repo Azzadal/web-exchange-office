@@ -14,11 +14,11 @@
 	}
 	.pair_name p:nth-child(1) {
 		margin-left: 15vw;
-		margin-top: -12vh;
+		margin-top: -12.2vh;
 	}
 	.pair_name p:nth-child(2) {
 	    position: relative;
-		top: -12vh;
+		top: -12.2vh;
 		left: 13vw;
 	}
 	.pair_name p:nth-child(3) {
@@ -83,11 +83,11 @@
 	}
 	.pair_name p:nth-child(1) {
 		margin-left: 22vw;
-		margin-top: -12vh;
+		margin-top: -12.2vh;
 	}
 	.pair_name p:nth-child(2) {
 		position: relative;
-		top: -12vh;
+		top: -12.2vh;
 		left: 19vw;
 	}
 	.pair_name p:nth-child(3) {
@@ -109,7 +109,7 @@
 		width: 35.5%;
 	}
 	.select__pair__header{
-		font-size: 14px;
+		font-size: x-small;
 	}
 	.panels{
 		width: 90%;
@@ -234,5 +234,8 @@
 	}
 	legend{
 		font-size: 12px;
+	}
+	.table table{
+		width: 100%;
 	}
 }
