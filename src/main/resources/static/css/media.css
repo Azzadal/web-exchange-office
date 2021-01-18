@@ -77,7 +77,7 @@
 	.course__rate__body{
 		display: grid;
 		margin: 0 0.5vw 1.2vh 12px;
-		grid-template-columns: 115px 115px;
+		grid-template-columns: 25vw 25vw;
 		grid-column-gap: 7px;
 		grid-row-gap: 18px;
 	}
@@ -88,7 +88,7 @@
 	.pair_name p:nth-child(2) {
 		position: relative;
 		top: -12.2vh;
-		left: 19vw;
+		left: 12vw;
 	}
 	.pair_name p:nth-child(3) {
 		position: relative;
@@ -96,7 +96,7 @@
 	}
 	.pair_name p:nth-child(4) {
 		position: relative;
-		left: -16vw;
+		left: -25vw;
 	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
