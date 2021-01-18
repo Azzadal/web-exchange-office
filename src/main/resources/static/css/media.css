@@ -1,4 +1,4 @@
-@media (max-height: 650px) and (max-width: 470px){
+@media (max-height: 640px) and (min-width: 361px) and (max-width: 470px){
 	header{
 		width: 94.5%;
 	    height: 5.9%;
@@ -13,21 +13,21 @@
 	    grid-row-gap: 18px;
 	}
 	.pair_name p:nth-child(1) {
-		margin-left: 97px;
-		margin-top: -78px;
+		margin-left: 15vw;
+		margin-top: -12vh;
 	}
 	.pair_name p:nth-child(2) {
 	    position: relative;
-	    top: -78px;
-	    left: 53px;
+		top: -12vh;
+		left: 13vw;
 	}
 	.pair_name p:nth-child(3) {
 	    position: relative;
-	    left: -138px;
+	    left: -37vw;
 	}
 	.pair_name p:nth-child(4) {
 	    position: relative;
-	    left: -85px;
+	    left: -22vw;
 	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
@@ -63,11 +63,155 @@
 		font-size: 12px;
 	}
 	#data_status{
-		font-size: ;
+		font-size: 12px;
 	}
 }
 
-@media (min-width: 471px) and (max-width: 768px){
+@media screen and (max-width: 360px){
+	header{
+		width: 94.5%;
+		height: 5.9%;
+		display: flex;
+		margin: 7.1% 2% 0 3.5%;
+	}
+	.course__rate__body{
+		display: grid;
+		margin: 0 0.5vw 1.2vh 12px;
+		grid-template-columns: 115px 115px;
+		grid-column-gap: 7px;
+		grid-row-gap: 18px;
+	}
+	.pair_name p:nth-child(1) {
+		margin-left: 22vw;
+		margin-top: -12vh;
+	}
+	.pair_name p:nth-child(2) {
+		position: relative;
+		top: -12vh;
+		left: 19vw;
+	}
+	.pair_name p:nth-child(3) {
+		position: relative;
+		left: -35vw;
+	}
+	.pair_name p:nth-child(4) {
+		position: relative;
+		left: -16vw;
+	}
+	.course__rate .course__rate__current_rate{
+		width: 23vw;
+	}
+	.course__rate{
+		width: 60.5%;
+		margin-right: 8px;
+	}
+	.select__pair {
+		width: 35.5%;
+	}
+	.select__pair__header{
+		font-size: 14px;
+	}
+	.panels{
+		width: 90%;
+		margin-left: 21px;
+	}
+	.main__header{
+		display: block;
+	}
+	.schedule{
+		margin: 0;
+		width: 100%;
+	}
+	.rate_buy, .rate_sell{
+		font-size: 12px;
+	}
+	.form-quantity{
+		padding-top: 9px;
+	}
+	legend{
+		font-size: 12px;
+	}
+	#data_status{
+		font-size: 12px;
+	}
+	.pair_name{
+		font-size: 14px;
+	}
+}
+
+@media (min-height: 641px) and (max-width: 600px) and (min-width: 360px){
+	header{
+		width: 94.5%;
+		height: 5.9%;
+		display: flex;
+		margin: 7.1% 2% 0 3.5%;
+	}
+	.course__rate__body{
+		display: grid;
+		margin: 0 0.5vw 1.2vh 12px;
+		grid-template-columns: 115px 115px;
+		grid-column-gap: 7px;
+		grid-row-gap: 18px;
+	}
+	.pair_name p:nth-child(1) {
+		margin-left: 15vw;
+		margin-top: -11.2vh;
+	}
+	.pair_name p:nth-child(2) {
+		position: relative;
+		top: -11.2vh;
+		left: 15vw;
+	}
+	.pair_name p:nth-child(3) {
+		position: relative;
+		left: -30vw;
+	}
+	.pair_name p:nth-child(4) {
+		position: relative;
+		left: -15vw;
+	}
+	.course__rate .course__rate__current_rate{
+		width: 23vw;
+	}
+	.course__rate{
+		width: 60.5%;
+		margin-right: 8px;
+	}
+	.select__pair {
+		width: 35.5%;
+	}
+	.select__pair__header{
+		font-size: 18px;
+	}
+	.panels{
+		width: 90%;
+		margin-left: 21px;
+	}
+	.main__header{
+		display: block;
+	}
+	.schedule{
+		margin: 0;
+		width: 100%;
+	}
+	.rate_buy, .rate_sell{
+		font-size: 12px;
+	}
+	.form-quantity{
+		padding-top: 9px;
+	}
+	legend{
+		font-size: 12px;
+	}
+	#data_status{
+		font-size: 12px;
+	}
+	.pair_name{
+		font-size: 14px;
+	}
+}
+
+	@media (min-width: 471px) and (max-width: 768px){
 	header{
 		width: 94.5%;
 	    height: 5.9%;
