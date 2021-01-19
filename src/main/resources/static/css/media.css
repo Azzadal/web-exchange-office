@@ -201,7 +201,10 @@
 		grid-column-gap: 7px;
 		grid-row-gap: 18px;
 	}
-
+	.pivot_table table {
+		word-break: break-word;
+		font-size: 14px;
+	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
 	}

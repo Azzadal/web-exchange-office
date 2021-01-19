@@ -84,14 +84,14 @@ function tableComplit() {
             let i;
 
             for (let i = 0; i < json.length; i++){
-                if (json[i].type === 'URSell')  json[i].type = 'USD/RUR продажа';
-                if (json[i].type === 'URBuy')  json[i].type = 'USD/RUR покупка';
-                if (json[i].type === 'ERSell')  json[i].type = 'EUR/RUR продажа';
-                if (json[i].type === 'ERBuy')  json[i].type = 'EUR/RUR покупка';
-                if (json[i].type === 'EUSell')  json[i].type = 'EUR/USD продажа';
-                if (json[i].type === 'EUBuy')  json[i].type = 'EUR/USD покупка';
-                if (json[i].type === 'UESell')  json[i].type = 'USD/EUR продажа';
-                if (json[i].type === 'UEBuy')  json[i].type = 'USD/EUR покупка';
+                if (json[i].type === 'URSell')  json[i].type = `&#36/&#8381 продажа`;
+                if (json[i].type === 'URBuy')  json[i].type = `&#36/&#8381 покупка`;
+                if (json[i].type === 'ERSell')  json[i].type = `&#8364/&#8381 продажа`;
+                if (json[i].type === 'ERBuy')  json[i].type = `&#8364/&#8381 покупка`;
+                if (json[i].type === 'EUSell')  json[i].type = `&#8364/&#36 продажа`;
+                if (json[i].type === 'EUBuy')  json[i].type = `&#8364/&#36 покупка`;
+                if (json[i].type === 'UESell')  json[i].type = `&#36/&#8364 продажа`;
+                if (json[i].type === 'UEBuy')  json[i].type = `&#36/&#8364 покупка`;
             }
 
             bidsHistory.innerHTML = '';
