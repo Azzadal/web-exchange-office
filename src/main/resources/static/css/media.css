@@ -276,3 +276,9 @@
 		font-size: 17px;
 	}
 }
+
+@media (max-width: 1000px) and (min-width: 576px) and (max-height: 400px){
+	.select__pair__current{
+		font-size: 17px;
+	}
+}
