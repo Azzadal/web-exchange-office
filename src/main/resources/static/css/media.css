@@ -7,30 +7,40 @@
 	}
 	.course__rate__body{
 		display: grid;
-	    margin: 0 0.5vw 1.2vh 12px;
-	    grid-template-columns: 115px 115px;
+	    margin: 0 3.5vw 1.2vh 12px;
+	    grid-template-columns: 23vw 23vw;
 	    grid-column-gap: 7px;
 	    grid-row-gap: 18px;
 	}
-	.pair_name p:nth-child(1) {
-		margin-left: 15vw;
-		margin-top: -12.2vh;
-	}
-	.pair_name p:nth-child(2) {
-	    position: relative;
-		top: -12.2vh;
-		left: 13vw;
-	}
-	.pair_name p:nth-child(3) {
-	    position: relative;
-	    left: -37vw;
-	}
-	.pair_name p:nth-child(4) {
-	    position: relative;
-	    left: -22vw;
+	.pair_name{
+		display: none;
 	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(1):after{
+		content: 'USD/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(2):after{
+		content: 'EUR/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(3):after{
+		content: 'USD/EUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(4):after{
+		content: 'EUR/USD';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
 	}
 	.course__rate{
 		width: 60.5%;
@@ -76,27 +86,37 @@
 	}
 	.course__rate__body{
 		display: grid;
-		margin: 0 0.5vw 1.2vh 12px;
-		grid-template-columns: 25vw 25vw;
+		margin: 0 3.5vw 1.2vh 12px;
+		grid-template-columns: 23vw 23vw;
 		grid-column-gap: 7px;
 		grid-row-gap: 18px;
 	}
-	.pair_name p:nth-child(1) {
-		margin-left: 22vw;
-		margin-top: -12.2vh;
+	.pair_name{
+		display: none;
 	}
-	.pair_name p:nth-child(2) {
-		position: relative;
-		top: -12.2vh;
-		left: 12vw;
+	.course__rate__body .course__rate__body__border:nth-child(1):after{
+		content: 'USD/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
 	}
-	.pair_name p:nth-child(3) {
-		position: relative;
-		left: -35vw;
+	.course__rate__body .course__rate__body__border:nth-child(2):after{
+		content: 'EUR/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
 	}
-	.pair_name p:nth-child(4) {
-		position: relative;
-		left: -25vw;
+	.course__rate__body .course__rate__body__border:nth-child(3):after{
+		content: 'USD/EUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(4):after{
+		content: 'EUR/USD';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
 	}
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
@@ -150,30 +170,38 @@
 		display: flex;
 		margin: 7.1% 2% 0 3.5%;
 	}
+	.course__rate__body .course__rate__body__border:nth-child(1):after{
+		content: 'USD/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(2):after{
+		content: 'EUR/RUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(3):after{
+		content: 'USD/EUR';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
+	.course__rate__body .course__rate__body__border:nth-child(4):after{
+		content: 'EUR/USD';
+		color: #f2dec4;
+		font-size: 14px;
+		text-align: center;
+	}
 	.course__rate__body{
 		display: grid;
-		margin: 0 0.5vw 1.2vh 12px;
-		grid-template-columns: 115px 115px;
+		margin: 0 3.5vw 1.2vh 12px;
+		grid-template-columns: 23vw 23vw;
 		grid-column-gap: 7px;
 		grid-row-gap: 18px;
 	}
-	.pair_name p:nth-child(1) {
-		margin-left: 15vw;
-		margin-top: -11.2vh;
-	}
-	.pair_name p:nth-child(2) {
-		position: relative;
-		top: -11.2vh;
-		left: 15vw;
-	}
-	.pair_name p:nth-child(3) {
-		position: relative;
-		left: -30vw;
-	}
-	.pair_name p:nth-child(4) {
-		position: relative;
-		left: -15vw;
-	}
+
 	.course__rate .course__rate__current_rate{
 		width: 23vw;
 	}
@@ -185,7 +213,7 @@
 		width: 35.5%;
 	}
 	.select__pair__header{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.panels{
 		width: 90%;
@@ -211,7 +239,7 @@
 		font-size: 12px;
 	}
 	.pair_name{
-		font-size: 14px;
+		display: none;
 	}
 }
 
@@ -241,5 +269,10 @@
 	}
 	.table table{
 		width: 100%;
+	}
+}
+@media (max-width: 575px) and (min-width: 470px){
+	.select__pair__current{
+		font-size: 17px;
 	}
 }

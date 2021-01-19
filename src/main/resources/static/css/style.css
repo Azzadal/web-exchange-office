@@ -1,3 +1,6 @@
+html{
+    height: 100vh;
+}
 body{
     margin: 0;
     padding: 0;
@@ -50,9 +53,11 @@ tr:hover td{
     font-weight: bold;
 }
 .pivot_table{
+    position: relative;
     height: auto;
-    max-height: 30vh;
+    max-height: 46vh;
     overflow: scroll;
+    top: 100vh;
 }
 .pivot_table table{
     width: 100%;
@@ -133,10 +138,12 @@ legend{
 }
 .rate_buy, .rate_sell{
     width: 50%;
-    border-right: 1px solid black;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     line-height: 7vh;
+}
+.rate_buy{
+    border-right: 1px solid black;
 }
 .select__pair__item{
     background: linear-gradient(to left, #f2dec4, #c1ac91);
@@ -167,6 +174,10 @@ legend{
     background-color: #f2dec4;
     font-size: 5vh;
     border: 2px solid black;
+}
+.course__rate__body__border{
+    display: inline-block;
+    text-align: center;
 }
 .rate{
     width: 50%;
