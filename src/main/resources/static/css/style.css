@@ -57,7 +57,6 @@ tr:hover td{
     height: auto;
     max-height: 46vh;
     overflow: scroll;
-    top: 100vh;
 }
 .pivot_table table{
     width: 100%;
