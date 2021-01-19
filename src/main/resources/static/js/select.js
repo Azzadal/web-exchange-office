@@ -4,6 +4,8 @@ let g = document.getElementsByClassName('select__pair__item');
 let lPanelTitle = document.getElementsByClassName('l__panel__title');
 let rPanelTitle = document.getElementsByClassName('r__panel__title');
 let schedule = document.getElementById('schedule');
+let mainHeader = document.getElementsByClassName('main__header');
+let pivotTable = document.getElementsByClassName('pivot_table');
 let select = function(){
     let selectItem = document.querySelectorAll('.select__pair__item');
 
@@ -18,6 +20,8 @@ let select = function(){
         schedule.style.zIndex = '0';
         lPanelTitle[0].style.zIndex = '0';
         rPanelTitle[0].style.zIndex = '0';
+        mainHeader[0].style.zIndex = '0';
+        pivotTable[0].style.zIndex = '0';
     }
     let current = document.getElementById('current');
 }
@@ -30,6 +34,8 @@ document.getElementById('current').addEventListener('click', function(event){
         panels[0].style.zIndex = '-1';
         lPanelTitle[0].style.zIndex = '-1';
         rPanelTitle[0].style.zIndex = '-1';
+        mainHeader[0].style.zIndex = '-1';
+        pivotTable[0].style.zIndex = '-1';
         x.classList.add('show');
         x.style.height = 'auto';
         schedule.style.zIndex = '-1';
@@ -46,6 +52,8 @@ document.getElementById('current').addEventListener('click', function(event){
         schedule.style.zIndex = '0';
         lPanelTitle[0].style.zIndex = '0';
         rPanelTitle[0].style.zIndex = '0';
+        mainHeader[0].style.zIndex = '0';
+        pivotTable[0].style.zIndex = '0';
         
         x.addEventListener('transitionend', 
             function () {

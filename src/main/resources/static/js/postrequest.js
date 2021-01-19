@@ -142,36 +142,18 @@ function connect() {
 
 //table history
 //
-//         stompClient.subscribe('/topic/ids', function (e) {
-//             let gvn = JSON.parse(e.body);
-//
-//             console.log('GVN', gvn)
-//
-//             alert('Проверка')
-//             for (let i = 0; i < gvn.length; i++){
-//                 if (gvn[i].type === 'ERSell')  gvn[i].type = 'EUR/RUR продажа'
-//             }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//             bidsHistory.innerHTML = '';
-//             for (let i = 0; i < gvn.length; i++) {
-//                 let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-//                 bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
-//                     + gvn[i].rate +
-//                     '</td><td>' + gvn[i].quantity + '</td><td>' +
-//                     gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
-//             }
-//         });
+        stompClient.subscribe('/topic/ids', function (e) {
+            let gvn = JSON.parse(e.body);
+
+            bidsHistory.innerHTML = '';
+            for (let i = 0; i < gvn.length; i++) {
+                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
+                    + gvn[i].rate +
+                    '</td><td>' + gvn[i].quantity + '</td><td>' +
+                    gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
+            }
+        });
         stompClient.subscribe('/topic/rateUR', function (e) {
             rateURObj = JSON.parse(e.body);
             rateBuyUR.innerHTML = rateURObj[0].rateBuy;
@@ -229,13 +211,13 @@ function checkBuy(pair1, pair2, rateBuy) {
     } else addBidsBuy(pair1, rateBuy);
 }
 
-function checkSell(pair1, pair2) {
+function checkSell(pair1, pair2, rateSell) {
     let date = new Date();
     let flag;
     let q;
     if (rowsBuy.length <= 0) flag = 1;
     for (let i = 0; i < rowsBuy.length; i++) {
-        if (rateSell.value === rowsPriceBuy[i].innerHTML) {
+        if (rateSell === rowsPriceBuy[i].innerHTML) {
             flag = 0;
             q = i;
             break;
@@ -256,16 +238,10 @@ function checkSell(pair1, pair2) {
         }));
         rowsBuy[q].remove();
         setTimeout(tableBuy, 1000, pair2);
-    } else addBidsSell(pair1);
+    } else addBidsSell(pair1, rateSell);
 }
 
 function addBidsBuy(pair, rateBuy) {
-
-        // if (pair === "rateUR") rateBuy = parseFloat(rateBuyUR.innerHTML);
-        // if (pair === "rateER") rateBuy = parseFloat(rateBuyER.innerHTML);
-        // if (pair === "rateUE") rateBuy = parseFloat(rateBuyUE.innerHTML);
-        // if (pair === "rateEU") rateBuy = parseFloat(rateBuyEU.innerHTML);
-
         stompClient.send("/app/" + pair, {}, JSON.stringify({
             'rate': rateBuy,
             'quantity': quantityBuy.value,
@@ -280,9 +256,9 @@ function addBidsBuy(pair, rateBuy) {
 
 }
 
-function addBidsSell(pair) {
+function addBidsSell(pair, rateSell) {
     stompClient.send("/app/" + pair, {}, JSON.stringify({
-        'rate':rateSell.value,
+        'rate':rateSell,
         'quantity':quantitySell.value,
         'total':totalSell.value,
         'type':pair,
