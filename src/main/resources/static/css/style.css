@@ -193,6 +193,7 @@ main{
     height: 100%;
 }
 .schedule{
+    display: none;
     width: 62.1%;
     height: 60vh;
     background-image: url(../images/sched_bg.png);

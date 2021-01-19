@@ -32,6 +32,7 @@ const rate = {
 
             function getRate(json) {
                 if (json !== undefined) {
+                    schedule.style.display = 'block';
                     for (let i = json.length-1; i >= 0; i--) {
                         data.series[0].push(json[i].rateBuy);
                         data.series[1].push(json[i].rateSell);

@@ -12,8 +12,7 @@ let select = function(){
     });
 
     function selectChoice(){
-        let text = this.innerText;
-        current.innerText = text;
+        current.innerText = this.innerText;
         x.classList.remove('show');
         panels[0].style.zIndex = '0';
         schedule.style.zIndex = '0';
