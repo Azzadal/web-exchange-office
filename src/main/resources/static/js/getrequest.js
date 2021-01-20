@@ -80,7 +80,7 @@ let screenWidth = screen.width;
 let screenHeight = screen.height;
 
 window.onload = function () {
-    if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterBegin', 'Ожидание данных...');
+    if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterbegin', 'Ожидание данных...');
     tableComplit();
     connect();
     const xhr = new XMLHttpRequest();
