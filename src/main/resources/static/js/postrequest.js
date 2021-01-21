@@ -318,13 +318,28 @@ document.getElementById('butSell').onclick = e => {
 
 //автозаполнение формы продажи
 function autofillSell(){
-        for (let i = 0; i <= rowsBuy.length - 1; i++) {
-            rowsBuy[i].addEventListener('click', function () {
-                rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
-                quantitySell.value = rowsQuanBuy[i].innerHTML;
-                outTotal();
-            })
-        }
+        // for (let i = 0; i <= rowsBuy.length - 1; i++) {
+        //     rowsBuy[i].addEventListener('click', function () {
+        //         rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
+        //         quantitySell.value = rowsQuanBuy[i].innerHTML;
+        //         outTotal();
+        //     })
+        // }
+
+
+
+
+    for (let i = 0; i <= rowsBuy.length - 1; i++) {
+        rowsBuy[i].addEventListener('click',  () => {
+            modal.open();
+        })
+    }
+
+
+
+
+
+
 }
 
 //автозаполнение формы покупки

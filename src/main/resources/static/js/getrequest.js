@@ -10,6 +10,7 @@ const rateSellEU = document.getElementById('rateSellEU');
 const rateBuyAll = document.getElementsByClassName('rate_buy');
 const rateSellAll = document.getElementsByClassName('rate_sell');
 const datastatus = document.getElementById('data_status');
+const modal = base.modal({title: "Говно"});
 
 const data = {
     series: [
