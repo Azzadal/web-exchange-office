@@ -26,6 +26,8 @@ base.modal = function (options) {
 
     let closing = false
     let destroyed = false
+    const ANIMATION_SPEED = 200
+    const $modal = _createModal(options)
 
     const modal = {
         open() {
@@ -40,12 +42,8 @@ base.modal = function (options) {
                 $modal.classList.remove('hide')
                 closing = false
             }, ANIMATION_SPEED)
-
         }
     }
-
-    const $modal = _createModal(options)
-    const ANIMATION_SPEED = 200
 
     const listener = event => {
         if (event.target.dataset.close){
