@@ -10,7 +10,7 @@ base.modal = function (options) {
                     <span class="modal-close" data-close="true">&times;</span>
                 </div>
                 <div class="modal-body">
-                    курс ${options.course} кол-во ${options.quantity}
+                    курс <b>${options.course}</b> кол-во <b>${options.quantity}</b>
                 </div>
                 <div class="modal-footer">
                     <button>Ok</button>
@@ -40,6 +40,7 @@ base.modal = function (options) {
                 $modal.classList.remove('hide')
                 closing = false
             }, ANIMATION_SPEED)
+
         }
     }
 
@@ -48,13 +49,14 @@ base.modal = function (options) {
 
     const listener = event => {
         if (event.target.dataset.close) modal.close()
+        modal.destroy()
     }
 
     $modal.addEventListener('click', listener)
 
     return Object.assign(modal, {
         destroy(){
-            $modal.parentNode.removeChild($modal)
+            $modal.remove()
             $modal.removeEventListener('click', listener)
             destroyed = true
         }

@@ -333,6 +333,14 @@ main{
     opacity: 0;
     z-index: -1;
 }
+.modal-body{
+    padding-left: 10px;
+    font-family: 'Consolas', sans-serif;
+    line-height: 25px;
+}
+.modal-body b:nth-child(1){
+    margin-right: 10px;
+}
 .modal-overlay{
     position: absolute;
     top: 0;
@@ -347,16 +355,18 @@ main{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid gray;
+    font-family: 'Microsoft-Sans-Serif', sans-serif;
 }
 .modal-close{
     cursor: pointer;
 }
 .modal-window{
     width: 300px;
-    background-color: white;
     margin: 0 auto;
     transform: translateY(-200px);
     transition: transform .3s ease-in;
+    border-radius: 8px;
+    background-color: antiquewhite;
 }
 .modal-footer{
     padding: 5px 10px;

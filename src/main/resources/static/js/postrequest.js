@@ -341,6 +341,7 @@ function autofillSell(){
             })
                  // .open()
             modal.open()
+
         })
     }
 
