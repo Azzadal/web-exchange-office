@@ -68,7 +68,7 @@ function tableBuy(arg) {
                     json[i].total + '</td></tr>';
             }
         }
-            autofillSell();
+            executeSell();
     };
     console.log('tableBuy(arg)', arg)
     req.send();
@@ -127,7 +127,7 @@ function connect() {
                     '</td><td class="text-center rowsQuanBuy">' + gvn[i].quantity + '</td><td class="text-center rowsTotalBuy">' +
                     gvn[i].total + '</td></tr>';
             }
-                autofillSell();
+                executeSell();
         });
         stompClient.subscribe('/topic/sells', function (e) {
             let gvn = JSON.parse(e.body);
@@ -318,7 +318,7 @@ document.getElementById('butSell').onclick = e => {
 };
 
 //автозаполнение формы продажи
-function autofillSell(){
+function executeSell(){
         // for (let i = 0; i <= rowsBuy.length - 1; i++) {
         //     rowsBuy[i].addEventListener('click', function () {
         //         rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
@@ -333,14 +333,51 @@ function autofillSell(){
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
 
         rowsBuy[i].addEventListener('click', function()  {
-            // console.log('log', this.rowsPriceBuy)
+            let date = new Date();
+            let arg;
+            switch (chekedPair) {
+                case 'rateUR':
+                    arg = 'URBuy';
+                    break;
+                case 'rateER':
+                    arg = 'ERBuy'
+                    break;
+                case 'rateUE':
+                    arg = 'UEBuy'
+                    break;
+                case 'rateEU':
+                    arg = 'EUBuy'
+                    break;
+            }
             modal = base.modal({
                 title: 'Продать',
                 course: rowsPriceBuy[i].innerHTML,
-                quantity: rowsQuanBuy[i].innerHTML
+                quantity: rowsQuanBuy[i].innerHTML,
+                execute(){
+                    stompClient.send("/app/id", {}, JSON.stringify({
+                        'id': idBuy[i].innerHTML,
+                        'rate': rowsPriceBuy[i].innerHTML,
+                        'quantity': rowsQuanBuy[i].innerHTML,
+                        'total': rowsTotalBuy[i].innerHTML,
+                        'type': chekedPair,
+                        'status': 'done',
+                        'date': date
+                    }));
+                    console.log('this', this)
+                    rowsBuy[i].remove();
+                    setTimeout(tableBuy, 1000, arg);
+                    modal.close();
+                }
             })
-                 // .open()
-            modal.open()
+                 .open();
+
+
+
+
+
+
+
+            // modal.open()
 
         })
     }

@@ -13,7 +13,7 @@ base.modal = function (options) {
                     курс <b>${options.course}</b> кол-во <b>${options.quantity}</b>
                 </div>
                 <div class="modal-footer">
-                    <button>Ok</button>
+                    <button data-ok="true">Ok</button>
                     <button>Cancel</button>
                 </div>
             </div>
@@ -48,8 +48,15 @@ base.modal = function (options) {
     const ANIMATION_SPEED = 200
 
     const listener = event => {
-        if (event.target.dataset.close) modal.close()
-        modal.destroy()
+        if (event.target.dataset.close){
+            modal.close()
+            modal.destroy()
+        }
+        if (event.target.dataset.ok){
+            options.execute()
+            modal.close()
+            modal.destroy()
+        }
     }
 
     $modal.addEventListener('click', listener)
