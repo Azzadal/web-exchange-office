@@ -304,8 +304,6 @@ main{
     width: 0;
     background: transparent;
 }
-.vmodal{
-}
 .vmodal.open .modal-window,
 .vmodal.open .modal-overlay{
     opacity: 1;
@@ -317,7 +315,7 @@ main{
     z-index: 1000;
 }
 .vmodal.open .modal-window{
-    transform: translateY(100px);
+    transform: translateY(50vh);
 }
 .vmodal.open .modal-overlay{
     background: rgba(0,0,0,0.5);
@@ -328,7 +326,6 @@ main{
 .vmodal.hide .modal-overlay{
     background: rgba(0,0,0,0);
 }
-
 .modal-window, .modal-overlay{
     opacity: 0;
     z-index: -1;

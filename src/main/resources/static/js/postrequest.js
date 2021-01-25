@@ -45,7 +45,7 @@ function tableSell(arg) {
                     json[i].total + '</td></tr>';
             }
         }
-            autofillBuy();
+        executeBuy();
     };
     console.log('tableSell(arg)', arg)
     req.send();
@@ -138,43 +138,42 @@ function connect() {
                     '</td><td class="rowsQuanSell">' + gvn[i].quantity + '</td><td class="rowsTotalSell">' +
                     gvn[i].total + '</td></tr>';
             }
-                autofillBuy();
+            executeBuy();
         });
 
 //table history
-//
         stompClient.subscribe('/topic/ids', function (e) {
-            let gvn = JSON.parse(e.body);
+            let json = JSON.parse(e.body);
 
             bidsHistory.innerHTML = '';
-            for (let i = 0; i < gvn.length; i++) {
-                let date = moment(gvn[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + gvn[i].id + '</td><td>' + date + '</td><td>'
-                    + gvn[i].rate +
-                    '</td><td>' + gvn[i].quantity + '</td><td>' +
-                    gvn[i].total + '</td><td>' + gvn[i].type + '</td></tr>';
+            for (let i = 0; i < json.length; i++) {
+                let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
+                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
+                    + json[i].rate +
+                    '</td><td>' + json[i].quantity + '</td><td>' +
+                    json[i].total + '</td><td>' + json[i].type + '</td></tr>';
             }
         });
-        stompClient.subscribe('/topic/rateUR', function (e) {
+        stompClient.subscribe('/topic/rateUR', e => {
             rateURObj = JSON.parse(e.body);
             rateBuyUR.innerHTML = rateURObj[0].rateBuy;
             rateSellUR.innerHTML = rateURObj[0].rateSell;
             datastatus.innerHTML = '';
             rate.gr('rateUR')
         });
-        stompClient.subscribe('/topic/rateER', function (e) {
+        stompClient.subscribe('/topic/rateER', e => {
             rateERObj = JSON.parse(e.body);
             rateBuyER.innerHTML = rateERObj[0].rateBuy;
             rateSellER.innerHTML = rateERObj[0].rateSell;
             rate.gr('rateER')
         });
-        stompClient.subscribe('/topic/rateUE', function (e) {
+        stompClient.subscribe('/topic/rateUE', e => {
             rateUEObj = JSON.parse(e.body);
             rateBuyUE.innerHTML = rateUEObj[0].rateBuy;
             rateSellUE.innerHTML = rateUEObj[0].rateSell;
             rate.gr('rateUE')
         });
-        stompClient.subscribe('/topic/rateEU', function (e) {
+        stompClient.subscribe('/topic/rateEU', e => {
             rateEUObj = JSON.parse(e.body);
             rateBuyEU.innerHTML = rateEUObj[0].rateBuy;
             rateSellEU.innerHTML = rateEUObj[0].rateSell;
@@ -182,6 +181,7 @@ function connect() {
         });
     });
 }
+
 function checkBuy(pair1, pair2, rateBuy) {
     let date = new Date();
     let flag;
@@ -317,22 +317,12 @@ document.getElementById('butSell').onclick = e => {
     }
 };
 
-//автозаполнение формы продажи
+//продажа
 function executeSell(){
-        // for (let i = 0; i <= rowsBuy.length - 1; i++) {
-        //     rowsBuy[i].addEventListener('click', function () {
-        //         rateSell.innerHTML = rowsPriceBuy[i].innerHTML;
-        //         quantitySell.value = rowsQuanBuy[i].innerHTML;
-        //         outTotal();
-        //     })
-        // }
-
-
-
-
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
 
         rowsBuy[i].addEventListener('click', function()  {
+            console.log('clicked')
             let date = new Date();
             let arg;
             switch (chekedPair) {
@@ -340,13 +330,13 @@ function executeSell(){
                     arg = 'URBuy';
                     break;
                 case 'rateER':
-                    arg = 'ERBuy'
+                    arg = 'ERBuy';
                     break;
                 case 'rateUE':
-                    arg = 'UEBuy'
+                    arg = 'UEBuy';
                     break;
                 case 'rateEU':
-                    arg = 'EUBuy'
+                    arg = 'EUBuy';
                     break;
             }
             modal = base.modal({
@@ -359,42 +349,57 @@ function executeSell(){
                         'rate': rowsPriceBuy[i].innerHTML,
                         'quantity': rowsQuanBuy[i].innerHTML,
                         'total': rowsTotalBuy[i].innerHTML,
-                        'type': chekedPair,
+                        'type': arg,
                         'status': 'done',
                         'date': date
                     }));
-                    console.log('this', this)
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
                 }
             })
-                 .open();
-
-
-
-
-
-
-
-            // modal.open()
-
+                .open();
         })
     }
-
-
-
-
-
-
 }
 
-//автозаполнение формы покупки
-function autofillBuy(){
+function executeBuy(){
         for (let i = 0; i <= rowsSell.length - 1; i++) {
             rowsSell[i].addEventListener('click', function () {
-                rateBuy.innerHTML = rowsPriceSell[i].innerHTML;
-                quantityBuy.value = rowsQuanSell[i].innerHTML;
-                outTotal();
+                let date = new Date();
+                let arg;
+                switch (chekedPair) {
+                    case 'rateUR':
+                        arg = 'URSell';
+                        break;
+                    case 'rateER':
+                        arg = 'ERSell';
+                        break;
+                    case 'rateUE':
+                        arg = 'UESell';
+                        break;
+                    case 'rateEU':
+                        arg = 'EUSell';
+                        break;
+                }
+                modal = base.modal({
+                    title: 'Купить',
+                    course: rowsPriceSell[i].innerHTML,
+                    quantity: rowsQuanSell[i].innerHTML,
+                    execute(){
+                        stompClient.send("/app/id", {}, JSON.stringify({
+                            'id': idSell[i].innerHTML,
+                            'rate': rowsPriceSell[i].innerHTML,
+                            'quantity': rowsQuanSell[i].innerHTML,
+                            'total': rowsTotalSell[i].innerHTML,
+                            'type': arg,
+                            'status': 'done',
+                            'date': date
+                        }));
+                        rowsSell[i].remove();
+                        setTimeout(tableSell, 1000, arg);
+                    }
+                })
+                    .open();
             })
         }
 }
