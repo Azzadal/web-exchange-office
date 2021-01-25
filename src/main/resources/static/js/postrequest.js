@@ -20,6 +20,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsHistory = document.getElementsByClassName('rowsHistory'),
     rowsBuy = document.getElementsByClassName('rowsBuy'),
     greet = document.getElementById('greet');
+let modal;
 let stompClient = null;
 let rateURObj;
 let rateERObj;
@@ -330,8 +331,16 @@ function autofillSell(){
 
 
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
-        rowsBuy[i].addEventListener('click',  () => {
-            modal.open();
+
+        rowsBuy[i].addEventListener('click', function()  {
+            // console.log('log', this.rowsPriceBuy)
+            modal = base.modal({
+                title: 'Продать',
+                course: rowsPriceBuy[i].innerHTML,
+                quantity: rowsQuanBuy[i].innerHTML
+            })
+                 // .open()
+            modal.open()
         })
     }
 

@@ -1,16 +1,16 @@
 base.modal = function (options) {
-    function _createModal(options){
+    function _createModal(options) {
         const modal = document.createElement('div')
         modal.classList.add('vmodal')
         modal.insertAdjacentHTML('afterbegin', `
-            <div class="modal-overlay">
+            <div class="modal-overlay" data-close="true">
             <div class="modal-window">
                 <div class="modal-header">
                     <span class="modal-title">${options.title}</span>
-                    <span class="modal-close">&times;</span>
+                    <span class="modal-close" data-close="true">&times;</span>
                 </div>
                 <div class="modal-body">
-                    
+                    курс ${options.course} кол-во ${options.quantity}
                 </div>
                 <div class="modal-footer">
                     <button>Ok</button>
@@ -24,15 +24,15 @@ base.modal = function (options) {
         return modal
     }
 
-    const $modal = _createModal(options)
-    const ANIMATION_SPEED = 200
     let closing = false
+    let destroyed = false
 
-    return{
-        open(){
+    const modal = {
+        open() {
+            if (destroyed) return console.log('Modal is destroyed')
             !closing && $modal.classList.add('open')
         },
-        close(){
+        close() {
             closing = true
             $modal.classList.remove('open')
             $modal.classList.add('hide')
@@ -40,7 +40,23 @@ base.modal = function (options) {
                 $modal.classList.remove('hide')
                 closing = false
             }, ANIMATION_SPEED)
-        },
-        destroy(){}
+        }
     }
+
+    const $modal = _createModal(options)
+    const ANIMATION_SPEED = 200
+
+    const listener = event => {
+        if (event.target.dataset.close) modal.close()
+    }
+
+    $modal.addEventListener('click', listener)
+
+    return Object.assign(modal, {
+        destroy(){
+            $modal.parentNode.removeChild($modal)
+            $modal.removeEventListener('click', listener)
+            destroyed = true
+        }
+    })
 }
