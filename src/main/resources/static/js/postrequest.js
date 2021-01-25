@@ -83,7 +83,7 @@ function tableComplit() {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
-
+            console.log('таблица заполнилась')
             for (let i = 0; i < json.length; i++){
                 if (json[i].type === 'URSell')  json[i].type = `&#36/&#8381 продажа`;
                 if (json[i].type === 'URBuy')  json[i].type = `&#36/&#8381 покупка`;
