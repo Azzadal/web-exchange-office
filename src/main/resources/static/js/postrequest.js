@@ -366,7 +366,6 @@ function executeSell(){
                     console.log('this', this)
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
-                    modal.close();
                 }
             })
                  .open();
