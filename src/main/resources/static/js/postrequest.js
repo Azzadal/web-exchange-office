@@ -2,8 +2,6 @@ const quantityBuy = document.getElementById('quantityBuy'),
     idBuy = document.getElementsByClassName('idBuy'),
     idSell = document.getElementsByClassName('idSell'),
     quantitySell = document.getElementById('quantitySell'),
-    rateBuy = document.getElementById('rateBuy'),
-    rateSell = document.getElementById('rateSell'),
     totalBuy = document.getElementById('totalBuy'),
     totalSell = document.getElementById('totalSell'),
     bidsSell = document.getElementById('bidsSell'),
@@ -33,7 +31,7 @@ function tableSell(arg) {
     const req = new XMLHttpRequest();
     req.responseType = "json";
     req.open('GET', window.location + arg);
-    req.onreadystatechange = function () {
+    req.onreadystatechange = () => {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
@@ -47,7 +45,7 @@ function tableSell(arg) {
         }
         executeBuy();
     };
-    console.log('tableSell(arg)', arg)
+    console.log('tableSell(arg)', arg);
     req.send();
 }
 
@@ -56,7 +54,7 @@ function tableBuy(arg) {
     const req = new XMLHttpRequest();
     req.responseType = "json";
     req.open('GET', window.location + arg);
-    req.onreadystatechange = function () {
+    req.onreadystatechange = () => {
         if (req.readyState === 4) {
             let json = req.response;
             let i;
@@ -70,7 +68,7 @@ function tableBuy(arg) {
         }
             executeSell();
     };
-    console.log('tableBuy(arg)', arg)
+    console.log('tableBuy(arg)', arg);
     req.send();
 }
 
@@ -79,24 +77,23 @@ function tableComplit() {
     const req = new XMLHttpRequest();
     req.responseType = "json";
     req.open('GET', window.location + "tab_compl");
-    req.onreadystatechange = function () {
+    req.onreadystatechange = () => {
         if (req.readyState === 4) {
             let json = req.response;
-            let i;
-            console.log('таблица заполнилась')
-            for (let i = 0; i < json.length; i++){
-                if (json[i].type === 'URSell')  json[i].type = `&#36/&#8381 продажа`;
-                if (json[i].type === 'URBuy')  json[i].type = `&#36/&#8381 покупка`;
-                if (json[i].type === 'ERSell')  json[i].type = `&#8364/&#8381 продажа`;
-                if (json[i].type === 'ERBuy')  json[i].type = `&#8364/&#8381 покупка`;
-                if (json[i].type === 'EUSell')  json[i].type = `&#8364/&#36 продажа`;
-                if (json[i].type === 'EUBuy')  json[i].type = `&#8364/&#36 покупка`;
-                if (json[i].type === 'UESell')  json[i].type = `&#36/&#8364 продажа`;
-                if (json[i].type === 'UEBuy')  json[i].type = `&#36/&#8364 покупка`;
+
+            for (let js of json){
+                if (js.type === 'URSell')  js.type = `&#36/&#8381 продажа`;
+                if (js.type === 'URBuy')  js.type = `&#36/&#8381 покупка`;
+                if (js.type === 'ERSell')  js.type = `&#8364/&#8381 продажа`;
+                if (js.type === 'ERBuy')  js.type = `&#8364/&#8381 покупка`;
+                if (js.type === 'EUSell')  js.type = `&#8364/&#36 продажа`;
+                if (js.type === 'EUBuy')  js.type = `&#8364/&#36 покупка`;
+                if (js.type === 'UESell')  js.type = `&#36/&#8364 продажа`;
+                if (js.type === 'UEBuy')  js.type = `&#36/&#8364 покупка`;
             }
 
             bidsHistory.innerHTML = '';
-            for (i = 0; i < json.length; i++) {
+            for (let i = 0; i < json.length; i++) {
                 let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
                 bidsHistory.innerHTML += '<tr><td style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
                     + json[i].rate +
@@ -108,17 +105,17 @@ function tableComplit() {
     req.send();
 }
 
+let userName;
 function connect() {
     let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
         console.log('Connected: ' + frame);
-        console.log('пользователь', frame.headers['user-name']);
-        let user_name = frame.headers['user-name'];
+        userName = frame.headers['user-name'];
 
-        greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + user_name + '</span>');
+        greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + userName + '</span>');
 
-        stompClient.subscribe('/topic/buys', function (e) {
+        stompClient.subscribe('/topic/buys', e => {
             let gvn = JSON.parse(e.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
@@ -127,9 +124,9 @@ function connect() {
                     '</td><td class="text-center rowsQuanBuy">' + gvn[i].quantity + '</td><td class="text-center rowsTotalBuy">' +
                     gvn[i].total + '</td></tr>';
             }
-                executeSell();
+            executeSell();
         });
-        stompClient.subscribe('/topic/sells', function (e) {
+        stompClient.subscribe('/topic/sells', e => {
             let gvn = JSON.parse(e.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
@@ -142,8 +139,19 @@ function connect() {
         });
 
 //table history
-        stompClient.subscribe('/topic/ids', function (e) {
+        stompClient.subscribe('/topic/ids', e => {
             let json = JSON.parse(e.body);
+
+            for (let js of json){
+                if (js.type === 'URSell')  js.type = `&#36/&#8381 продажа`;
+                if (js.type === 'URBuy')  js.type = `&#36/&#8381 покупка`;
+                if (js.type === 'ERSell')  js.type = `&#8364/&#8381 продажа`;
+                if (js.type === 'ERBuy')  js.type = `&#8364/&#8381 покупка`;
+                if (js.type === 'EUSell')  js.type = `&#8364/&#36 продажа`;
+                if (js.type === 'EUBuy')  js.type = `&#8364/&#36 покупка`;
+                if (js.type === 'UESell')  js.type = `&#36/&#8364 продажа`;
+                if (js.type === 'UEBuy')  js.type = `&#36/&#8364 покупка`;
+            }
 
             bidsHistory.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
@@ -199,13 +207,13 @@ function checkBuy(pair1, pair2, rateBuy) {
     }
     if(flag === 0) {
         stompClient.send("/app/id", {}, JSON.stringify({
-            'id': idSell[q].innerHTML,
-            'rate': rowsPriceSell[q].innerHTML,
-            'quantity': rowsQuanSell[q].innerHTML,
-            'total': rowsTotalSell[q].innerHTML,
-            'type': pair2,
-            'status': 'done',
-            'date': date
+            id: idSell[q].innerHTML,
+            rate: rowsPriceSell[q].innerHTML,
+            quantity: rowsQuanSell[q].innerHTML,
+            total: rowsTotalSell[q].innerHTML,
+            type: pair2,
+            status: 'done',
+            date: date
         }));
         rowsSell[q].remove();
         setTimeout(tableSell, 1000, pair2);
@@ -229,13 +237,13 @@ function checkSell(pair1, pair2, rateSell) {
     }
     if(flag === 0) {
         stompClient.send("/app/id", {}, JSON.stringify({
-            'id': idBuy[q].innerHTML,
-            'rate': rowsPriceBuy[q].innerHTML,
-            'quantity': rowsQuanBuy[q].innerHTML,
-            'total': rowsTotalBuy[q].innerHTML,
-            'type': pair2,
-            'status': 'done',
-            'date': date
+            id: idBuy[q].innerHTML,
+            rate: rowsPriceBuy[q].innerHTML,
+            quantity: rowsQuanBuy[q].innerHTML,
+            total: rowsTotalBuy[q].innerHTML,
+            type: pair2,
+            status: 'done',
+            date: date
         }));
         rowsBuy[q].remove();
         setTimeout(tableBuy, 1000, pair2);
@@ -244,12 +252,13 @@ function checkSell(pair1, pair2, rateSell) {
 
 function addBidsBuy(pair, rateBuy) {
         stompClient.send("/app/" + pair, {}, JSON.stringify({
-            'rate': rateBuy,
-            'quantity': quantityBuy.value,
-            'total': totalBuy.value,
-            'type': pair,
-            'status': 'not_done',
-            'date': null
+            rate: rateBuy,
+            quantity: quantityBuy.value,
+            total: totalBuy.value,
+            type: pair,
+            status: 'not_done',
+            date: null,
+            userName: userName
         }));
 
         $("#quantityBuy").val("0");
@@ -259,12 +268,13 @@ function addBidsBuy(pair, rateBuy) {
 
 function addBidsSell(pair, rateSell) {
     stompClient.send("/app/" + pair, {}, JSON.stringify({
-        'rate':rateSell,
-        'quantity':quantitySell.value,
-        'total':totalSell.value,
-        'type':pair,
-        'status':'not_done',
-        'date': null
+        rate: rateSell,
+        quantity: quantitySell.value,
+        total: totalSell.value,
+        type: pair,
+        status: 'not_done',
+        date: null,
+        userName: userName
     }));
 
     $("#quantitySell").val("0");
@@ -322,7 +332,7 @@ function executeSell(){
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
 
         rowsBuy[i].addEventListener('click', function()  {
-            console.log('clicked')
+            console.log('clicked');
             let date = new Date();
             let arg;
             switch (chekedPair) {
@@ -345,13 +355,14 @@ function executeSell(){
                 quantity: rowsQuanBuy[i].innerHTML,
                 execute(){
                     stompClient.send("/app/id", {}, JSON.stringify({
-                        'id': idBuy[i].innerHTML,
-                        'rate': rowsPriceBuy[i].innerHTML,
-                        'quantity': rowsQuanBuy[i].innerHTML,
-                        'total': rowsTotalBuy[i].innerHTML,
-                        'type': arg,
-                        'status': 'done',
-                        'date': date
+                        id: idBuy[i].innerHTML,
+                        rate: rowsPriceBuy[i].innerHTML,
+                        quantity: rowsQuanBuy[i].innerHTML,
+                        total: rowsTotalBuy[i].innerHTML,
+                        type: arg,
+                        status: 'done',
+                        date: date,
+                        userName: userName
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
@@ -387,13 +398,14 @@ function executeBuy(){
                     quantity: rowsQuanSell[i].innerHTML,
                     execute(){
                         stompClient.send("/app/id", {}, JSON.stringify({
-                            'id': idSell[i].innerHTML,
-                            'rate': rowsPriceSell[i].innerHTML,
-                            'quantity': rowsQuanSell[i].innerHTML,
-                            'total': rowsTotalSell[i].innerHTML,
-                            'type': arg,
-                            'status': 'done',
-                            'date': date
+                            id: idSell[i].innerHTML,
+                            rate: rowsPriceSell[i].innerHTML,
+                            quantity: rowsQuanSell[i].innerHTML,
+                            total: rowsTotalSell[i].innerHTML,
+                            type: arg,
+                            status: 'done',
+                            date: date,
+                            userName: userName
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
