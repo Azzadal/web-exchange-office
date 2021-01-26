@@ -367,10 +367,11 @@ function executeSell(){
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
                 }
-            })
-                .open();
-        })
+            });
+                setTimeout(modal.open, 1)
+        });
     }
+
 }
 
 function executeBuy(){
@@ -410,8 +411,8 @@ function executeBuy(){
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
                     }
-                })
-                    .open();
-            })
+                });
+                    setTimeout(modal.open, 1)
+            });
         }
 }

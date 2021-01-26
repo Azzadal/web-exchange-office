@@ -304,11 +304,23 @@ main{
     width: 0;
     background: transparent;
 }
+.modal-window{
+    width: 300px;
+    margin: 0 auto;
+    transform: translateY(-200px);
+    transition: transform .3s ease-in;
+    border-radius: 8px;
+    background-color: antiquewhite;
+}
+.vmodal{
+
+}
 .vmodal.open .modal-window,
 .vmodal.open .modal-overlay{
     opacity: 1;
     z-index: 1000;
 }
+
 .vmodal.hide .modal-window,
 .vmodal.hide .modal-overlay{
     opacity: 1;
@@ -357,14 +369,7 @@ main{
 .modal-close{
     cursor: pointer;
 }
-.modal-window{
-    width: 300px;
-    margin: 0 auto;
-    transform: translateY(-200px);
-    transition: transform .3s ease-in;
-    border-radius: 8px;
-    background-color: antiquewhite;
-}
+
 .modal-footer{
     padding: 5px 10px;
     border-top: 1px solid gray;
