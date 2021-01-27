@@ -312,13 +312,14 @@ main{
     border-radius: 8px;
     background-color: antiquewhite;
 }
-.vmodal{
-
-}
+.vmodal{}
 .vmodal.open .modal-window,
 .vmodal.open .modal-overlay{
     opacity: 1;
     z-index: 1000;
+    position: fixed;
+    left: 0;
+    right: 0;
 }
 
 .vmodal.hide .modal-window,

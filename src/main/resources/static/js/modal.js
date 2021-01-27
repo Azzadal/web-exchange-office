@@ -20,7 +20,7 @@ base.modal = function (options) {
         </div>
         `
         )
-        document.body.appendChild(modal)
+        document.body.prepend(modal)
         return modal
     }
 
@@ -48,12 +48,12 @@ base.modal = function (options) {
     const listener = event => {
         if (event.target.dataset.close){
             modal.close()
-            modal.destroy()
+            setTimeout(modal.destroy, 300)
         }
         if (event.target.dataset.ok){
             options.execute()
             modal.close()
-            modal.destroy()
+            setTimeout(modal.destroy, 300)
         }
     }
 

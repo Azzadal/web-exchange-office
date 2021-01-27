@@ -330,9 +330,7 @@ document.getElementById('butSell').onclick = e => {
 //продажа
 function executeSell(){
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
-
-        rowsBuy[i].addEventListener('click', function()  {
-            console.log('clicked');
+        rowsBuy[i].addEventListener('click', () => {
             let date = new Date();
             let arg;
             switch (chekedPair) {
@@ -371,12 +369,11 @@ function executeSell(){
                 setTimeout(modal.open, 1)
         });
     }
-
 }
 
 function executeBuy(){
         for (let i = 0; i <= rowsSell.length - 1; i++) {
-            rowsSell[i].addEventListener('click', function () {
+            rowsSell[i].addEventListener('click', () => {
                 let date = new Date();
                 let arg;
                 switch (chekedPair) {
