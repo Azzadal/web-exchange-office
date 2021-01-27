@@ -1,11 +1,16 @@
 package com.javaspring.proj.controller;
 
 import com.javaspring.proj.Repository.BidRepository;
+import com.javaspring.proj.Repository.UserRepo;
+import com.javaspring.proj.config.HttpSessionHandshakeInterceptor_personalised;
+import com.javaspring.proj.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import com.javaspring.proj.model.Bid;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/")
@@ -13,6 +18,8 @@ public class BidController {
     @Autowired
     private BidRepository bidRepository;
     private Bid bid;
+    @Autowired
+    private UserRepo userRepo;
 
     @MessageMapping("/URBuy")
     @SendTo("/topic/buys")
@@ -102,6 +109,14 @@ public class BidController {
     @MessageMapping("/EUSell")
     @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidEUSell(@RequestBody Bid bid){
+        String userName = HttpSessionHandshakeInterceptor_personalised.userName;
+//        User client = userRepo.findByUsername(bid.getUserName());
+//        User client = userRepo.findByUsername(hsi.getUserName());
+//        System.out.println("Client " + client);
+//        System.out.println("Client name " + client.getUsername());
+//        System.out.println("Client pass " + client.getPassword());
+//        System.out.println("Client cash " + client.getCash());
+        System.out.println("Name " + userName);
         bidRepository.save(bid);
         return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
@@ -114,6 +129,7 @@ public class BidController {
     @MessageMapping("/id")
     @SendTo("/topic/ids")
     public Iterable<Bid> adssssll(@RequestBody Bid bid){
+        System.out.println("Sum: " + bid.getTotal());
         bidRepository.save(bid);
         return bidRepository.findByStatusOrderByDateDesc("done");
     }

@@ -2,6 +2,7 @@ package com.javaspring.proj.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,8 +52,8 @@ public class Rate {
         HashMap<String, BigDecimal> map = new HashMap<>();
         double randomBuy = (Math.random() * (maxBuy - minBuy)) + minBuy;
         double randomSell = (Math.random() * (maxSell - minSell)) + minSell;
-        BigDecimal buy = new BigDecimal(randomBuy).setScale(2, BigDecimal.ROUND_CEILING);
-        BigDecimal sell = new BigDecimal(randomSell).setScale(2, BigDecimal.ROUND_CEILING);
+        BigDecimal buy = new BigDecimal(randomBuy).setScale(2, RoundingMode.CEILING);
+        BigDecimal sell = new BigDecimal(randomSell).setScale(2, RoundingMode.CEILING);
         map.put("rateBuy", buy);
         map.put("rateSell", sell);
         return map;

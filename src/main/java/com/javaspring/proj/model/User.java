@@ -1,6 +1,8 @@
 package com.javaspring.proj.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Set;
 
 @Entity
@@ -12,6 +14,7 @@ public class User {
     private String username;
     private String password;
     private boolean active;
+    private BigDecimal cash = new BigDecimal(50000);
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -56,5 +59,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public BigDecimal getCash() {
+        return cash.setScale(2, RoundingMode.CEILING);
+    }
+
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
     }
 }

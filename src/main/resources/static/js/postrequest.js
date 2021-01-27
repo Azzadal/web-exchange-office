@@ -49,6 +49,21 @@ function tableSell(arg) {
     req.send();
 }
 
+document.getElementById('testbtn').addEventListener('click', function (){
+
+        const req = new XMLHttpRequest();
+        req.responseType = "text";
+        req.open('GET', window.location + 'user_name');
+        req.onreadystatechange = () => {
+
+            if (req.readyState === 4) {
+                this.innerText = req.responseText;
+            }
+        };
+        req.send();
+
+})
+
 //первоначальный вывод данных
 function tableBuy(arg) {
     const req = new XMLHttpRequest();
@@ -104,12 +119,13 @@ function tableComplit() {
     };
     req.send();
 }
-
+let fr;
 let userName;
 function connect() {
-    let socket = new SockJS('/websocket');
+let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
+        fr = frame;
         console.log('Connected: ' + frame);
         userName = frame.headers['user-name'];
 
