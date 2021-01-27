@@ -33,7 +33,7 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
 
     private boolean createSession;
 
-    public static String userName;
+    public  String userName;
 
     /**
      * Default constructor for copying all HTTP session attributes and the HTTP

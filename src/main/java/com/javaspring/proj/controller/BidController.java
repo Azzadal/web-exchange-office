@@ -109,7 +109,8 @@ public class BidController {
     @MessageMapping("/EUSell")
     @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidEUSell(@RequestBody Bid bid){
-        String userName = HttpSessionHandshakeInterceptor_personalised.userName;
+        HttpSessionHandshakeInterceptor_personalised his = new HttpSessionHandshakeInterceptor_personalised();
+        String userName = his.userName;
 //        User client = userRepo.findByUsername(bid.getUserName());
 //        User client = userRepo.findByUsername(hsi.getUserName());
 //        System.out.println("Client " + client);
@@ -129,7 +130,9 @@ public class BidController {
     @MessageMapping("/id")
     @SendTo("/topic/ids")
     public Iterable<Bid> adssssll(@RequestBody Bid bid){
-        System.out.println("Sum: " + bid.getTotal());
+        System.out.println(
+                "Пользователь " + bid.getUserName() + " купил валюты на сумму " + bid.getTotal()
+        );
         bidRepository.save(bid);
         return bidRepository.findByStatusOrderByDateDesc("done");
     }

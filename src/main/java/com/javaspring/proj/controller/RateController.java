@@ -121,10 +121,5 @@ public class RateController {
         return rateRepository.count();
     }
 
-    @GetMapping(value = "user_name")
-    private String getName(){
-        System.out.println("Test " + HttpSessionHandshakeInterceptor_personalised.userName);
-        return HttpSessionHandshakeInterceptor_personalised.userName;
-    }
 
 }
