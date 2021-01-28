@@ -7,7 +7,7 @@ document.getElementById('lp_title').addEventListener('click', event => {
         event.preventDefault();
         if (!lContent.classList.contains('show')) {
             lContent.classList.add('show');
-            lContent.style.height = '59vh';
+            lContent.style.height = '58vh';
 
             let height = lContent.clientHeight + 'px';
 
@@ -31,11 +31,9 @@ document.getElementById('rp_title').addEventListener('click', event => {
         event.preventDefault();
         if (!rContent.classList.contains('show')) {
             rContent.classList.add('show');
-            rContent.style.height = 'auto';
+            rContent.style.height = '58vh';
 
             let height = rContent.clientHeight + 'px';
-
-            rContent.style.height = '0px';
 
             setTimeout(() => {
                 rContent.style.height = height;

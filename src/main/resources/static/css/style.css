@@ -304,7 +304,6 @@ main{
 .table{
     position: relative;
     max-height: 30vh;
-    background-color: #f2dec4;
     height: auto;
     overflow: scroll;
 }
