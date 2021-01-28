@@ -263,8 +263,8 @@ function addBidsBuy(pair, rateBuy) {
         userName: userName
     }));
 
-    $("#quantityBuy").val("0");
-    $("#totalBuy").val("0");
+    quantityBuy.value = 0;
+    totalBuy.value = 0;
 
 }
 
@@ -279,8 +279,8 @@ function addBidsSell(pair, rateSell) {
         userName: userName
     }));
 
-    $("#quantitySell").val("0");
-    $("#totalSell").val("0");
+    quantitySell.value = 0;
+    totalSell.value = 0;
 }
 
 document.getElementById('butBuy').onclick = e => {
