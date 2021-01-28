@@ -73,8 +73,17 @@ function outTotal() {
             rateSell = rateSellEU.innerHTML;
             break;
     }
-    totalBuy.value = parseFloat(rateBuy) * parseInt(quantityBuy.value).toFixed(2);
-    totalSell.value = parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2);
+    
+    if (!Number.isNaN(parseFloat(rateBuy) * parseInt(quantityBuy.value).toFixed(2))){
+        totalBuy.value = parseFloat(rateBuy) * parseInt(quantityBuy.value).toFixed(2);
+    } else {
+        totalBuy.value = 0;
+    }
+    if (!Number.isNaN(parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2))){
+        totalSell.value = parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2);
+    } else {
+        totalSell.value = 0;
+    }
 }
 
 let screenWidth = screen.width;

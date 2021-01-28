@@ -109,11 +109,12 @@
                         <div class="form">
                             <div>
                                 <label for="quantityBuy">Количество</label>
-                                <input id="quantityBuy" class="form-quantity" type="number" value="0" name="quantityBuy">
+                                <input id="quantityBuy" class="form-quantity" type="number" onfocus="this.value=''" value="0" name="quantityBuy">
                             </div>
                             <div>
                                 <label for="totalBuy">Итого</label>
-                                <textarea style="resize: none;" id="totalBuy" name="totalBuy" class="form-total" rows="1"           disabled>
+                                <textarea
+                                        style="resize: none;" id="totalBuy" name="totalBuy" class="form-total" rows="1" disabled>
                                 </textarea>
                             </div>
                         </div>
@@ -142,11 +143,11 @@
                         <div class="form">
                             <div>
                                 <label for="quantitySell">Количество</label>
-                                <input id="quantitySell" class="form-quantity" type="number" value="0" name="quantitySell">
+                                <input id="quantitySell" class="form-quantity" type="number" onfocus="this.value=''" value="0" name="quantitySell">
                             </div>
                             <div>
                                 <label for="totalSell">Итого</label>
-                                <textarea style="resize: none;" id="totalSell" name="totalSell" class="form-total" rows="1"           disabled>
+                                <textarea style="resize: none;" id="totalSell" name="totalSell" class="form-total" rows="1" disabled>
                                 </textarea>
                             </div>
                         </div>

@@ -253,18 +253,18 @@ function checkSell(pair1, pair2, rateSell) {
 }
 
 function addBidsBuy(pair, rateBuy) {
-        stompClient.send("/app/" + pair, {}, JSON.stringify({
-            rate: rateBuy,
-            quantity: quantityBuy.value,
-            total: totalBuy.value,
-            type: pair,
-            status: 'not_done',
-            date: null,
-            userName: userName
-        }));
+    stompClient.send("/app/" + pair, {}, JSON.stringify({
+        rate: rateBuy,
+        quantity: quantityBuy.value,
+        total: totalBuy.value,
+        type: pair,
+        status: 'not_done',
+        date: null,
+        userName: userName
+    }));
 
-        $("#quantityBuy").val("0");
-        $("#totalBuy").val("0");
+    $("#quantityBuy").val("0");
+    $("#totalBuy").val("0");
 
 }
 
