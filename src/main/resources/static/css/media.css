@@ -75,6 +75,9 @@
 	#data_status{
 		font-size: 12px;
 	}
+	#butBuy, #butSell{
+		width: 70.5vw;
+	}
 }
 
 @media screen and (max-width: 360px){
@@ -161,6 +164,9 @@
 		word-break: break-word;
 		font-size: 12px;
 	}
+	#butBuy, #butSell{
+		width: 70.5vw;
+	}
 }
 
 @media (min-height: 641px) and (max-width: 600px) and (min-width: 360px){
@@ -244,9 +250,12 @@
 	.pair_name{
 		display: none;
 	}
+	#butBuy, #butSell{
+		width: 70.5vw;
+	}
 }
 
-	@media (min-width: 471px) and (max-width: 768px){
+@media (min-width: 471px) and (max-width: 768px){
 	header{
 		width: 94.5%;
 	    height: 5.9%;
@@ -273,10 +282,16 @@
 	.table table{
 		width: 100%;
 	}
+	#butBuy, #butSell{
+		width: 70.5vw;
+	}
 }
 @media (max-width: 575px) and (min-width: 470px){
 	.select__pair__current{
 		font-size: 17px;
+	}
+	#butBuy, #butSell{
+		width: 70.5vw;
 	}
 }
 

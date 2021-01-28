@@ -248,11 +248,11 @@ main{
     left: 8px;
 }
 #l_content, #r_content, #pairs{
+    height: auto;
     -webkit-transition: height 0.5s ease;
     -o-transition: height 0.5s ease;
     transition: height 0.5s ease;
     overflow: hidden;
-    height: auto;
     text-align: center;
     border-radius: 7px;
 }
@@ -374,4 +374,12 @@ main{
 .modal-footer{
     padding: 5px 10px;
     border-top: 1px solid gray;
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

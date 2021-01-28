@@ -1,4 +1,5 @@
 let chekedPair;
+let selectChoice = false;
 const rateBuyUR = document.getElementById('rateBuyUR');
 const rateBuyER = document.getElementById('rateBuyER');
 const rateBuyUE = document.getElementById('rateBuyUE');
@@ -130,7 +131,7 @@ window.onload = function () {
             tableSell(arg2);
             rate.gr(choice);
 
-            console.log('произошла смена select')
+            selectChoice = true;
         });
     });
     observer.observe(

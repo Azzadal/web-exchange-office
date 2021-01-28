@@ -109,15 +109,12 @@ public class BidController {
     @MessageMapping("/EUSell")
     @SendTo("/topic/sells")
     public Iterable<Bid> addNewBidEUSell(@RequestBody Bid bid){
-        HttpSessionHandshakeInterceptor_personalised his = new HttpSessionHandshakeInterceptor_personalised();
-        String userName = his.userName;
 //        User client = userRepo.findByUsername(bid.getUserName());
 //        User client = userRepo.findByUsername(hsi.getUserName());
 //        System.out.println("Client " + client);
 //        System.out.println("Client name " + client.getUsername());
 //        System.out.println("Client pass " + client.getPassword());
 //        System.out.println("Client cash " + client.getCash());
-        System.out.println("Name " + userName);
         bidRepository.save(bid);
         return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
