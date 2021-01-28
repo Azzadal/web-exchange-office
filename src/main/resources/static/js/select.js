@@ -6,6 +6,7 @@ let rPanelTitle = document.getElementsByClassName('r__panel__title');
 let schedule = document.getElementById('schedule');
 let mainHeader = document.getElementsByClassName('main__header');
 let pivotTable = document.getElementsByClassName('pivot_table');
+let divTable = document.getElementsByClassName('table');
 let select = function(){
     let selectItem = document.querySelectorAll('.select__pair__item');
 
@@ -22,6 +23,7 @@ let select = function(){
         rPanelTitle[0].style.zIndex = '0';
         mainHeader[0].style.zIndex = '0';
         pivotTable[0].style.zIndex = '0';
+        divTable[0].style.zIndex = '0';
     }
     let current = document.getElementById('current');
 }
@@ -36,6 +38,7 @@ document.getElementById('current').addEventListener('click', function(event){
         rPanelTitle[0].style.zIndex = '-1';
         mainHeader[0].style.zIndex = '-1';
         pivotTable[0].style.zIndex = '-1';
+        divTable[0].style.zIndex = '-1';
         x.classList.add('show');
         x.style.height = 'auto';
         schedule.style.zIndex = '-1';
@@ -54,7 +57,8 @@ document.getElementById('current').addEventListener('click', function(event){
         rPanelTitle[0].style.zIndex = '0';
         mainHeader[0].style.zIndex = '0';
         pivotTable[0].style.zIndex = '0';
-        
+        divTable[0].style.zIndex = '0';
+
         x.addEventListener('transitionend', 
             function () {
                 

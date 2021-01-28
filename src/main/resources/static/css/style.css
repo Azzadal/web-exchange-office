@@ -262,7 +262,7 @@ main{
     display: none;
 }
 .l_content__table_button, .r_content__table_button{
-    height: 35vh;
+    height: auto;
 }
 #butBuy, #butSell{
     width: 23.5vw;
@@ -297,6 +297,7 @@ main{
     color: #e2c6a4;
 }
 .table{
+    position: relative;
     max-height: 30vh;
     background-color: #f2dec4;
     height: auto;

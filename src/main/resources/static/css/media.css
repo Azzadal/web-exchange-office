@@ -77,6 +77,7 @@
 	}
 	#butBuy, #butSell{
 		width: 70.5vw;
+		margin-top: 5px;
 	}
 }
 
@@ -166,6 +167,7 @@
 	}
 	#butBuy, #butSell{
 		width: 70.5vw;
+		margin-top: 5px;
 	}
 }
 
