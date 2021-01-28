@@ -12,6 +12,11 @@ table {
     empty-cells: hide;
     margin: auto;
 }
+thead th {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+}
 td {
     padding: 5px 15px;
     text-align: center;
@@ -271,7 +276,7 @@ main{
     border-radius: 7px;
     background-color: #f6d27e;
     outline: none;
-    min-height: 25px;
+    min-height: 30px;
 }
 .form-quantity, .form-total{
     width: 100%;

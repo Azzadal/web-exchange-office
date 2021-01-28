@@ -254,6 +254,7 @@
 	}
 	#butBuy, #butSell{
 		width: 70.5vw;
+		margin-top: 5px;
 	}
 }
 
@@ -286,6 +287,7 @@
 	}
 	#butBuy, #butSell{
 		width: 70.5vw;
+		margin-top: 5px;
 	}
 }
 @media (max-width: 575px) and (min-width: 470px){
@@ -294,6 +296,7 @@
 	}
 	#butBuy, #butSell{
 		width: 70.5vw;
+		margin-top: 5px;
 	}
 }
 

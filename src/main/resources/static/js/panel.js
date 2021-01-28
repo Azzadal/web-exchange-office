@@ -7,11 +7,9 @@ document.getElementById('lp_title').addEventListener('click', event => {
         event.preventDefault();
         if (!lContent.classList.contains('show')) {
             lContent.classList.add('show');
-            lContent.style.height = 'auto';
+            lContent.style.height = '59vh';
 
             let height = lContent.clientHeight + 'px';
-
-            lContent.style.height = '0px';
 
             setTimeout(() => {
                 lContent.style.height = height;
