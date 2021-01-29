@@ -105,17 +105,31 @@ function tableComplit() {
     };
     req.send();
 }
-let fr;
+
 let userName;
 function connect() {
 let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
-        fr = frame;
+
         console.log('Connected: ' + frame);
         userName = frame.headers['user-name'];
 
         greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + userName + '</span>');
+
+
+
+        stompClient.subscribe('/topic/users', e => {
+            let c = JSON.parse(e.body);
+            console.log('users', c)
+        });
+
+
+
+
+
+
+
 
         stompClient.subscribe('/topic/buys', e => {
             let gvn = JSON.parse(e.body);
@@ -189,11 +203,20 @@ let socket = new SockJS('/websocket');
             rateSellEU.innerHTML = rateEUObj[0].rateSell;
             rate.gr('rateEU')
         });
-        stompClient.subscribe('/topic/users', e => {
-            let c = JSON.parse(e.body);
-            console.log('Юзеров', c)
-        });
+
     });
+    // const req = new XMLHttpRequest();
+    // req.responseType = "json";
+    // req.open('GET', window.location + 'users');
+    // req.onreadystatechange = () => {
+    //     if (req.readyState === 4) {
+    //         let json = req.response;
+    //         console.log('users', json)
+    //     }
+    //
+    // };
+    //
+    // req.send();
 }
 
 function checkBuy(pair1, pair2, rateBuy) {

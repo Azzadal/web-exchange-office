@@ -134,8 +134,10 @@ public class BidController {
         return bidRepository.findByStatusOrderByDateDesc("done");
     }
 
+
     @SendTo("/topic/users")
     public int getUserCount(){
+        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
         return HttpSessionHandshakeInterceptor_personalised.prr.size();
     }
 

@@ -1,5 +1,6 @@
 package com.javaspring.proj.config;
 
+import com.javaspring.proj.controller.BidController;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -132,9 +133,6 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
         userName = httpServletRequest.getRemoteUser();
 
 
-        prr = new ArrayList<>();
-        prr.add(httpServletRequest.getUserPrincipal());
-        System.out.println("Юзеров " + prr.size());
 
 
         System.out.println("SessionHandshakeInterceptor::beforeHandshake()    httpServletRequest.getRemoteUser()(): " + userName);
@@ -209,6 +207,14 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                WebSocketHandler wsHandler, Exception ex) {
+
+        BidController bc = new BidController();
+        ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
+        HttpServletRequest httpServletRequest = servletRequest.getServletRequest();
+        prr = new ArrayList<>();
+        prr.add(httpServletRequest.getUserPrincipal());
+        System.out.println("Юзеров промежуточнй класс " + prr.size());
+        bc.getUserCount();
 
         System.out.println("SessionHandshakeInterceptor::afterHandshake()");
 
