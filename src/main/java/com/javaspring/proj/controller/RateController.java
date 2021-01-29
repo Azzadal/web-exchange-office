@@ -120,6 +120,4 @@ public class RateController {
     private long getCount(){
         return rateRepository.count();
     }
-
-
 }

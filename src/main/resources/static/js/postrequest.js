@@ -189,6 +189,10 @@ let socket = new SockJS('/websocket');
             rateSellEU.innerHTML = rateEUObj[0].rateSell;
             rate.gr('rateEU')
         });
+        stompClient.subscribe('/topic/users', e => {
+            let c = JSON.parse(e.body);
+            console.log('Юзеров', c)
+        });
     });
 }
 

@@ -7,13 +7,12 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Map;
+import java.security.Principal;
+import java.util.*;
 
 public class HttpSessionHandshakeInterceptor_personalised implements HandshakeInterceptor {
 
@@ -116,7 +115,7 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
     private boolean isCreateSession() {
         return this.createSession;
     }
-
+    public static ArrayList<Principal> prr;
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
@@ -131,6 +130,12 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
 //        httpServletRequest.getCookies();
 //        httpServletRequest.getParameter("inquiryId");
         userName = httpServletRequest.getRemoteUser();
+
+
+        prr = new ArrayList<>();
+        prr.add(httpServletRequest.getUserPrincipal());
+        System.out.println("Юзеров " + prr.size());
+
 
         System.out.println("SessionHandshakeInterceptor::beforeHandshake()    httpServletRequest.getRemoteUser()(): " + userName);
 

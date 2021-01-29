@@ -134,6 +134,11 @@ public class BidController {
         return bidRepository.findByStatusOrderByDateDesc("done");
     }
 
+    @SendTo("/topic/users")
+    public int getUserCount(){
+        return HttpSessionHandshakeInterceptor_personalised.prr.size();
+    }
+
     @GetMapping(value = "tab_compl")
     public Iterable<Bid> getComplitTab(){
         return bidRepository.findByStatusOrderByDateDesc("done");
