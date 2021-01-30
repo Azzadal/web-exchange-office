@@ -145,14 +145,17 @@ public class BidController {
         return bidRepository.findByStatusOrderByDateDesc("done");
     }
 
-    @Scheduled(fixedDelay = 1000)
-    public void getUserCount(){
-        String destination = "/topic/users";
-        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
-        this.messagingTemplate.convertAndSend(destination, simpUserRegistry.getUserCount());
+//    @Scheduled(fixedDelay = 1000)
+//    public void getUserCount(){
+//        String destination = "/topic/users";
+//        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
+//        this.messagingTemplate.convertAndSend(destination, simpUserRegistry.getUserCount());
+//    }
 
-//        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
-//        return HttpSessionHandshakeInterceptor_personalised.prr.size();
+    @GetMapping(value = "users")
+    public int getUserCount(){
+        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
+        return simpUserRegistry.getUserCount();
     }
 
     @GetMapping(value = "tab_compl")

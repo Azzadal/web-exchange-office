@@ -117,12 +117,23 @@ let socket = new SockJS('/websocket');
 
         greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + userName + '</span>');
 
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
+        req.open('GET', window.location + 'users');
+        req.onreadystatechange = () => {
+            if (req.readyState === 4) {
+                let json = req.response;
+                console.log('users', json)
+            }
 
+        };
 
-        stompClient.subscribe('/topic/users', e => {
-            let c = JSON.parse(e.body);
-            console.log('users', c)
-        });
+        req.send();
+
+        // stompClient.subscribe('/topic/users', e => {
+        //     let c = JSON.parse(e.body);
+        //     console.log('users', c)
+        // });
 
 
 
@@ -205,18 +216,6 @@ let socket = new SockJS('/websocket');
         });
 
     });
-    // const req = new XMLHttpRequest();
-    // req.responseType = "json";
-    // req.open('GET', window.location + 'users');
-    // req.onreadystatechange = () => {
-    //     if (req.readyState === 4) {
-    //         let json = req.response;
-    //         console.log('users', json)
-    //     }
-    //
-    // };
-    //
-    // req.send();
 }
 
 function checkBuy(pair1, pair2, rateBuy) {

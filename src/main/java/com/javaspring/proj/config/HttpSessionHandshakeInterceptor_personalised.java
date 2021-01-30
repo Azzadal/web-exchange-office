@@ -33,9 +33,6 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
 
     private boolean createSession;
 
-    public  String userName;
-    public static ArrayList<String> un = new ArrayList<>();
-
     /**
      * Default constructor for copying all HTTP session attributes and the HTTP
      * session id.
@@ -131,12 +128,8 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
         HttpServletRequest httpServletRequest = servletRequest.getServletRequest();
 //        httpServletRequest.getCookies();
 //        httpServletRequest.getParameter("inquiryId");
-        userName = httpServletRequest.getRemoteUser();
 
-        un.add(httpServletRequest.getRemoteUser());
-
-
-        System.out.println("SessionHandshakeInterceptor::beforeHandshake()    httpServletRequest.getRemoteUser()(): " + userName);
+        System.out.println("SessionHandshakeInterceptor::beforeHandshake()    httpServletRequest.getRemoteUser()(): " + httpServletRequest.getRemoteUser());
 
         System.out.println("SessionHandshakeInterceptor::beforeHandshake()    request.getLocalAddress(): "+request.getLocalAddress());
 
@@ -209,14 +202,6 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                WebSocketHandler wsHandler, Exception ex) {
 
-//        BidController bc = new BidController();
-        ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-        HttpServletRequest httpServletRequest = servletRequest.getServletRequest();
-        prr = new ArrayList<>();
-        prr.add(httpServletRequest.getUserPrincipal());
-
-        System.out.println("промежуточнй класс HeaderNames " + httpServletRequest.getHeaderNames().toString());
-//        bc.getUserCount();
 
         System.out.println("SessionHandshakeInterceptor::afterHandshake()");
 

@@ -93,6 +93,20 @@ window.onload = function () {
     if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterbegin', 'Ожидание данных...');
     tableComplit();
     connect();
+    // (() => {
+    //     const req = new XMLHttpRequest();
+    //     req.responseType = "json";
+    //     req.open('GET', window.location + 'users');
+    //     req.onreadystatechange = () => {
+    //         if (req.readyState === 4) {
+    //             let json = req.response;
+    //             console.log('users', json)
+    //         }
+    //
+    //     };
+    //
+    //     req.send();
+    // })();
     const xhr = new XMLHttpRequest();
     xhr.responseType = "text";
     xhr.open('GET', window.location + "count");
