@@ -5,8 +5,10 @@ import com.javaspring.proj.Repository.UserRepo;
 import com.javaspring.proj.config.HttpSessionHandshakeInterceptor_personalised;
 import com.javaspring.proj.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import com.javaspring.proj.model.Bid;
 
@@ -20,6 +22,13 @@ public class BidController {
     private Bid bid;
     @Autowired
     private UserRepo userRepo;
+
+    private final MessageSendingOperations<String> messagingTemplate;
+
+    @Autowired
+    public BidController(MessageSendingOperations<String> messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
+    }
 
     @MessageMapping("/URBuy")
     @SendTo("/topic/buys")
@@ -134,11 +143,14 @@ public class BidController {
         return bidRepository.findByStatusOrderByDateDesc("done");
     }
 
-
-    @SendTo("/topic/users")
-    public int getUserCount(){
+    @Scheduled(fixedDelay = 1000)
+    public void getUserCount(){
+        String destination = "/topic/users";
         System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
-        return HttpSessionHandshakeInterceptor_personalised.prr.size();
+        this.messagingTemplate.convertAndSend(destination, HttpSessionHandshakeInterceptor_personalised.prr.size());
+
+//        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
+//        return HttpSessionHandshakeInterceptor_personalised.prr.size();
     }
 
     @GetMapping(value = "tab_compl")

@@ -208,13 +208,13 @@ public class HttpSessionHandshakeInterceptor_personalised implements HandshakeIn
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                WebSocketHandler wsHandler, Exception ex) {
 
-        BidController bc = new BidController();
+//        BidController bc = new BidController();
         ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
         HttpServletRequest httpServletRequest = servletRequest.getServletRequest();
         prr = new ArrayList<>();
         prr.add(httpServletRequest.getUserPrincipal());
         System.out.println("Юзеров промежуточнй класс " + prr.size());
-        bc.getUserCount();
+//        bc.getUserCount();
 
         System.out.println("SessionHandshakeInterceptor::afterHandshake()");
 
