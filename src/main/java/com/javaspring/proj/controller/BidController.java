@@ -159,7 +159,8 @@ public class BidController {
     }
 
     private int userCount = 0;
-    private ArrayList<String> users = new ArrayList<>();
+//    private ArrayList<String> users = new ArrayList<>();
+    private ArrayList<Integer> users = new ArrayList<>();
 
     @GetMapping(value = "users")
     public int getUserCount(){
@@ -170,10 +171,13 @@ public class BidController {
     }
 
     @EventListener(SessionConnectEvent.class)
-    public void handleWebsocketConnectListner(SessionConnectEvent event) {
+    public void handleWebsocketConnectListener(SessionConnectEvent event) {
 
-        if (!users.contains(Objects.requireNonNull(event.getUser()).getName())){
-            users.add(event.getUser().getName());
+        if (users.contains(Objects.requireNonNull(event.getUser()).getName().hashCode())){
+            users.add(event.getUser().getName().hashCode());
+            System.out.println("Вход в аккаунт с другого устройства");
+        } else {
+            users.add(event.getUser().getName().hashCode());
             userCount++;
             System.out.println("Коннект " + event.getUser().getName());
             getUserCount2();
@@ -182,8 +186,8 @@ public class BidController {
     }
 
     @EventListener(SessionDisconnectEvent.class)
-    public void handleWebsocketDisconnectListner(SessionDisconnectEvent event) {
-        users.remove(Objects.requireNonNull(event.getUser()).getName());
+    public void handleWebsocketDisconnectListener(SessionDisconnectEvent event) {
+        users.remove(Objects.requireNonNull(event.getUser()).getName().hashCode());
         userCount--;
         System.out.println("Дисконнект " + event.getUser());
         getUserCount2();
