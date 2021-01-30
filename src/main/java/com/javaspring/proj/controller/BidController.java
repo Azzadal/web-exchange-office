@@ -146,8 +146,8 @@ public class BidController {
     @Scheduled(fixedDelay = 1000)
     public void getUserCount(){
         String destination = "/topic/users";
-        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
-        this.messagingTemplate.convertAndSend(destination, HttpSessionHandshakeInterceptor_personalised.prr.size());
+        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.un.size());
+        this.messagingTemplate.convertAndSend(destination, HttpSessionHandshakeInterceptor_personalised.un.size());
 
 //        System.out.println("Юзеров " + HttpSessionHandshakeInterceptor_personalised.prr.size());
 //        return HttpSessionHandshakeInterceptor_personalised.prr.size();
