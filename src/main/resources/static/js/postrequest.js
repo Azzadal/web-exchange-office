@@ -123,7 +123,7 @@ let socket = new SockJS('/websocket');
         req.onreadystatechange = () => {
             if (req.readyState === 4) {
                 let json = req.response;
-                greet.insertAdjacentHTML('beforeend', 'Пользователей на сайте <span>' + json + '</span>');
+                greet.insertAdjacentHTML('beforeend', '<div id="user_count">Пользователей на сайте <span>' + json + '</span></div>);
                 console.log('users', json)
             }
 
@@ -131,10 +131,11 @@ let socket = new SockJS('/websocket');
 
         req.send();
 
-        // stompClient.subscribe('/topic/users', e => {
-        //     let c = JSON.parse(e.body);
-        //     console.log('users', c)
-        // });
+        stompClient.subscribe('/topic/users', e => {
+            let c = JSON.parse(e.body);
+            console.log('users of STOMP', c)
+            document.querySelector('user_count').innerHTML = 'Пользователей на сайте <span>' + c + '</span>';
+        });
 
 
 
