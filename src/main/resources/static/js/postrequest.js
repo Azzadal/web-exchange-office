@@ -128,8 +128,9 @@ let socket = new SockJS('/websocket');
             }
 
         };
-
         req.send();
+
+        getCash();
 
         stompClient.subscribe('/topic/users', e => {
             let count = JSON.parse(e.body);
@@ -394,6 +395,7 @@ function executeSell(){
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
+                    getCash();
                 }
             });
                 setTimeout(modal.open, 1)
@@ -437,6 +439,7 @@ function executeBuy(){
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
+                        getCash();
                     }
                 });
                     setTimeout(modal.open, 1)

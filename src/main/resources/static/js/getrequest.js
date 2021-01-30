@@ -86,6 +86,20 @@ function outTotal() {
     }
 }
 
+function getCash(){
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "json";
+    xhr.open('GET', window.location + "cash");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            let cash = xhr.response;
+            document.getElementById('cash').innerHTML = cash;
+            console.log("кеш " + cash)
+        }
+    };
+    xhr.send();
+}
+
 let screenWidth = screen.width;
 let screenHeight = screen.height;
 

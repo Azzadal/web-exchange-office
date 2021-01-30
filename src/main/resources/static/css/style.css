@@ -66,6 +66,13 @@ tr:hover td{
     width: 100%;
     /*table-layout: fixed;*/
 }
+#cash{
+    color: #ffbc00;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+}
 #greet{
     color: #ffbc00;
     position: absolute;
