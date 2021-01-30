@@ -132,9 +132,9 @@ let socket = new SockJS('/websocket');
         req.send();
 
         stompClient.subscribe('/topic/users', e => {
-            let c = JSON.parse(e.body);
-            console.log('users of STOMP', c)
-            user_count.innerHTML = 'Пользователей на сайте <span>' + c + '</span>';
+            let count = JSON.parse(e.body);
+            console.log('users of STOMP', count)
+            document.getElementById('user_count').innerHTML = 'Пользователей на сайте <span>' + count + '</span>';
         });
 
 
