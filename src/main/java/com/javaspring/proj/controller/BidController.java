@@ -150,11 +150,11 @@ public class BidController {
     }
 
 //    @Scheduled(fixedDelay = 1000)
-//    public void getUserCount(){
-//        String destination = "/topic/users";
-//        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
-//        this.messagingTemplate.convertAndSend(destination, simpUserRegistry.getUserCount());
-//    }
+    public void getUserCount2(){
+        String destination = "/topic/users";
+        System.out.println("Юзеров stomp " + userCount);
+        this.messagingTemplate.convertAndSend(destination, userCount);
+    }
 
     private int userCount = 0;
 
