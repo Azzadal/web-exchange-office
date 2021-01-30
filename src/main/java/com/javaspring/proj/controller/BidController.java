@@ -18,6 +18,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -159,8 +160,8 @@ public class BidController {
     }
 
     private int userCount = 0;
-//    private ArrayList<String> users = new ArrayList<>();
     private ArrayList<Integer> users = new ArrayList<>();
+
 
     @GetMapping(value = "users")
     public int getUserCount(){
@@ -179,6 +180,7 @@ public class BidController {
         } else {
             users.add(event.getUser().getName().hashCode());
             userCount++;
+            System.out.println("Коннект " + (Integer)event.getUser().getName().hashCode());
             System.out.println("Коннект " + event.getUser().getName());
             getUserCount2();
         }
@@ -187,9 +189,12 @@ public class BidController {
 
     @EventListener(SessionDisconnectEvent.class)
     public void handleWebsocketDisconnectListener(SessionDisconnectEvent event) {
-        users.remove(Objects.requireNonNull(event.getUser()).getName().hashCode());
+
+        System.out.println("Дисконнект " + Objects.requireNonNull(event.getUser()).getName().hashCode());
+        System.out.println("Дисконнект " + Objects.requireNonNull(event.getUser().getName()));
+        System.out.println("сейчас в листе " + users);
+        users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
         userCount--;
-        System.out.println("Дисконнект " + event.getUser());
         getUserCount2();
     }
 
