@@ -150,7 +150,7 @@ public class BidController {
     }
 
 //    @Scheduled(fixedDelay = 1000)
-    public void getUserCount2(){
+    private void getUserCount2(){
         String destination = "/topic/users";
         System.out.println("Юзеров stomp " + userCount);
         this.messagingTemplate.convertAndSend(destination, userCount);

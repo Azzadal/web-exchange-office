@@ -134,7 +134,7 @@ let socket = new SockJS('/websocket');
         stompClient.subscribe('/topic/users', e => {
             let c = JSON.parse(e.body);
             console.log('users of STOMP', c)
-            document.querySelector('user_count').innerHTML = 'Пользователей на сайте <span>' + c + '</span>';
+            user_count.innerHTML = 'Пользователей на сайте <span>' + c + '</span>';
         });
 
 
