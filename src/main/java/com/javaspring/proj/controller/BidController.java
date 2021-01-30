@@ -17,6 +17,8 @@ import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
@@ -157,6 +159,7 @@ public class BidController {
     }
 
     private int userCount = 0;
+    private ArrayList<String> users = new ArrayList<>();
 
     @GetMapping(value = "users")
     public int getUserCount(){
@@ -168,13 +171,19 @@ public class BidController {
 
     @EventListener(SessionConnectEvent.class)
     public void handleWebsocketConnectListner(SessionConnectEvent event) {
-        userCount++;
-        System.out.println("Коннект " + event.getUser());
-        getUserCount2();
+
+        if (!users.contains(Objects.requireNonNull(event.getUser()).getName())){
+            users.add(event.getUser().getName());
+            userCount++;
+            System.out.println("Коннект " + event.getUser().getName());
+            getUserCount2();
+        }
+
     }
 
     @EventListener(SessionDisconnectEvent.class)
     public void handleWebsocketDisconnectListner(SessionDisconnectEvent event) {
+        users.remove(Objects.requireNonNull(event.getUser()).getName());
         userCount--;
         System.out.println("Дисконнект " + event.getUser());
         getUserCount2();
