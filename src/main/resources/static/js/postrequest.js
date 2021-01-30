@@ -123,6 +123,7 @@ let socket = new SockJS('/websocket');
         req.onreadystatechange = () => {
             if (req.readyState === 4) {
                 let json = req.response;
+                greet.insertAdjacentHTML('beforeend', 'Пользователей на сайте <span>' + json + '</span>');
                 console.log('users', json)
             }
 

@@ -5,6 +5,7 @@ import com.javaspring.proj.Repository.UserRepo;
 import com.javaspring.proj.config.HttpSessionHandshakeInterceptor_personalised;
 import com.javaspring.proj.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,8 +13,11 @@ import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import com.javaspring.proj.model.Bid;
+import org.springframework.web.socket.messaging.SessionConnectEvent;
+import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.math.BigDecimal;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/")
@@ -152,11 +156,36 @@ public class BidController {
 //        this.messagingTemplate.convertAndSend(destination, simpUserRegistry.getUserCount());
 //    }
 
+    private int userCount = 0;
+
     @GetMapping(value = "users")
     public int getUserCount(){
-        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
-        return simpUserRegistry.getUserCount();
+//        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
+//        return simpUserRegistry.getUserCount();
+        System.out.println("Юзеров " + userCount);
+        return userCount;
     }
+
+    @EventListener(SessionConnectEvent.class)
+    public void handleWebsocketConnectListner(SessionConnectEvent event) {
+        userCount++;
+        System.out.println("Коннект " + event.getUser());
+    }
+
+    @EventListener(SessionDisconnectEvent.class)
+    public void handleWebsocketDisconnectListner(SessionDisconnectEvent event) {
+        userCount--;
+        System.out.println("Дисконнект " + event.getUser());
+    }
+
+
+
+
+
+
+
+
+
 
     @GetMapping(value = "tab_compl")
     public Iterable<Bid> getComplitTab(){
