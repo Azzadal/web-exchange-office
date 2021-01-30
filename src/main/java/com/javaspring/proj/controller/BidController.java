@@ -170,12 +170,14 @@ public class BidController {
     public void handleWebsocketConnectListner(SessionConnectEvent event) {
         userCount++;
         System.out.println("Коннект " + event.getUser());
+        getUserCount2();
     }
 
     @EventListener(SessionDisconnectEvent.class)
     public void handleWebsocketDisconnectListner(SessionDisconnectEvent event) {
         userCount--;
         System.out.println("Дисконнект " + event.getUser());
+        getUserCount2();
     }
 
 
