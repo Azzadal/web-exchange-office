@@ -264,9 +264,9 @@ main{
 }
 #l_content, #r_content, #pairs{
     height: auto;
-    -webkit-transition: height 0.5s ease;
-    -o-transition: height 0.5s ease;
-    transition: height 0.5s ease;
+    -webkit-transition: height 0.8s ease;
+    -o-transition: height 0.8s ease;
+    transition: height 0.8s ease;
     overflow: hidden;
     text-align: center;
     border-radius: 7px;
@@ -345,7 +345,7 @@ main{
     z-index: 1000;
 }
 .vmodal.open .modal-window{
-    transform: translateY(50vh);
+    transform: translateY(30vh);
 }
 .vmodal.open .modal-overlay{
     background: rgba(0,0,0,0.5);
@@ -395,8 +395,13 @@ main{
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+#user_count{
+    color: #dda83b;
+}
+#user_count span{
+    color: #30e224;
 }

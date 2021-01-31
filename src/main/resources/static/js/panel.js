@@ -7,12 +7,10 @@ document.getElementById('lp_title').addEventListener('click', event => {
         event.preventDefault();
         if (!lContent.classList.contains('show')) {
             lContent.classList.add('show');
-            lContent.style.height = '58vh';
-
-            let height = lContent.clientHeight + 'px';
+             lContent.style.height = '0px';
 
             setTimeout(() => {
-                lContent.style.height = height;
+                lContent.style.height = '58vh';
             }, 0);
         } else {
             lContent.style.height = '0px';
@@ -24,6 +22,12 @@ document.getElementById('lp_title').addEventListener('click', event => {
                     once: true
                 });
         }
+    } else {
+        modal = base.modal({
+            title: 'Внимание!',
+            content: 'сначала выберите пару',
+        });
+        setTimeout(modal.open, 1)
     }
 });
 document.getElementById('rp_title').addEventListener('click', event => {
@@ -31,12 +35,10 @@ document.getElementById('rp_title').addEventListener('click', event => {
         event.preventDefault();
         if (!rContent.classList.contains('show')) {
             rContent.classList.add('show');
-            rContent.style.height = '58vh';
-
-            let height = rContent.clientHeight + 'px';
+            rContent.style.height = '0px';
 
             setTimeout(() => {
-                rContent.style.height = height;
+                rContent.style.height = '58vh';
             }, 0);
         } else {
             rContent.style.height = '0px';
@@ -48,5 +50,11 @@ document.getElementById('rp_title').addEventListener('click', event => {
                     once: true
                 });
         }
+    } else {
+        modal = base.modal({
+            title: 'Внимание!',
+            content: 'сначала выберите пару',
+        });
+        setTimeout(modal.open, 1)
     }
 });

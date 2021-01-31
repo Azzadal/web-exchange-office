@@ -10,11 +10,11 @@ base.modal = function (options) {
                     <span class="modal-close" data-close="true">&times;</span>
                 </div>
                 <div class="modal-body">
-                    курс <b>${options.course}</b> кол-во <b>${options.quantity}</b>
+                    ${options.content}
                 </div>
                 <div class="modal-footer">
                     <button data-ok="true">Ok</button>
-                    <button>Cancel</button>
+                    <button data-close="true">Cancel</button>
                 </div>
             </div>
         </div>

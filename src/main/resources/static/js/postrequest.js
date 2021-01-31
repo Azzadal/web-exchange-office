@@ -379,8 +379,7 @@ function executeSell(){
             }
             modal = base.modal({
                 title: 'Продать',
-                course: rowsPriceBuy[i].innerHTML,
-                quantity: rowsQuanBuy[i].innerHTML,
+                content: `курс <b>${rowsPriceBuy[i].innerHTML}</b> кол-во <b>${rowsQuanBuy[i].innerHTML}</b>`,
                 execute(){
                     stompClient.send("/app/id/deposit", {}, JSON.stringify({
                         id: idBuy[i].innerHTML,
@@ -423,8 +422,7 @@ function executeBuy(){
                 }
                 modal = base.modal({
                     title: 'Купить',
-                    course: rowsPriceSell[i].innerHTML,
-                    quantity: rowsQuanSell[i].innerHTML,
+                    content: `курс <b>${rowsPriceSell[i].innerHTML}</b> кол-во <b>${rowsQuanSell[i].innerHTML}</b>`,
                     execute(){
                         stompClient.send("/app/id/withdraw", {}, JSON.stringify({
                             id: idSell[i].innerHTML,
