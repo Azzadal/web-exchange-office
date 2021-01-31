@@ -3,6 +3,7 @@ package com.javaspring.proj.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -45,7 +46,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
+    private boolean isActive() {
         return active;
     }
 
@@ -53,7 +54,7 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
+    private Set<Role> getRoles() {
         return roles;
     }
 
@@ -67,5 +68,23 @@ public class User {
 
     public void setCash(BigDecimal cash) {
         this.cash = cash;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return isActive() == user.isActive() &&
+                Objects.equals(getId(), user.getId()) &&
+                Objects.equals(getUsername(), user.getUsername()) &&
+                Objects.equals(getPassword(), user.getPassword()) &&
+                Objects.equals(getCash(), user.getCash()) &&
+                Objects.equals(getRoles(), user.getRoles());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUsername(), getPassword(), isActive(), getCash(), getRoles());
     }
 }

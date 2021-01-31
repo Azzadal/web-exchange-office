@@ -86,10 +86,10 @@ function outTotal() {
     }
 }
 
-function getCash(){
+function getCash(userName){
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
-    xhr.open('GET', window.location + "cash");
+    xhr.open('GET', window.location + userName + "/cash");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let cash = xhr.response;
@@ -102,7 +102,7 @@ function getCash(){
 
 let screenWidth = screen.width;
 let screenHeight = screen.height;
-
+let userName = getUserName();
 window.onload = function () {
     if (rateURObj === undefined || rateERObj === undefined || rateUEObj === undefined || rateEUObj === undefined) datastatus.insertAdjacentHTML('afterbegin', 'Ожидание данных...');
     tableComplit();

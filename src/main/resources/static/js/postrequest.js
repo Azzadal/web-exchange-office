@@ -105,15 +105,25 @@ function tableComplit() {
     };
     req.send();
 }
+function getUserName(){
+    let userName;
+    const req = new XMLHttpRequest();
+    req.open('GET', window.location + 'user_name_test', false);
+    req.send();
+        if (req.readyState === 4) {
+            userName = req.responseText;
+            console.log('пользователь ', userName);
+            return userName;
+        } else return '';
+}
 
-let userName;
 function connect() {
 let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
 
         console.log('Connected: ' + frame);
-        userName = frame.headers['user-name'];
+        // userName = frame.headers['user-name'];
 
         greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + userName + '</span>');
 
@@ -130,20 +140,13 @@ let socket = new SockJS('/websocket');
         };
         req.send();
 
-        getCash();
+        getCash(userName);
 
         stompClient.subscribe('/topic/users', e => {
             let count = JSON.parse(e.body);
             console.log('users of STOMP', count)
             document.getElementById('user_count').innerHTML = 'Пользователей на сайте <span>' + count + '</span>';
         });
-
-
-
-
-
-
-
 
         stompClient.subscribe('/topic/buys', e => {
             let gvn = JSON.parse(e.body);
@@ -383,7 +386,7 @@ function executeSell(){
                 course: rowsPriceBuy[i].innerHTML,
                 quantity: rowsQuanBuy[i].innerHTML,
                 execute(){
-                    stompClient.send("/app/id", {}, JSON.stringify({
+                    stompClient.send("/app/id/deposit", {}, JSON.stringify({
                         id: idBuy[i].innerHTML,
                         rate: rowsPriceBuy[i].innerHTML,
                         quantity: rowsQuanBuy[i].innerHTML,
@@ -395,7 +398,7 @@ function executeSell(){
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
-                    getCash();
+                    getCash(userName);
                 }
             });
                 setTimeout(modal.open, 1)
@@ -427,7 +430,7 @@ function executeBuy(){
                     course: rowsPriceSell[i].innerHTML,
                     quantity: rowsQuanSell[i].innerHTML,
                     execute(){
-                        stompClient.send("/app/id", {}, JSON.stringify({
+                        stompClient.send("/app/id/withdraw", {}, JSON.stringify({
                             id: idSell[i].innerHTML,
                             rate: rowsPriceSell[i].innerHTML,
                             quantity: rowsQuanSell[i].innerHTML,
@@ -439,7 +442,7 @@ function executeBuy(){
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
-                        getCash();
+                        getCash(userName);
                     }
                 });
                     setTimeout(modal.open, 1)

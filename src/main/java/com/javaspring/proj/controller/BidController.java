@@ -35,7 +35,7 @@ public class BidController {
     @Autowired
     private SimpUserRegistry simpUserRegistry;
     private final MessageSendingOperations<String> messagingTemplate;
-    private User client;
+
     private int userCount = 0;
     private ArrayList<Integer> users = new ArrayList<>();
     @Autowired
@@ -133,7 +133,7 @@ public class BidController {
 //        System.out.println("Client " + client);
 //        System.out.println("Client name " + client.getUsername());
 //        System.out.println("Client pass " + client.getPassword());
-        System.out.println("Client cash " + client.getCash());
+//        System.out.println("Client cash " + client.getCash());
         bidRepository.save(bid);
         return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
@@ -143,13 +143,26 @@ public class BidController {
         return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
 
-    @MessageMapping("/id")
+    @MessageMapping("/id/withdraw")
     @SendTo("/topic/ids")
-    public Iterable<Bid> adssssll(@RequestBody Bid bid){
+    public Iterable<Bid> withdraw(@RequestBody Bid bid){
         System.out.println(
                 "Пользователь " + bid.getUserName() + " купил валюты на сумму " + bid.getTotal()
         );
+        User client = userRepo.findByUsername(bid.getUserName());
         client.setCash(client.getCash().subtract(bid.getTotal()));
+        userRepo.save(client);
+        bidRepository.save(bid);
+        return bidRepository.findByStatusOrderByDateDesc("done");
+    }
+    @MessageMapping("/id/deposit")
+    @SendTo("/topic/ids")
+    public Iterable<Bid> deposit(@RequestBody Bid bid){
+        System.out.println(
+                "Пользователь " + bid.getUserName() + " купил валюты на сумму " + bid.getTotal()
+        );
+        User client = userRepo.findByUsername(bid.getUserName());
+        client.setCash(client.getCash().add(bid.getTotal()));
         userRepo.save(client);
         bidRepository.save(bid);
         return bidRepository.findByStatusOrderByDateDesc("done");
@@ -168,35 +181,30 @@ public class BidController {
         System.out.println("Юзеров " + userCount);
         return userCount;
     }
-    @GetMapping(value = "cash")
-    public BigDecimal getUserCash(){
-        System.out.println("cash " + client.getCash());
-        return client.getCash();
-    }
 
-    @EventListener(SessionConnectEvent.class)
-    public void handleWebsocketConnectListener(SessionConnectEvent event) {
-        client = userRepo.findByUsername(Objects.requireNonNull(event.getUser()).getName());
-        if (users.contains(Objects.requireNonNull(event.getUser()).getName().hashCode())){
-            users.add(event.getUser().getName().hashCode());
-            System.out.println("Вход в аккаунт с другого устройства");
-        } else {
-            users.add(event.getUser().getName().hashCode());
-            userCount++;
-            getUserCount2();
-        }
-    }
-
-    @EventListener(SessionDisconnectEvent.class)
-    public void handleWebsocketDisconnectListener(SessionDisconnectEvent event) {
-        if ((Collections.frequency(users, Objects.requireNonNull(event.getUser()).getName().hashCode())) > 1){
-            users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
-        } else {
-            users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
-            userCount--;
-            getUserCount2();
-        }
-    }
+//    @EventListener(SessionConnectEvent.class)
+//    public void handleWebsocketConnectListener(SessionConnectEvent event) {
+//        User client = userRepo.findByUsername(Objects.requireNonNull(event.getUser()).getName());
+//        if (users.contains(Objects.requireNonNull(event.getUser()).getName().hashCode())){
+//            users.add(event.getUser().getName().hashCode());
+//            System.out.println("Вход в аккаунт с другого устройства");
+//        } else {
+//            users.add(event.getUser().getName().hashCode());
+//            userCount++;
+//            getUserCount2();
+//        }
+//    }
+//
+//    @EventListener(SessionDisconnectEvent.class)
+//    public void handleWebsocketDisconnectListener(SessionDisconnectEvent event) {
+//        if ((Collections.frequency(users, Objects.requireNonNull(event.getUser()).getName().hashCode())) > 1){
+//            users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
+//        } else {
+//            users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
+//            userCount--;
+//            getUserCount2();
+//        }
+//    }
 
     @GetMapping(value = "tab_compl")
     public Iterable<Bid> getComplitTab(){
