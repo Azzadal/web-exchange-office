@@ -73,6 +73,9 @@ tr:hover td{
     right: 5px;
     display: flex;
 }
+footer{
+    height: 30px;
+}
 #greet{
     color: #ffbc00;
     position: absolute;
