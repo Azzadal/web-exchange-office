@@ -108,7 +108,7 @@ function tableComplit() {
 function getUserName(){
     let userName;
     const req = new XMLHttpRequest();
-    req.open('GET', window.location + 'user_name_test', false);
+    req.open('GET', window.location + 'user_name', false);
     req.send();
         if (req.readyState === 4) {
             userName = req.responseText;
@@ -121,10 +121,7 @@ function connect() {
 let socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
-
         console.log('Connected: ' + frame);
-        // userName = frame.headers['user-name'];
-
         greet.insertAdjacentHTML('afterbegin', 'Привет <span>' + userName + '</span>');
 
         const req = new XMLHttpRequest();
@@ -136,11 +133,10 @@ let socket = new SockJS('/websocket');
                 greet.insertAdjacentHTML('beforeend', '<div id="user_count">Пользователей на сайте <span>' + json + '</span></div>');
                 console.log('users', json)
             }
-
         };
         req.send();
 
-        getCash(userName);
+        getCash();
 
         stompClient.subscribe('/topic/users', e => {
             let count = JSON.parse(e.body);
@@ -398,7 +394,7 @@ function executeSell(){
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
-                    getCash(userName);
+                    setTimeout(getCash, 1000);
                 }
             });
                 setTimeout(modal.open, 1)
@@ -442,7 +438,7 @@ function executeBuy(){
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
-                        getCash(userName);
+                        setTimeout(getCash, 1000);
                     }
                 });
                     setTimeout(modal.open, 1)

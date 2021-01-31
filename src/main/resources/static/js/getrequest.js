@@ -86,14 +86,14 @@ function outTotal() {
     }
 }
 
-function getCash(userName){
+function getCash(){
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
-    xhr.open('GET', window.location + userName + "/cash");
+    xhr.open('GET', window.location + "cash");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let cash = xhr.response;
-            document.getElementById('cash').innerHTML = cash;
+            document.getElementById('cash').innerHTML = `Баланс ${cash}`;
             console.log("кеш " + cash)
         }
     };

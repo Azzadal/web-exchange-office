@@ -24,20 +24,14 @@ public class UserController {
     public UserController() {
     }
 
-    @GetMapping(value = "{userName}/cash")
-    public BigDecimal getUserCash(@PathVariable("userName") String userName){
-        User client = userRepository.findByUsername(userName);
-        System.out.println("cash " + client.getCash());
-        return client.getCash();
-    }
     @GetMapping(value = "cash")
-    public BigDecimal getUserTestCash(Principal principal){
+    public BigDecimal getUserCash(Principal principal){
         User client = userRepository.findByUsername(principal.getName());
         System.out.println("cash " + client.getCash());
         return client.getCash();
     }
 
-    @GetMapping(value = "user_name_test")
+    @GetMapping(value = "user_name")
 //    @EventListener(SessionConnectEvent.class)
     public String getUserName(Principal principal){
         User client = userRepository.findByUsername(principal.getName());
