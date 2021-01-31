@@ -30,6 +30,12 @@ public class UserController {
         System.out.println("cash " + client.getCash());
         return client.getCash();
     }
+    @GetMapping(value = "cash")
+    public BigDecimal getUserTestCash(Principal principal){
+        User client = userRepository.findByUsername(principal.getName());
+        System.out.println("cash " + client.getCash());
+        return client.getCash();
+    }
 
     @GetMapping(value = "user_name_test")
 //    @EventListener(SessionConnectEvent.class)
