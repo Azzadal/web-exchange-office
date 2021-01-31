@@ -1,19 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Вход в систему</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #45362b;
+            color: #c9c6a4;
+        }
+        .form_login{
+            width: 20vw;
+            margin: auto;
+        }
+        input{
+            width: 100%;
+            height: 4vh;
+            border-radius: 7px;
+            outline: none;
+            margin-top: 1vh;
+            margin-bottom: 8px;
+            min-height: 25px;
+            max-height: 80px;
+            background-color: #f2dec4 !important;
+            color: #000;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .login{
+            transform: translateY(-150px);
+            transition: transform 1s ease-out;
+        }
+        .reg{
+            width: 20vw;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+        .reg a{
+            text-decoration: none;
+            color: #e2c6a4;
+            cursor: pointer;
+        }
+        .reg a:hover{
+            cursor: pointer;
+            color: #abe2a4;
+        }
+        .header{
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-Страница входа
-<div>
-    <form action="/login" method="post" role="form">
-        <div><label> Имя : <input type="text" name="username"/> </label></div>
-        <div><label> Пароль: <input  type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Вход"></div>
-    </form>
+<div id="login" class="login">
+    <div class="header">Страница входа</div>
+    <div class="form_login" style="width: 20vw; margin: auto">
+        <form action="/login" method="post" role="form">
+            <div><label> Логин : <input type="text" name="username"/> </label></div>
+            <div><label> Пароль: <input  type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Вход"></div>
+        </form>
+    </div>
+    <div class="reg"><a href="/registration">Добавить нового пользователя</a></div>
 </div>
-<a href="/registration">Добавить нового пользователя</a>
+<script>
+    window.onload = () => {
+        setTimeout(() => {
+            document.getElementById('login').style.transform = 'translateY(25vh)'
+        }, 200)
+    }
+</script>
 </body>
 </html>
