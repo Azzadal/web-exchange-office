@@ -72,6 +72,18 @@ function tableBuy(arg) {
     console.log('tableBuy(arg)', arg);
     req.send();
 }
+function parseType(json) {
+    for (let js of json){
+        if (js.type === 'URSell')  js.type = `&#36/&#8381 продажа`;
+        if (js.type === 'URBuy')  js.type = `&#36/&#8381 покупка`;
+        if (js.type === 'ERSell')  js.type = `&#8364/&#8381 продажа`;
+        if (js.type === 'ERBuy')  js.type = `&#8364/&#8381 покупка`;
+        if (js.type === 'EUSell')  js.type = `&#8364/&#36 продажа`;
+        if (js.type === 'EUBuy')  js.type = `&#8364/&#36 покупка`;
+        if (js.type === 'UESell')  js.type = `&#36/&#8364 продажа`;
+        if (js.type === 'UEBuy')  js.type = `&#36/&#8364 покупка`;
+    }
+}
 
 //первоначальный вывод данных
 function tableComplit() {
@@ -81,17 +93,7 @@ function tableComplit() {
     req.onreadystatechange = () => {
         if (req.readyState === 4) {
             let json = req.response;
-
-            for (let js of json){
-                if (js.type === 'URSell')  js.type = `&#36/&#8381 продажа`;
-                if (js.type === 'URBuy')  js.type = `&#36/&#8381 покупка`;
-                if (js.type === 'ERSell')  js.type = `&#8364/&#8381 продажа`;
-                if (js.type === 'ERBuy')  js.type = `&#8364/&#8381 покупка`;
-                if (js.type === 'EUSell')  js.type = `&#8364/&#36 продажа`;
-                if (js.type === 'EUBuy')  js.type = `&#8364/&#36 покупка`;
-                if (js.type === 'UESell')  js.type = `&#36/&#8364 продажа`;
-                if (js.type === 'UEBuy')  js.type = `&#36/&#8364 покупка`;
-            }
+            parseType(json);
 
             bidsHistory.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
@@ -170,17 +172,7 @@ let socket = new SockJS('/websocket');
 //table history
         stompClient.subscribe('/topic/ids', e => {
             let json = JSON.parse(e.body);
-
-            for (let js of json){
-                if (js.type === 'URSell')  js.type = `&#36/&#8381 продажа`;
-                if (js.type === 'URBuy')  js.type = `&#36/&#8381 покупка`;
-                if (js.type === 'ERSell')  js.type = `&#8364/&#8381 продажа`;
-                if (js.type === 'ERBuy')  js.type = `&#8364/&#8381 покупка`;
-                if (js.type === 'EUSell')  js.type = `&#8364/&#36 продажа`;
-                if (js.type === 'EUBuy')  js.type = `&#8364/&#36 покупка`;
-                if (js.type === 'UESell')  js.type = `&#36/&#8364 продажа`;
-                if (js.type === 'UEBuy')  js.type = `&#36/&#8364 покупка`;
-            }
+            parseType(json);
 
             bidsHistory.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
@@ -393,7 +385,7 @@ function executeSell(){
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
-                    setTimeout(getCash, 1000);
+                    setTimeout(getCash, 800);
                 }
             });
                 setTimeout(modal.open, 1)
@@ -436,7 +428,7 @@ function executeBuy(){
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
-                        setTimeout(getCash, 1000);
+                        setTimeout(getCash, 800);
                     }
                 });
                     setTimeout(modal.open, 1)

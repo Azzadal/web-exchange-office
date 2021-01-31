@@ -13,7 +13,7 @@ base.modal = function (options) {
                     ${options.content}
                 </div>
                 <div class="modal-footer">
-                    <button data-ok="true">Ok</button>
+                    <button style="display: ${options.displayOk}" data-ok="true">Ok</button>
                     <button data-close="true">Cancel</button>
                 </div>
             </div>

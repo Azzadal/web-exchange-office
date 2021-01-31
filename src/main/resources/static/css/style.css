@@ -264,9 +264,9 @@ main{
 }
 #l_content, #r_content, #pairs{
     height: auto;
-    -webkit-transition: height 0.8s ease;
-    -o-transition: height 0.8s ease;
-    transition: height 0.8s ease;
+    -webkit-transition: height 0.5s ease;
+    -o-transition: height 0.5s ease;
+    transition: height 0.5s ease;
     overflow: hidden;
     text-align: center;
     border-radius: 7px;
