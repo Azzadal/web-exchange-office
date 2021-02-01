@@ -14,7 +14,7 @@ base.modal = function (options) {
                 </div>
                 <div class="modal-footer">
                     <button style="display: ${options.displayOk}" data-ok="true">Ok</button>
-                    <button data-close="true">Cancel</button>
+                    <button style="display: ${options.displayCancel}" data-close="true">Cancel</button>
                 </div>
             </div>
         </div>

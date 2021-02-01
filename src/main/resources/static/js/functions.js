@@ -7,7 +7,6 @@ const quantityBuy = document.getElementById('quantityBuy'),
     bidsSell = document.getElementById('bidsSell'),
     bidsBuy = document.getElementById('bidsBuy'),
     bidsHistory = document.getElementById('bidsHistory'),
-    complBid = document.getElementById('complBid'),
     rowsPriceSell = document.getElementsByClassName('rowsPriceSell'),
     rowsPriceBuy = document.getElementsByClassName('rowsPriceBuy'),
     rowsQuanBuy = document.getElementsByClassName('rowsQuanBuy'),
@@ -15,7 +14,6 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
     rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
     rowsSell = document.getElementsByClassName('rowsSell'),
-    rowsHistory = document.getElementsByClassName('rowsHistory'),
     rowsBuy = document.getElementsByClassName('rowsBuy'),
     greet = document.getElementById('greet');
 let modal;
@@ -133,7 +131,6 @@ let socket = new SockJS('/websocket');
             if (req.readyState === 4) {
                 let json = req.response;
                 document.getElementById('footer').insertAdjacentHTML('beforeend', '<div id="user_count">Пользователей на сайте <span>' + json + '</span></div>');
-                console.log('users', json)
             }
         };
         req.send();

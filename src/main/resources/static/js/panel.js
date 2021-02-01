@@ -8,8 +8,8 @@ const listener = html => {
                 html.style.height = '0px';
 
                 setTimeout(() => {
-                    html.style.height = '58vh';
-                }, 0);
+                    html.style.height = 'auto';
+                }, 1);
             } else {
                 html.style.height = '0px';
 
@@ -24,6 +24,8 @@ const listener = html => {
             modal = base.modal({
                 title: 'Внимание!',
                 content: 'сначала выберите пару',
+                displayOk: 'none',
+                displayCancel: 'none'
             });
             setTimeout(modal.open, 1);
             setTimeout(modal.close, 2000);

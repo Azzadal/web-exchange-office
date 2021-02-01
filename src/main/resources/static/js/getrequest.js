@@ -120,9 +120,6 @@ window.onload = function () {
 
     console.log(`Размеры экрана ${screenWidth} ${screenHeight}`)
 
-    const bidsBuy = document.getElementById('bidsBuy');
-    const rowsBuy = document.getElementsByClassName('rowsBuy');
-
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(mutation => {
 
