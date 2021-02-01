@@ -5,11 +5,13 @@ const listener = html => {
         if (selectChoice){
             if (!html.classList.contains('show')) {
                 html.classList.add('show');
+                html.style.height = 'auto';
+                let height = html.clientHeight + 'px';
                 html.style.height = '0px';
 
                 setTimeout(() => {
-                    html.style.height = 'auto';
-                }, 1);
+                    html.style.height = height;
+                }, 0);
             } else {
                 html.style.height = '0px';
 

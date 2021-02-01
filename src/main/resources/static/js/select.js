@@ -9,6 +9,7 @@ let pivotTable = document.getElementsByClassName('pivot_table');
 let divTable = document.getElementsByClassName('table');
 let select = function(){
     let selectItem = document.querySelectorAll('.select__pair__item');
+    let current = document.getElementById('current');
 
     selectItem.forEach(item => {
         item.addEventListener('click', selectChoice)
@@ -25,7 +26,6 @@ let select = function(){
         pivotTable[0].style.zIndex = '0';
         divTable[0].style.zIndex = '0';
     }
-    let current = document.getElementById('current');
 }
 select();
 
@@ -42,7 +42,7 @@ document.getElementById('current').addEventListener('click', function(event){
         x.classList.add('show');
         x.style.height = 'auto';
         schedule.style.zIndex = '-1';
-        var height = x.clientHeight + 'px';
+        let height = x.clientHeight + 'px';
 
         x.style.height = '0px';
 
@@ -60,8 +60,7 @@ document.getElementById('current').addEventListener('click', function(event){
         divTable[0].style.zIndex = '0';
 
         x.addEventListener('transitionend', 
-            function () {
-                
+            function (){
                 x.classList.remove('show');
             }, {
                 once: true

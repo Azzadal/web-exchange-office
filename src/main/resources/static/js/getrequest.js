@@ -120,6 +120,36 @@ window.onload = function () {
 
     console.log(`Размеры экрана ${screenWidth} ${screenHeight}`)
 
+    const observerTableBuy = new MutationObserver(function (mutations) {
+        lContent.style.height = 'auto';
+        let height = lContent.clientHeight + 'px';
+        lContent.style.height = height;
+    });
+    observerTableBuy.observe(
+        bidsBuy,
+        {
+            childList: true,
+            attributes: true,
+            subtree: true,
+            characterData: true
+        }
+    );
+
+    const observerTableSell = new MutationObserver(function (mutations) {
+        rContent.style.height = 'auto';
+        let height = rContent.clientHeight + 'px';
+        rContent.style.height = height;
+    });
+    observerTableSell.observe(
+        bidsSell,
+        {
+            childList: true,
+            attributes: true,
+            subtree: true,
+            characterData: true
+        }
+    );
+
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(mutation => {
 
