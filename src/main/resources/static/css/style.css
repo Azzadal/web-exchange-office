@@ -241,10 +241,10 @@ main{
     font-size: 20px;
     color: #e2c6a4;
 }
-.l__panel__title:before,
-.l__panel__title:after,
-.r__panel__title:before,
-.r__panel__title:after{
+#lp_title:before,
+#lp_title:after,
+#rp_title:before,
+#rp_title:after{
     content: '';
     width: 10px;
     height: 1px;
@@ -252,13 +252,13 @@ main{
     top: 8px;
     background-color: #f2dec4;
 }
-.l__panel__title:before,
-.r__panel__title:before{
+#lp_title:before,
+#rp_title:before{
     transform: rotate(40deg);
     left: 0;
 }
-.l__panel__title:after,
-.r__panel__title:after{
+#lp_title:after,
+#rp_title:after{
     transform: rotate(-40deg);
     left: 8px;
 }

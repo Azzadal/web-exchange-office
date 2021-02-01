@@ -2,7 +2,6 @@ package com.javaspring.proj.controller;
 
 import com.javaspring.proj.Repository.BidRepository;
 import com.javaspring.proj.Repository.UserRepo;
-import com.javaspring.proj.config.HttpSessionHandshakeInterceptor_personalised;
 import com.javaspring.proj.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -10,37 +9,28 @@ import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import com.javaspring.proj.model.Bid;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/")
 public class BidController {
-    @Autowired
-    private BidRepository bidRepository;
-    private Bid bid;
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private SimpUserRegistry simpUserRegistry;
+    private final BidRepository bidRepository;
+    private final UserRepo userRepo;
     private final MessageSendingOperations<String> messagingTemplate;
-
     private int userCount = 0;
     private ArrayList<Integer> users = new ArrayList<>();
-    @Autowired
-    public BidController(MessageSendingOperations<String> messagingTemplate) {
+
+    public BidController(MessageSendingOperations<String> messagingTemplate, BidRepository bidRepository, UserRepo userRepo) {
         this.messagingTemplate = messagingTemplate;
+        this.bidRepository = bidRepository;
+        this.userRepo = userRepo;
     }
 
     @MessageMapping("/URBuy")
@@ -164,30 +154,25 @@ public class BidController {
         return bidRepository.findByStatusOrderByDateDesc("done");
     }
 
-    private void getUserCount2(){
+    private void getUserCountWS(){
         String destination = "/topic/users";
-        System.out.println("Юзеров stomp " + userCount);
         this.messagingTemplate.convertAndSend(destination, userCount);
     }
 
     @GetMapping(value = "users")
-    public int getUserCount(){
-//        System.out.println("Юзеров " + simpUserRegistry.getUserCount());
-//        return simpUserRegistry.getUserCount();
-        System.out.println("Юзеров " + userCount);
+    public int getUserCountHTTP(){
         return userCount;
     }
 
     @EventListener(SessionConnectEvent.class)
     public void handleWebsocketConnectListener(SessionConnectEvent event) {
-        User client = userRepo.findByUsername(Objects.requireNonNull(event.getUser()).getName());
         if (users.contains(Objects.requireNonNull(event.getUser()).getName().hashCode())){
             users.add(event.getUser().getName().hashCode());
             System.out.println("Вход в аккаунт с другого устройства");
         } else {
             users.add(event.getUser().getName().hashCode());
             userCount++;
-            getUserCount2();
+            getUserCountWS();
         }
     }
 
@@ -198,7 +183,7 @@ public class BidController {
         } else {
             users.remove((Integer) Objects.requireNonNull(event.getUser()).getName().hashCode());
             userCount--;
-            getUserCount2();
+            getUserCountWS();
         }
     }
 

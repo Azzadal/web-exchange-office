@@ -74,13 +74,13 @@ function outTotal() {
             break;
     }
     
-    if (!Number.isNaN(parseFloat(rateBuy) * parseInt(quantityBuy.value).toFixed(2))){
-        totalBuy.value = parseFloat(rateBuy) * parseInt(quantityBuy.value).toFixed(2);
+    if (!Number.isNaN(parseFloat(rateBuy) * parseInt(quantityBuy.value))){
+        totalBuy.value = (parseFloat(rateBuy) * parseInt(quantityBuy.value)).toFixed(2);
     } else {
         totalBuy.value = 0;
     }
-    if (!Number.isNaN(parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2))){
-        totalSell.value = parseFloat(rateSell) * parseInt(quantitySell.value).toFixed(2);
+    if (!Number.isNaN(parseFloat(rateSell) * parseInt(quantitySell.value))){
+        totalSell.value = (parseFloat(rateSell) * parseInt(quantitySell.value)).toFixed(2);
     } else {
         totalSell.value = 0;
     }
@@ -122,8 +122,7 @@ window.onload = function () {
 
     const observerTableBuy = new MutationObserver(function (mutations) {
         lContent.style.height = 'auto';
-        let height = lContent.clientHeight + 'px';
-        lContent.style.height = height;
+        lContent.style.height = lContent.clientHeight + 'px';
     });
     observerTableBuy.observe(
         bidsBuy,
@@ -137,8 +136,7 @@ window.onload = function () {
 
     const observerTableSell = new MutationObserver(function (mutations) {
         rContent.style.height = 'auto';
-        let height = rContent.clientHeight + 'px';
-        rContent.style.height = height;
+        rContent.style.height = rContent.clientHeight + 'px';
     });
     observerTableSell.observe(
         bidsSell,

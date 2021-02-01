@@ -15,14 +15,12 @@ import java.util.Map;
 
 @RestController
 public class RateController {
-    @Autowired
-    private RateRepository rateRepository;
-
+    private final RateRepository rateRepository;
     private final MessageSendingOperations<String> messagingTemplate;
 
-    @Autowired
-    public RateController(MessageSendingOperations<String> messagingTemplate) {
+    public RateController(MessageSendingOperations<String> messagingTemplate, RateRepository rateRepository) {
         this.messagingTemplate = messagingTemplate;
+        this.rateRepository = rateRepository;
     }
 
     @Scheduled(fixedDelay = 10000)

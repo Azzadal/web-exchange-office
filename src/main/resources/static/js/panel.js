@@ -1,23 +1,25 @@
 let lContent = document.getElementById('l_content');
+let lpTitle = document.getElementById('lp_title');
 let rContent = document.getElementById('r_content');
+let rpTitle = document.getElementById('rp_title');
 
-const listener = html => {
+const listener = (body) => {
         if (selectChoice){
-            if (!html.classList.contains('show')) {
-                html.classList.add('show');
-                html.style.height = 'auto';
-                let height = html.clientHeight + 'px';
-                html.style.height = '0px';
+            if (!body.classList.contains('show')) {
+                body.classList.add('show');
+                body.style.height = 'auto';
+                let height = body.clientHeight + 'px';
+                body.style.height = '0px';
 
                 setTimeout(() => {
-                    html.style.height = height;
+                    body.style.height = height;
                 }, 0);
             } else {
-                html.style.height = '0px';
+                body.style.height = '0px';
 
-                html.addEventListener('transitionend',
+                body.addEventListener('transitionend',
                     () => {
-                        html.classList.remove('show');
+                        body.classList.remove('show');
                     }, {
                         once: true
                     });
