@@ -38,7 +38,7 @@ function tableSell(arg) {
                 bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + json[i].id + '</td><td class="rowsPriceSell">'
                     + json[i].rate +
                     '</td><td class="rowsQuanSell">' + json[i].quantity + '</td><td class="rowsTotalSell">' +
-                    json[i].total + '</td></tr>';
+                    json[i].total + '</td><td>' + json[i].userName + '</td></tr>';
             }
         }
         executeBuy();
