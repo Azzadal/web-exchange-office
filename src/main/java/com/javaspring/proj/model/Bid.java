@@ -18,7 +18,8 @@ public class Bid {
     private String type;
     private String status;
     private Date date;
-    private String userName;
+    private String seller;
+    private String buyer;
 
     public Integer getId() {
         return id;
@@ -76,12 +77,19 @@ public class Bid {
         this.date = date;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getSeller() {
+        return seller;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setSeller(String seller) {
+        this.seller = seller;
     }
 
+    public String getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
 }

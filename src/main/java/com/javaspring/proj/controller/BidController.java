@@ -118,27 +118,15 @@ public class BidController {
         return bidRepository.findByTypeAndStatus("EUSell", "not_done");
     }
 
-    @MessageMapping("/id/withdraw")
+    @MessageMapping("/id/execute_deal")
     @SendTo("/topic/ids")
-    public Iterable<Bid> withdraw(@RequestBody Bid bid){
-        System.out.println(
-                "Пользователь " + bid.getUserName() + " купил валюты на сумму " + bid.getTotal()
-        );
-        User client = userRepo.findByUsername(bid.getUserName());
-        client.setCash(client.getCash().subtract(bid.getTotal()));
-        userRepo.save(client);
-        bidRepository.save(bid);
-        return bidRepository.findByStatusOrderByDateDesc("done");
-    }
-    @MessageMapping("/id/deposit")
-    @SendTo("/topic/ids")
-    public Iterable<Bid> deposit(@RequestBody Bid bid){
-        System.out.println(
-                "Пользователь " + bid.getUserName() + " продал валюты на сумму " + bid.getTotal()
-        );
-        User client = userRepo.findByUsername(bid.getUserName());
-        client.setCash(client.getCash().add(bid.getTotal()));
-        userRepo.save(client);
+    public Iterable<Bid> executeDeal(@RequestBody Bid bid){
+        User buyer = userRepo.findByUsername(bid.getBuyer());
+        User seller = userRepo.findByUsername(bid.getSeller());
+        buyer.setCash(buyer.getCash().subtract(bid.getTotal()));
+        seller.setCash(seller.getCash().add(bid.getTotal()));
+        userRepo.save(buyer);
+        userRepo.save(seller);
         bidRepository.save(bid);
         return bidRepository.findByStatusOrderByDateDesc("done");
     }

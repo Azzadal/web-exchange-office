@@ -13,6 +13,7 @@ const quantityBuy = document.getElementById('quantityBuy'),
     rowsQuanSell = document.getElementsByClassName('rowsQuanSell'),
     rowsTotalSell = document.getElementsByClassName('rowsTotalSell'),
     rowsTotalBuy = document.getElementsByClassName('rowsTotalBuy'),
+    rowsUserName = document.getElementsByClassName('user_name'),
     rowsSell = document.getElementsByClassName('rowsSell'),
     rowsBuy = document.getElementsByClassName('rowsBuy'),
     greet = document.getElementById('greet');
@@ -38,7 +39,7 @@ function tableSell(arg) {
                 bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + json[i].id + '</td><td class="rowsPriceSell">'
                     + json[i].rate +
                     '</td><td class="rowsQuanSell">' + json[i].quantity + '</td><td class="rowsTotalSell">' +
-                    json[i].total + '</td><td>' + json[i].userName + '</td></tr>';
+                    json[i].total + '</td><td class="user_name" style="display: none;">' + json[i].seller + '</td></tr>';
             }
         }
         executeBuy();
@@ -59,10 +60,10 @@ function tableBuy(arg) {
             let i;
             bidsBuy.innerHTML = '';
             for(i = 0; i < json.length; i++) {
-                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="col-4 idBuy" style="display: none;">' + json[i].id + '</td><td class="rowsPriceBuy">'
+                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="idBuy" style="display: none;">' + json[i].id + '</td><td class="rowsPriceBuy">'
                     + json[i].rate +
                     '</td><td class="rowsQuanBuy">' + json[i].quantity + '</td><td class="rowsTotalBuy">' +
-                    json[i].total + '</td></tr>';
+                    json[i].total + '</td><td class="user_name" style="display: none;">' + json[i].buyer + '</td></tr>';
             }
         }
             executeSell();
@@ -99,7 +100,7 @@ function tableComplit() {
                 bidsHistory.innerHTML += '<tr><td style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
                     + json[i].rate +
                     '</td><td>' + json[i].quantity + '</td><td>' +
-                    json[i].total + '</td><td>' + json[i].type + '</td></tr>';
+                    json[i].total + '</td><td>' + json[i].type + '</td><td class="user_name" style="display: none;">' + json[i].userName + '</td></tr>';
             }
         }
     };
@@ -147,10 +148,10 @@ let socket = new SockJS('/websocket');
             let gvn = JSON.parse(e.body);
             bidsBuy.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="col-4 idBuy" style="display: none;">' + gvn[i].id +
-                    '</td><td class="text-center rowsPriceBuy">' + gvn[i].rate +
-                    '</td><td class="text-center rowsQuanBuy">' + gvn[i].quantity + '</td><td class="text-center rowsTotalBuy">' +
-                    gvn[i].total + '</td></tr>';
+                bidsBuy.innerHTML += '<tr class="rowsBuy"><td class="idBuy" style="display: none;">' + gvn[i].id +
+                    '</td><td class="rowsPriceBuy">' + gvn[i].rate +
+                    '</td><td class="rowsQuanBuy">' + gvn[i].quantity + '</td><td class="rowsTotalBuy">' +
+                    gvn[i].total + '</td><td class="user_name" style="display: none;">' + gvn[i].buyer + '</td></tr>';
             }
             executeSell();
         });
@@ -158,10 +159,10 @@ let socket = new SockJS('/websocket');
             let gvn = JSON.parse(e.body);
             bidsSell.innerHTML = '';
             for (let i = 0; i < gvn.length; i++) {
-                bidsSell.innerHTML += '<tr class="rowsSell"><td class="col-4 idSell" style="display: none;">' + gvn[i].id + '</td>' +
+                bidsSell.innerHTML += '<tr class="rowsSell"><td class="idSell" style="display: none;">' + gvn[i].id + '</td>' +
                     '<td class="rowsPriceSell">' + gvn[i].rate +
                     '</td><td class="rowsQuanSell">' + gvn[i].quantity + '</td><td class="rowsTotalSell">' +
-                    gvn[i].total + '</td></tr>';
+                    gvn[i].total + '</td><td class="user_name" style="display: none;">' + gvn[i].seller + '</td></tr>';
             }
             executeBuy();
         });
@@ -174,7 +175,7 @@ let socket = new SockJS('/websocket');
             bidsHistory.innerHTML = '';
             for (let i = 0; i < json.length; i++) {
                 let date = moment(json[i].date).format('DD-MM-YYYY'+ '<br>'+ 'HH:mm:ss');
-                bidsHistory.innerHTML += '<tr><td class="col-4" style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
+                bidsHistory.innerHTML += '<tr><td style="display: none;">' + json[i].id + '</td><td>' + date + '</td><td>'
                     + json[i].rate +
                     '</td><td>' + json[i].quantity + '</td><td>' +
                     json[i].total + '</td><td>' + json[i].type + '</td></tr>';
@@ -232,7 +233,9 @@ function checkBuy(pair1, pair2, rateBuy) {
             total: rowsTotalSell[q].innerHTML,
             type: pair2,
             status: 'done',
-            date: date
+            date: date,
+            buyer: userName,
+            seller: rowsSell[i].lastChild.textContent
         }));
         rowsSell[q].remove();
         setTimeout(tableSell, 1000, pair2);
@@ -262,7 +265,9 @@ function checkSell(pair1, pair2, rateSell) {
             total: rowsTotalBuy[q].innerHTML,
             type: pair2,
             status: 'done',
-            date: date
+            date: date,
+            seller: userName,
+            buyer: rowsBuy[i].lastChild.textContent
         }));
         rowsBuy[q].remove();
         setTimeout(tableBuy, 1000, pair2);
@@ -277,7 +282,7 @@ function addBidsBuy(pair, rateBuy) {
         type: pair,
         status: 'not_done',
         date: null,
-        userName: userName
+        buyer: userName
     }));
 
     quantityBuy.value = 0;
@@ -293,7 +298,7 @@ function addBidsSell(pair, rateSell) {
         type: pair,
         status: 'not_done',
         date: null,
-        userName: userName
+        seller: userName
     }));
 
     quantitySell.value = 0;
@@ -350,6 +355,19 @@ document.getElementById('butSell').onclick = e => {
 function executeSell(){
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
         rowsBuy[i].addEventListener('click', () => {
+            const buyer = rowsBuy[i].lastChild.textContent;
+            console.log('Покупатель', buyer)
+            if (buyer === userName){
+                modal = base.modal({
+                    title: 'Внимание!',
+                    content: 'Вы не можете выполнить свою заявку',
+                    displayOk: 'none',
+                    displayCancel: 'none'
+                });
+                setTimeout(modal.open, 1);
+                setTimeout(modal.close, 2000);
+                return;
+            }
             let date = new Date();
             let arg;
             switch (chekedPair) {
@@ -370,7 +388,7 @@ function executeSell(){
                 title: 'Продать',
                 content: `курс <b>${rowsPriceBuy[i].innerHTML}</b> кол-во <b>${rowsQuanBuy[i].innerHTML}</b>`,
                 execute(){
-                    stompClient.send("/app/id/deposit", {}, JSON.stringify({
+                    stompClient.send("/app/id/execute_deal", {}, JSON.stringify({
                         id: idBuy[i].innerHTML,
                         rate: rowsPriceBuy[i].innerHTML,
                         quantity: rowsQuanBuy[i].innerHTML,
@@ -378,7 +396,8 @@ function executeSell(){
                         type: arg,
                         status: 'done',
                         date: date,
-                        userName: userName
+                        seller: userName,
+                        buyer: buyer
                     }));
                     rowsBuy[i].remove();
                     setTimeout(tableBuy, 1000, arg);
@@ -393,6 +412,20 @@ function executeSell(){
 function executeBuy(){
         for (let i = 0; i <= rowsSell.length - 1; i++) {
             rowsSell[i].addEventListener('click', () => {
+                const seller = rowsSell[i].lastChild.textContent;
+                console.log('Продавец', seller)
+                console.log('строка', rowsSell[i])
+                if (seller === userName){
+                    modal = base.modal({
+                        title: 'Внимание!',
+                        content: 'Вы не можете выполнить свою заявку',
+                        displayOk: 'none',
+                        displayCancel: 'none'
+                    });
+                    setTimeout(modal.open, 1);
+                    setTimeout(modal.close, 2000);
+                    return;
+                }
                 let date = new Date();
                 let arg;
                 switch (chekedPair) {
@@ -413,7 +446,7 @@ function executeBuy(){
                     title: 'Купить',
                     content: `курс <b>${rowsPriceSell[i].innerHTML}</b> кол-во <b>${rowsQuanSell[i].innerHTML}</b>`,
                     execute(){
-                        stompClient.send("/app/id/withdraw", {}, JSON.stringify({
+                        stompClient.send("/app/id/execute_deal", {}, JSON.stringify({
                             id: idSell[i].innerHTML,
                             rate: rowsPriceSell[i].innerHTML,
                             quantity: rowsQuanSell[i].innerHTML,
@@ -421,7 +454,8 @@ function executeBuy(){
                             type: arg,
                             status: 'done',
                             date: date,
-                            userName: userName
+                            buyer: userName,
+                            seller: seller
                         }));
                         rowsSell[i].remove();
                         setTimeout(tableSell, 1000, arg);
