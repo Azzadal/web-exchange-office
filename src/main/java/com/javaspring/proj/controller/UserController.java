@@ -19,7 +19,6 @@ import java.util.Objects;
 @RestController
 public class UserController {
     private final UserRepo userRepository;
-    private SimpUserRegistry simpUserRegistry;
     private int userCount = 0;
     private ArrayList<Integer> users = new ArrayList<>();
     private final MessageSendingOperations<String> messagingTemplate;
@@ -27,6 +26,11 @@ public class UserController {
     public UserController(MessageSendingOperations<String> messagingTemplate, UserRepo userRepository) {
         this.messagingTemplate = messagingTemplate;
         this.userRepository = userRepository;
+    }
+
+    @GetMapping(value = "getUsers")
+    public Iterable<User> getUsers(){
+        return userRepository.findAll();
     }
 
     @GetMapping(value = "cash")
