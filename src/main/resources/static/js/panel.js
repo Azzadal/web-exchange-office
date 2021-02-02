@@ -1,7 +1,5 @@
 let lContent = document.getElementById('l_content');
-let lpTitle = document.getElementById('lp_title');
 let rContent = document.getElementById('r_content');
-let rpTitle = document.getElementById('rp_title');
 
 const listener = (body) => {
         if (selectChoice){

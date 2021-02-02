@@ -356,7 +356,6 @@ function executeSell(){
     for (let i = 0; i <= rowsBuy.length - 1; i++) {
         rowsBuy[i].addEventListener('click', () => {
             const buyer = rowsBuy[i].lastChild.textContent;
-            console.log('Покупатель', buyer)
             if (buyer === userName){
                 modal = base.modal({
                     title: 'Внимание!',
@@ -413,8 +412,6 @@ function executeBuy(){
         for (let i = 0; i <= rowsSell.length - 1; i++) {
             rowsSell[i].addEventListener('click', () => {
                 const seller = rowsSell[i].lastChild.textContent;
-                console.log('Продавец', seller)
-                console.log('строка', rowsSell[i])
                 if (seller === userName){
                     modal = base.modal({
                         title: 'Внимание!',

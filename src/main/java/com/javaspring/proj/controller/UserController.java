@@ -6,6 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.Objects;
 
 @RestController
+@RequestMapping("/")
 public class UserController {
     private final UserRepo userRepository;
     private int userCount = 0;
@@ -28,7 +30,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping(value = "getUsers")
+    @GetMapping(value = "getusers")
     public Iterable<User> getUsers(){
         return userRepository.findAll();
     }
