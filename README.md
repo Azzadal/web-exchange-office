@@ -1,3 +1,3 @@
 # web exchange office
 test
-test link http://springboot1989.herokuapp.com/
+test link http://springrest1989.herokuapp.com/
