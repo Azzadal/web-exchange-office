@@ -140,4 +140,10 @@ public class BidController {
     public void clear_bid(){
         bidRepository.deleteAll();
     }
+
+    @MessageMapping("/id/testws")
+    @SendTo("/topic/testws")
+    public String testws(String s){
+        return s + " okey";
+    }
 }
