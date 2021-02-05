@@ -1,6 +1,7 @@
 package com.javaspring.proj;
 
 import com.javaspring.proj.controller.BidController;
+import com.javaspring.proj.controller.RateController;
 import com.javaspring.proj.controller.WebController;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,6 +51,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ControllerTest {
     @MockBean
     private BidController bidController;
+    @MockBean
+    private RateController rateController;
 
     private WebSocketStompClient webSocketStompClient;
     @BeforeEach
@@ -65,7 +68,7 @@ public class ControllerTest {
 //        webSocketStompClient.setMessageConverter(new StringMessageConverter());
 
         StompSession session = webSocketStompClient
-                .connect("ws://localhost:8090/websocket", new StompSessionHandlerAdapter() {})
+                .connect("ws://localhost:8090/", new StompSessionHandlerAdapter() {})
                 .get(1, SECONDS);
 
         session.subscribe("/topic/testws", new StompFrameHandler() {
