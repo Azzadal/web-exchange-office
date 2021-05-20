@@ -25,6 +25,7 @@ public class UserController {
     private ArrayList<Integer> users = new ArrayList<>();
     private final MessageSendingOperations<String> messagingTemplate;
 
+    private int loginCount = 0;
     public UserController(MessageSendingOperations<String> messagingTemplate, UserRepo userRepository) {
         this.messagingTemplate = messagingTemplate;
         this.userRepository = userRepository;
@@ -33,6 +34,11 @@ public class UserController {
     @GetMapping(value = "getusers")
     public Iterable<User> getUsers(){
         return userRepository.findAll();
+    }
+
+    @GetMapping(value = "login_count")
+    public int getLoginCount(){
+        return loginCount;
     }
 
     @GetMapping(value = "cash")
@@ -66,6 +72,7 @@ public class UserController {
         } else {
             users.add(event.getUser().getName().hashCode());
             userCount++;
+            loginCount++;
             getUserCountWS();
         }
     }
