@@ -21,6 +21,17 @@ public class Bid {
     private String seller;
     private String buyer;
 
+    public Bid(BigDecimal rate, int quantity, BigDecimal total, String type, String status, Date date, String seller, String buyer) {
+        this.rate = rate;
+        this.quantity = quantity;
+        this.total = total;
+        this.type = type;
+        this.status = status;
+        this.date = date;
+        this.seller = seller;
+        this.buyer = buyer;
+    }
+
     public Integer getId() {
         return id;
     }

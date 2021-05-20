@@ -46,7 +46,7 @@ public class User {
         this.password = password;
     }
 
-    private boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
@@ -54,7 +54,7 @@ public class User {
         this.active = active;
     }
 
-    private Set<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 

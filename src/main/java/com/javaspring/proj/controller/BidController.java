@@ -143,7 +143,7 @@ public class BidController {
 
     @MessageMapping("/id/testws")
     @SendTo("/topic/testws")
-    public String testws(String s){
-        return s + " okey";
+    public void testws(String s){
+//        return " okey";
     }
 }
