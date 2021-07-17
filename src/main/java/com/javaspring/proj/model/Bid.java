@@ -32,6 +32,9 @@ public class Bid {
         this.buyer = buyer;
     }
 
+    public Bid() {
+    }
+
     public Integer getId() {
         return id;
     }
