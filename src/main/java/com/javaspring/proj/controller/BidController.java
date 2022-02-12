@@ -1,7 +1,7 @@
 package com.javaspring.proj.controller;
 
 import com.javaspring.proj.Repository.BidRepository;
-import com.javaspring.proj.Repository.UserRepo;
+import com.javaspring.proj.Repository.UserRepository;
 import com.javaspring.proj.model.Bid;
 import com.javaspring.proj.model.User;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class BidController {
     private final BidRepository bidRepository;
-    private final UserRepo userRepo;
+    private final UserRepository userRepository;
 
-    public BidController(BidRepository bidRepository, UserRepo userRepo) {
+    public BidController(BidRepository bidRepository, UserRepository userRepository) {
         this.bidRepository = bidRepository;
-        this.userRepo = userRepo;
+        this.userRepository = userRepository;
     }
 
     @MessageMapping("/URBuy")
@@ -121,12 +121,12 @@ public class BidController {
     @MessageMapping("/id/execute_deal")
     @SendTo("/topic/ids")
     public Iterable<Bid> executeDeal(@RequestBody Bid bid){
-        User buyer = userRepo.findByUsername(bid.getBuyer());
-        User seller = userRepo.findByUsername(bid.getSeller());
+        User buyer = userRepository.findByUsername(bid.getBuyer());
+        User seller = userRepository.findByUsername(bid.getSeller());
         buyer.setCash(buyer.getCash().subtract(bid.getTotal()));
         seller.setCash(seller.getCash().add(bid.getTotal()));
-        userRepo.save(buyer);
-        userRepo.save(seller);
+        userRepository.save(buyer);
+        userRepository.save(seller);
         bidRepository.save(bid);
         return bidRepository.findByStatusOrderByDateDesc("done");
     }

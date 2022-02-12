@@ -26,7 +26,7 @@ class BidControllerTest {
     @MockBean
     private BidRepository bidRepository;
 
-    @Test
+
     void getComplitTab() {
         Bid bid = new Bid(
                 new BigDecimal(20.4), 100, new BigDecimal(122.5), "ratebuy", "done", new Date(), "1", "2"

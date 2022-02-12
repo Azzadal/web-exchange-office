@@ -1,10 +1,9 @@
 package com.javaspring.proj.controller;
 
-import com.javaspring.proj.Repository.UserRepo;
+import com.javaspring.proj.Repository.UserRepository;
 import com.javaspring.proj.model.User;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.core.MessageSendingOperations;
-import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +19,13 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/")
 public class UserController {
-    private final UserRepo userRepository;
+    private final UserRepository userRepository;
     private int userCount = 0;
     private ArrayList<Integer> users = new ArrayList<>();
     private final MessageSendingOperations<String> messagingTemplate;
 
     private int loginCount = 0;
-    public UserController(MessageSendingOperations<String> messagingTemplate, UserRepo userRepository) {
+    public UserController(MessageSendingOperations<String> messagingTemplate, UserRepository userRepository) {
         this.messagingTemplate = messagingTemplate;
         this.userRepository = userRepository;
     }

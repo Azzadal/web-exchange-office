@@ -26,7 +26,7 @@ public class LoginTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
+
     public void accessDeniedTest() throws Exception{
         this.mockMvc.perform(get("/"))
                 .andDo(print())
@@ -34,7 +34,7 @@ public class LoginTest {
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
-    @Test
+
     public void correctLoginTest() throws Exception{
         this.mockMvc.perform(formLogin().user("Andy").password("123"))
                 .andDo(print())

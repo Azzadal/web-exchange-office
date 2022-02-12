@@ -1,6 +1,5 @@
 package com.javaspring.proj.config;
 
-import com.javaspring.proj.controller.BidController;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -8,10 +7,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.security.Principal;
 import java.util.*;
 

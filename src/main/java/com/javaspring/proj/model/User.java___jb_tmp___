@@ -16,10 +16,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "id"),
                 @UniqueConstraint(columnNames = "login")
         })
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User extends EntityIdentifier {
     private String username;
     private String login;
     @JsonIgnore
@@ -36,7 +33,7 @@ public class User {
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return isActive() == user.isActive() &&
-                Objects.equals(getId(), user.getId()) &&
+                Objects.equals(role.getId(), user.getId()) &&
                 Objects.equals(getUsername(), user.getUsername()) &&
                 Objects.equals(getPassword(), user.getPassword()) &&
                 Objects.equals(getCash(), user.getCash()) &&
