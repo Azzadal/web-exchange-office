@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface RateRepository extends CrudRepository<Rate, Integer> {
+public interface RateRepository extends CrudRepository<Rate, Long> {
     Iterable<Rate> findByType(String type);
     Iterable<Rate> findFirst50ByTypeOrderByIdDesc(String type);
     @Modifying

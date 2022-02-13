@@ -1,0 +1,183 @@
+databaseChangeLog:
+  - changeSet:
+      id: users/table
+      author: azzadal
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: USRK_PK
+                  name: ID
+                  type: BIGINT
+              - column:
+                  name: ACTIVE
+                  type: BOOLEAN
+              - column:
+                  name: CASH
+                  type: NUMERIC(19, 2)
+              - column:
+                  name: LOGIN
+                  type: VARCHAR(255)
+              - column:
+                  name: PASSWORD
+                  type: VARCHAR(255)
+              - column:
+                  name: USERNAME
+                  type: VARCHAR(255)
+              - column:
+                  name: ROLE_ID
+                  type: BIGINT
+            tableName: USR
+  - changeSet:
+      id: roles/table
+      author: azzadal
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: RL_PK
+                  name: ID
+                  type: BIGINT
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+            tableName: ROLE_TABLE
+  - changeSet:
+      id: rate/table
+      author: azzadal
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: RT_PK
+                  name: ID
+                  type: BIGINT
+              - column:
+                  name: RATE_BUY
+                  type: NUMERIC(19, 2)
+              - column:
+                  name: RATE_SELL
+                  type: NUMERIC(19, 2)
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+            tableName: RATE
+  - changeSet:
+      id: bid/table
+      author: azzadal
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: BID_PK
+                  name: ID
+                  type: BIGINT
+              - column:
+                  name: BUYER
+                  type: VARCHAR(255)
+              - column:
+                  name: SELLER
+                  type: VARCHAR(255)
+              - column:
+                  name: STATUS
+                  type: VARCHAR(255)
+              - column:
+                  name: DATE
+                  type: TIMESTAMP
+              - column:
+                  name: QUANTITY
+                  type: BIGINT
+              - column:
+                  name: RATE
+                  type: NUMERIC(19, 2)
+              - column:
+                  name: TOTAL
+                  type: NUMERIC(19, 2)
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+            tableName: BID
+  - changeSet:
+      id: usr_role/foreign-key/fk_role_id
+      author: azzadal
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ROLE_ID
+            baseTableName: USR
+            constraintName: FK_RL_ID
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: ID
+            referencedTableName: ROLE_TABLE
+            validate: true
+            onDelete: cascade
+  - changeSet:
+      id: roles/create-roles/user
+      author: azzadal
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: ID
+                  value: 1
+              - column:
+                  name: NAME
+                  value: ROLE_USER
+            tableName: ROLE_TABLE
+  - changeSet:
+      id: roles/create-roles/admin
+      author: azzadal
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: ID
+                  value: 2
+              - column:
+                  name: NAME
+                  value: ROLE_ADMIN
+            tableName: ROLE_TABLE
+  - changeSet:
+      id: user/create-admin
+      author: azzadal
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: ID
+                  value: 1
+              - column:
+                  name: ACTIVE
+                  value: true
+              - column:
+                  name: CASH
+                  value: 100000
+              - column:
+                  name: LOGIN
+                  value: admin
+              - column:
+                  name: PASSWORD
+                  value: admin
+              - column:
+                  name: USERNAME
+                  value: Azzadal
+              - column:
+                  name: ROLE_ID
+                  value: 2
+            tableName: USR

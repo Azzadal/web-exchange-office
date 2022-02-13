@@ -5,9 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
-import java.util.Set;
 
 @Data
 @Entity
@@ -16,10 +14,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "id"),
                 @UniqueConstraint(columnNames = "login")
         })
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class User extends EntityIIdentifier {
     private String username;
     private String login;
     @JsonIgnore
